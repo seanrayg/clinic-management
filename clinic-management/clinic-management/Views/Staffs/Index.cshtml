@@ -1,0 +1,61 @@
+﻿@model IEnumerable<clinic_management.Models.Staff>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">List of Staffs</h4>
+            </div>
+        </div>
+        <!--    Hover Rows  -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Middle Initial</th>
+                                <th>Last Name</th>
+                                <th>Joined Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(model => item.StaffFirst)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.StaffMid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.StaffLast)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => item.StaffJoinedDate)
+                                    </td>
+                                    <td>
+                                        <a href="/Staffs/Details/@Html.DisplayFor(modelItem => item.StaffID)" type="button" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
+                                        <a href="/Staffs/Edit/@Html.DisplayFor(modelItem => item.StaffID)" type="button" class="btn btn-md btn-success"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="/Staffs/Delete/@Html.DisplayFor(modelItem => item.StaffID)" type="button" class="btn btn-md btn-success"><i class="fa fa-times"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- End  Hover Rows  -->
+    </div>
+</div>

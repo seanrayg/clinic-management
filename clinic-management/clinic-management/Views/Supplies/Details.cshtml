@@ -1,0 +1,42 @@
+﻿@model clinic_management.Models.Supply
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Supply</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplyName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplyName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReceivedDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReceivedDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SupplyType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SupplyType)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.SupplyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

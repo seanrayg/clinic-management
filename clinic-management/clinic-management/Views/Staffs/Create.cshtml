@@ -1,0 +1,108 @@
+﻿@model clinic_management.Models.Staff
+
+@{
+    ViewBag.Title = "Create";
+}
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line"> Staff Registration </h4>
+            </div>
+        </div>
+        <!--    Hover Rows  -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+            </div>
+            <div class="panel-body">
+                @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+                <div class="form-horizontal">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> Staff ID </strong></label>@*@Html.LabelFor(model => model.StaffID, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.StaffID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> First Name </strong></label>@*@Html.LabelFor(model => model.StaffFirst, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.StaffFirst, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StaffFirst, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> Middle Name </strong></label>@*@Html.LabelFor(model => model.StaffMid, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.StaffMid, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StaffMid, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> Last Name </strong></label>@*@Html.LabelFor(model => model.StaffLast, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.StaffLast, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StaffLast, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> Gender </strong></label>@*@Html.LabelFor(model => model.StaffGender, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @*@Html.EditorFor(model => model.PatientGender, new { htmlAttributes = new { @class = "form-control" } })*@
+                            @Html.DropDownListFor(model => model.StaffGender, new List<SelectListItem>{
+                                new SelectListItem{ Value = "Male", Text = "Male" },
+                                new SelectListItem{ Value = "Female", Text = "Female" }}, "Select gender...", new { htmlAttributes = new { @class = "col-md-10" } })
+                            @Html.ValidationMessageFor(model => model.StaffGender, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> Password </strong></label>@*@Html.LabelFor(model => model.StaffPassword, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> Joined Date </strong></label>@*@Html.LabelFor(model => model.StaffJoinedDate, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.EditorFor(model => model.StaffJoinedDate, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.StaffJoinedDate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><strong> User Type </strong></label>@*@Html.LabelFor(model => model.UserTypeID, "UserTypeID", htmlAttributes: new { @class = "control-label col-md-2" })*@
+                        <div class="col-md-7">
+                            @Html.DropDownList("UserTypeID", null, "Select user type", htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Register" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+}
+            </div>
+            </div>
+            <!-- End  Hover Rows  -->
+        </div>
+</div>
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

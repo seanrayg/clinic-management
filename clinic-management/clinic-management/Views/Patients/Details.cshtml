@@ -1,0 +1,86 @@
+﻿@model clinic_management.Models.Patient
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="content-wrapper">
+    <div class="container">
+        <h4>Patient</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Full Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientLast), @Html.DisplayFor(model => model.PatientFirst) @Html.DisplayFor(model => model.PatientMid)
+            </dd>
+
+            @*<dt>
+                    @Html.DisplayNameFor(model => model.PatientFirst)
+                </dt>
+
+                <dd>
+
+                </dd>
+
+                <dt>
+
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.PatientMid)
+                </dd>*@
+
+            <dt>
+                Gender
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientGender)
+            </dd>
+
+            <dt>
+                Birthdate
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientBDate)
+            </dd>
+
+            <dt>
+                Address
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientAddrss)
+            </dd>
+
+            <dt>
+                Patient Type
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientType1.TypeName)
+            </dd>
+            <dt>
+                College
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PCollege.CollegeName)
+            </dd>
+            <dt>
+                Class
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PatientClass)
+            </dd>
+        </dl>
+        <p class="pull-right">
+            <input type="button" value="Edit" class="btn btn-primary" />
+            <input type="button" value="Check Medical Record" class="btn btn-primary" />
+            <input type="button" value="Back" class="btn btn-primary" />
+        </p>
+    </div>
+</div>

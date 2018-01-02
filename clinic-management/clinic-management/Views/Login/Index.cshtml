@@ -1,0 +1,39 @@
+﻿@model clinic_management.Models.Staff
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/login_style.css" rel="stylesheet" />
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="container">
+            <div class="login-container">
+                <div id="output"></div>
+                <div class="form-box">
+                    @Html.EditorFor(model => model.StaffID, new { htmlAttributes = new { @placeholder = "id", @type = "text" } })
+                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @placeholder = "password", @type = "password" } })
+                    <hr />
+                    @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-danger" })
+                    <br />
+                    @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
+                    <label class="text-danger">@ViewBag.ErrorMessage</label>
+                    <button class="btn btn-info btn-block login" type="submit">Login</button>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

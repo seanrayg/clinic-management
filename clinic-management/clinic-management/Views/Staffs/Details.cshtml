@@ -1,0 +1,67 @@
+﻿@model clinic_management.Models.Staff
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="content-wrapper">
+    <div class="container">
+        <h4>Staff</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                Full Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StaffLast), @Html.DisplayFor(model => model.StaffFirst) @Html.DisplayFor(model => model.StaffMid)
+            </dd>
+
+            @*<dt>
+                            @Html.DisplayNameFor(model => model.StaffFirst)
+                            </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StaffFirst)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StaffMid)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StaffMid)
+                </dd>*@
+
+            <dt>
+                Staff
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StaffGender)
+            </dd>
+
+            <dt>
+                Joined Date
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StaffJoinedDate)
+            </dd>
+
+            <dt>
+                Staff Type
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserType.TypeDesc)
+            </dd>
+
+        </dl>
+        <p>
+        <p class="pull-right">
+            <input type="button" value="Edit" class="btn btn-primary" />
+            <input type="button" value="Back" class="btn btn-primary" />
+        </p>
+    </div>
+</div>

@@ -1,0 +1,65 @@
+﻿@model IEnumerable<clinic_management.Models.Patient>
+
+@{
+    ViewBag.Title = "Index";
+}
+@*<head>
+        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
+    </head>*@
+<div class="content-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h4 class="page-head-line">List of Patients</h4>
+            </div>
+        </div>
+        <!--    Hover Rows  -->
+        <div class="panel panel-default">
+            <div class="panel-heading">
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-hover" id="p_table">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Middle Name</th>
+                                <th>Last Name</th>
+                                <th>College</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PatientFirst)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PatientMid)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PatientLast)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PCollege.CollegeCode)
+                                    </td>
+                                    <td>
+                                        <a href="/Patients/Details/@Html.DisplayFor(modelItem => item.PatientID)" type="button" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
+                                        <a href="/Patients/Edit/@Html.DisplayFor(modelItem => item.PatientID)" type="button" class="btn btn-md btn-success"><i class="fa fa-pencil-square-o"></i></a>
+                                        <a href="/Patients/Delete/@Html.DisplayFor(modelItem => item.PatientID)" type="button" class="btn btn-md btn-success"><i class="fa fa-times"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- End  Hover Rows  -->
+    </div>
+</div>
