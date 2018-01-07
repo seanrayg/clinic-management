@@ -3,48 +3,80 @@
     ViewBag.Title = "Index";
 }
 
-<!-- Tab links -->
-<div class="tab">
-    <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-    <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-    <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
-</div>
+<div class="container">
+    <h2>Inventory</h2>
 
-<!-- Tab content -->
-<div id="London" class="tabcontent">
-    <h3>London</h3>
-    <p>London is the capital city of England.</p>
-</div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#medicines">Medicines</a></li>
+        <li><a data-toggle="tab" href="#utensils">Utensils</a></li>
+    </ul>
 
-<div id="Paris" class="tabcontent">
-    <h3>Paris</h3>
-    <p>Paris is the capital of France.</p>
-</div>
-
-<div id="Tokyo" class="tabcontent">
-    <h3>Tokyo</h3>
-    <p>Tokyo is the capital of Japan.</p>
+    <div class="tab-content">
+        <div id="medicines" class="tab-pane fade in active">
+            <br />
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Add Supply</button>
+                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default">Refresh</button>
+            </div>
+            <br />
+            <br />
+            <table class="table" id="tableMedicines">
+                <thead>
+                    <tr>
+                        <th>Supply ID</th>
+                        <th>Medicine</th>
+                        <th>Quantity</th>
+                        <th>Recieved Date</th>
+                        <th>Expiration Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+        <div id="utensils" class="tab-pane fade">
+            <br />
+            <div class="btn-group">
+                <button type="button" class="btn btn-default">Add Supply</button>
+                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default">Refresh</button>
+            </div>
+            <br />
+            <br />
+            <table class="table" id="tableUtensils">
+                <thead>
+                    <tr>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>John</td>
+                        <td>Doe</td>
+                        <td>john@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>Mary</td>
+                        <td>Moe</td>
+                        <td>mary@example.com</td>
+                    </tr>
+                    <tr>
+                        <td>July</td>
+                        <td>Dooley</td>
+                        <td>july@example.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <script>
-    function openCity(evt, cityName) {
-        // Declare all variables
-        var i, tabcontent, tablinks;
-
-        // Get all elements with class="tabcontent" and hide them
-        tabcontent = document.getElementsByClassName("tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        // Get all elements with class="tablinks" and remove the class "active"
-        tablinks = document.getElementsByClassName("tablinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-
-        // Show the current tab, and add an "active" class to the button that opened the tab
-        document.getElementById(cityName).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
+    $(document).ready(function () {
+        $('#tableMedicines').DataTable();
+        $('#tableUtensils').DataTable();
+    });
 </script>
