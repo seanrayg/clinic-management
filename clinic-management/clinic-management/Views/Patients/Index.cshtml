@@ -3,10 +3,7 @@
 @{
     ViewBag.Title = "Index";
 }
-@*<head>
-        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
-    </head>*@
+
 <div class="content-wrapper">
     <div class="container">
         <div class="row">
@@ -63,3 +60,8 @@
         <!-- End  Hover Rows  -->
     </div>
 </div>
+<script src="~/Content/assets/js/jquery-1.11.1.js"></script>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+<script>
+    $("#p_table").dataTable();
+</script>   
