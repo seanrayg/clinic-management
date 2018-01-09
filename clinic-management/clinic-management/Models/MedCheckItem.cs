@@ -12,16 +12,13 @@ namespace clinic_management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MedCheckDetail
+    public partial class MedCheckItem
     {
-        public string MedCheckHID { get; set; }
-        public Nullable<System.DateTime> DateofVisit { get; set; }
-        public Nullable<System.TimeSpan> TimeofVisit { get; set; }
-        public string Complaint { get; set; }
-        public string Diagnosis { get; set; }
-        public string Treatment { get; set; }
-        public string Remarks { get; set; }
+        public int MedCheckID { get; set; }
+        public int ItemID { get; set; }
+        public int Quantity { get; set; }
     
-        public virtual MedCheckHeader MedCheckHeader { get; set; }
+        public virtual MedCheck MedCheck { get; set; }
+        public virtual Item Item { get; set; }
     }
 }

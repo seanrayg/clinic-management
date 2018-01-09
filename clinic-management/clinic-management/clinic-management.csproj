@@ -164,6 +164,7 @@
       <DependentUpon>PUPClinic.edmx</DependentUpon>
       <LastGenOutput>PUPClinic.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\PUPClinic.edmx.sql" />
     <Content Include="Models\PUPClinic.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PUPClinic.edmx</DependentUpon>
@@ -181,13 +182,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Inventory.cs">
+    <Compile Include="Models\Item.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MedCheckDetail.cs">
+    <Compile Include="Models\MedCheck.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\MedCheckHeader.cs">
+    <Compile Include="Models\MedCheckItem.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Patient.cs">

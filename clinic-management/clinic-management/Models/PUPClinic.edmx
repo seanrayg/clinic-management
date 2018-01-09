@@ -4,298 +4,273 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="dbClinicManagementModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Inventory">
-          <Key>
-            <PropertyRef Name="InventoryID" />
-          </Key>
-          <Property Name="InventoryID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="SupplyID" Type="int" />
-          <Property Name="StaffID" Type="varchar" MaxLength="20" />
-          <Property Name="SupplyQuantity" Type="int" />
-          <Property Name="ExpirationDate" Type="date" />
-        </EntityType>
-        <EntityType Name="MedCheckDetail">
-          <Key>
-            <PropertyRef Name="MedCheckHID" />
-          </Key>
-          <Property Name="MedCheckHID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="DateofVisit" Type="date" />
-          <Property Name="TimeofVisit" Type="time" Precision="7" />
-          <Property Name="Complaint" Type="text" />
-          <Property Name="Diagnosis" Type="text" />
-          <Property Name="Treatment" Type="text" />
-          <Property Name="Remarks" Type="text" />
-        </EntityType>
-        <EntityType Name="MedCheckHeader">
-          <Key>
-            <PropertyRef Name="MedCheckHID" />
-          </Key>
-          <Property Name="MedCheckHID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="StaffID" Type="varchar" MaxLength="20" />
-          <Property Name="PatientID" Type="int" />
-          <Property Name="InventoryID" Type="varchar" MaxLength="20" />
-          <Property Name="MedCheckType" Type="int" />
-          <Property Name="MedCheckStatus" Type="int" />
-        </EntityType>
-        <EntityType Name="Patient">
-          <Key>
-            <PropertyRef Name="PatientID" />
-          </Key>
-          <Property Name="PatientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="PatientLast" Type="varchar" MaxLength="50" />
-          <Property Name="PatientFirst" Type="varchar(max)" />
-          <Property Name="PatientMid" Type="varchar" MaxLength="50" />
-          <Property Name="PatientGender" Type="varchar" MaxLength="20" />
-          <Property Name="PatientBDate" Type="date" />
-          <Property Name="PatientAddrss" Type="text" />
-          <Property Name="TypeID" Type="int" />
-          <Property Name="PatientClass" Type="int" />
-          <Property Name="CollegeID" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="PatientType">
-          <Key>
-            <PropertyRef Name="TypeID" />
-          </Key>
-          <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeName" Type="varchar" MaxLength="20" />
-        </EntityType>
-        <EntityType Name="PCollege">
-          <Key>
-            <PropertyRef Name="CollegeID" />
-          </Key>
-          <Property Name="CollegeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="CollegeCode" Type="varchar" MaxLength="10" />
-          <Property Name="CollegeName" Type="varchar(max)" />
-        </EntityType>
-        <EntityType Name="Staff">
-          <Key>
-            <PropertyRef Name="StaffID" />
-          </Key>
-          <Property Name="StaffID" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="StaffLast" Type="varchar" MaxLength="50" />
-          <Property Name="StaffFirst" Type="varchar(max)" />
-          <Property Name="StaffMid" Type="varchar" MaxLength="50" />
-          <Property Name="StaffGender" Type="varchar" MaxLength="20" />
-          <Property Name="StaffPassword" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="StaffJoinedDate" Type="nchar" MaxLength="10" />
-          <Property Name="UserTypeID" Type="int" />
-        </EntityType>
-        <EntityType Name="Supply">
-          <Key>
-            <PropertyRef Name="SupplyID" />
-          </Key>
-          <Property Name="SupplyID" Type="int" Nullable="false" />
-          <Property Name="SupplyName" Type="varchar(max)" />
-          <Property Name="ReceivedDate" Type="date" />
-          <Property Name="SupplyType" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="UserType">
-          <Key>
-            <PropertyRef Name="UserTypeID" />
-          </Key>
-          <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="TypeDesc" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <Association Name="FK_Inventory_Staff">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="StaffID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="StaffID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inventory_Supply">
-          <End Role="Supply" Type="Self.Supply" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supply">
-              <PropertyRef Name="SupplyID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="SupplyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MedCheckDetail_MedCheckHeader">
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="1" />
-          <End Role="MedCheckDetail" Type="Self.MedCheckDetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MedCheckHeader">
-              <PropertyRef Name="MedCheckHID" />
-            </Principal>
-            <Dependent Role="MedCheckDetail">
-              <PropertyRef Name="MedCheckHID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MedCheckHeader_Inventory">
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inventory">
-              <PropertyRef Name="InventoryID" />
-            </Principal>
-            <Dependent Role="MedCheckHeader">
-              <PropertyRef Name="InventoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MedCheckHeader_Patient">
-          <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Patient">
-              <PropertyRef Name="PatientID" />
-            </Principal>
-            <Dependent Role="MedCheckHeader">
-              <PropertyRef Name="PatientID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MedCheckHeader_Staff">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="StaffID" />
-            </Principal>
-            <Dependent Role="MedCheckHeader">
-              <PropertyRef Name="StaffID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Patient_PatientType">
-          <End Role="PatientType" Type="Self.PatientType" Multiplicity="0..1" />
-          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PatientType">
-              <PropertyRef Name="TypeID" />
-            </Principal>
-            <Dependent Role="Patient">
-              <PropertyRef Name="TypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Patient_PCollege">
-          <End Role="PCollege" Type="Self.PCollege" Multiplicity="1" />
-          <End Role="Patient" Type="Self.Patient" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="PCollege">
-              <PropertyRef Name="CollegeID" />
-            </Principal>
-            <Dependent Role="Patient">
-              <PropertyRef Name="CollegeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Staff_UserType">
-          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
-          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="UserType">
-              <PropertyRef Name="UserTypeID" />
-            </Principal>
-            <Dependent Role="Staff">
-              <PropertyRef Name="UserTypeID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="dbClinicManagementModelStoreContainer">
-          <EntitySet Name="Inventory" EntityType="Self.Inventory" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MedCheckDetail" EntityType="Self.MedCheckDetail" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="MedCheckHeader" EntityType="Self.MedCheckHeader" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Patient" EntityType="Self.Patient" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PatientType" EntityType="Self.PatientType" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="PCollege" EntityType="Self.PCollege" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_Inventory_Staff" Association="Self.FK_Inventory_Staff">
-            <End Role="Staff" EntitySet="Staff" />
-            <End Role="Inventory" EntitySet="Inventory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Supply" Association="Self.FK_Inventory_Supply">
-            <End Role="Supply" EntitySet="Supply" />
-            <End Role="Inventory" EntitySet="Inventory" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedCheckDetail_MedCheckHeader" Association="Self.FK_MedCheckDetail_MedCheckHeader">
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeader" />
-            <End Role="MedCheckDetail" EntitySet="MedCheckDetail" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedCheckHeader_Inventory" Association="Self.FK_MedCheckHeader_Inventory">
-            <End Role="Inventory" EntitySet="Inventory" />
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeader" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedCheckHeader_Patient" Association="Self.FK_MedCheckHeader_Patient">
-            <End Role="Patient" EntitySet="Patient" />
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeader" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedCheckHeader_Staff" Association="Self.FK_MedCheckHeader_Staff">
-            <End Role="Staff" EntitySet="Staff" />
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeader" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patient_PatientType" Association="Self.FK_Patient_PatientType">
-            <End Role="PatientType" EntitySet="PatientType" />
-            <End Role="Patient" EntitySet="Patient" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Patient_PCollege" Association="Self.FK_Patient_PCollege">
-            <End Role="PCollege" EntitySet="PCollege" />
-            <End Role="Patient" EntitySet="Patient" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Staff_UserType" Association="Self.FK_Staff_UserType">
-            <End Role="UserType" EntitySet="UserType" />
-            <End Role="Staff" EntitySet="Staff" />
-          </AssociationSet>
-        </EntityContainer>
-      </Schema></edmx:StorageModels>
+    <Schema Namespace="dbClinicManagementModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="dbClinicManagementModelStoreContainer">
+    <EntitySet Name="Items" EntityType="dbClinicManagementModel.Store.Items" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MedChecks" EntityType="dbClinicManagementModel.Store.MedChecks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Patients" EntityType="dbClinicManagementModel.Store.Patients" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PatientTypes" EntityType="dbClinicManagementModel.Store.PatientTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PColleges" EntityType="dbClinicManagementModel.Store.PColleges" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Staffs" EntityType="dbClinicManagementModel.Store.Staffs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Supplies" EntityType="dbClinicManagementModel.Store.Supplies" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserTypes" EntityType="dbClinicManagementModel.Store.UserTypes" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="MedCheckItems" EntityType="dbClinicManagementModel.Store.MedCheckItems" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_MedCheckHeader_Patient" Association="dbClinicManagementModel.Store.FK_MedCheckHeader_Patient">
+      <End Role="Patient" EntitySet="Patients" />
+      <End Role="MedCheckHeader" EntitySet="MedChecks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MedCheckHeader_Staff" Association="dbClinicManagementModel.Store.FK_MedCheckHeader_Staff">
+      <End Role="Staff" EntitySet="Staffs" />
+      <End Role="MedCheckHeader" EntitySet="MedChecks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_PatientType" Association="dbClinicManagementModel.Store.FK_Patient_PatientType">
+      <End Role="PatientType" EntitySet="PatientTypes" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Patient_PCollege" Association="dbClinicManagementModel.Store.FK_Patient_PCollege">
+      <End Role="PCollege" EntitySet="PColleges" />
+      <End Role="Patient" EntitySet="Patients" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_UserType" Association="dbClinicManagementModel.Store.FK_Staff_UserType">
+      <End Role="UserType" EntitySet="UserTypes" />
+      <End Role="Staff" EntitySet="Staffs" />
+    </AssociationSet>
+    <AssociationSet Name="MedCheckID" Association="dbClinicManagementModel.Store.MedCheckID">
+      <End Role="MedCheck" EntitySet="MedChecks" />
+      <End Role="MedCheckItem" EntitySet="MedCheckItems" />
+    </AssociationSet>
+    <AssociationSet Name="ItemMedCheckItem" Association="dbClinicManagementModel.Store.ItemMedCheckItem">
+      <End Role="Item" EntitySet="Items" />
+      <End Role="MedCheckItem" EntitySet="MedCheckItems" />
+    </AssociationSet>
+    <AssociationSet Name="ItemSupply" Association="dbClinicManagementModel.Store.ItemSupply">
+      <End Role="Item" EntitySet="Items" />
+      <End Role="Supply" EntitySet="Supplies" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Items">
+    <Key>
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ItemQuantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="SupplyID" Type="int" Nullable="true" />
+    <Property Name="ItemType" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MedChecks">
+    <Key>
+      <PropertyRef Name="MedCheckID" />
+    </Key>
+    <Property Name="MedCheckID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StaffID" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="PatientID" Type="int" Nullable="true" />
+    <Property Name="DateTimeOfVisit" Type="datetime" Nullable="false" />
+    <Property Name="Complaint" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Diagnosis" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Treatment" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="MedCheckType" Type="int" Nullable="true" />
+    <Property Name="MedCheckStatus" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Patients">
+    <Key>
+      <PropertyRef Name="PatientID" />
+    </Key>
+    <Property Name="PatientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PatientLast" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="PatientFirst" Type="varchar(max)" Nullable="true" />
+    <Property Name="PatientMid" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="PatientGender" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="PatientBDate" Type="datetime" Nullable="true" />
+    <Property Name="PatientAddrss" Type="varchar(max)" Nullable="true" />
+    <Property Name="TypeID" Type="int" Nullable="true" />
+    <Property Name="PatientClass" Type="int" Nullable="true" />
+    <Property Name="CollegeID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PatientTypes">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" Nullable="true" MaxLength="20" />
+  </EntityType>
+  <EntityType Name="PColleges">
+    <Key>
+      <PropertyRef Name="CollegeID" />
+    </Key>
+    <Property Name="CollegeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CollegeCode" Type="varchar" Nullable="true" MaxLength="10" />
+    <Property Name="CollegeName" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Staffs">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="StaffLast" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="StaffFirst" Type="varchar(max)" Nullable="true" />
+    <Property Name="StaffMid" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="StaffGender" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="StaffPassword" Type="varchar" Nullable="false" MaxLength="20" />
+    <Property Name="StaffJoinedDate" Type="nchar" Nullable="true" MaxLength="10" />
+    <Property Name="UserTypeID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Supplies">
+    <Key>
+      <PropertyRef Name="SupplyID" />
+    </Key>
+    <Property Name="SupplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="SupplyQuantity" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ReceivedDate" Type="datetime" Nullable="true" />
+    <Property Name="ExpirationDate" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserTypes">
+    <Key>
+      <PropertyRef Name="UserTypeID" />
+    </Key>
+    <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeDesc" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="MedCheckItems">
+    <Key>
+      <PropertyRef Name="MedCheckID" />
+      <PropertyRef Name="ItemID" />
+    </Key>
+    <Property Name="MedCheckID" Type="int" Nullable="false" />
+    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_MedCheckHeader_Patient">
+    <End Role="Patient" Type="dbClinicManagementModel.Store.Patients" Multiplicity="0..1" />
+    <End Role="MedCheckHeader" Type="dbClinicManagementModel.Store.MedChecks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Patient">
+        <PropertyRef Name="PatientID" />
+      </Principal>
+      <Dependent Role="MedCheckHeader">
+        <PropertyRef Name="PatientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MedCheckHeader_Staff">
+    <End Role="Staff" Type="dbClinicManagementModel.Store.Staffs" Multiplicity="0..1" />
+    <End Role="MedCheckHeader" Type="dbClinicManagementModel.Store.MedChecks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="StaffID" />
+      </Principal>
+      <Dependent Role="MedCheckHeader">
+        <PropertyRef Name="StaffID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_PatientType">
+    <End Role="PatientType" Type="dbClinicManagementModel.Store.PatientTypes" Multiplicity="0..1" />
+    <End Role="Patient" Type="dbClinicManagementModel.Store.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PatientType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Patient_PCollege">
+    <End Role="PCollege" Type="dbClinicManagementModel.Store.PColleges" Multiplicity="1" />
+    <End Role="Patient" Type="dbClinicManagementModel.Store.Patients" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PCollege">
+        <PropertyRef Name="CollegeID" />
+      </Principal>
+      <Dependent Role="Patient">
+        <PropertyRef Name="CollegeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_UserType">
+    <End Role="UserType" Type="dbClinicManagementModel.Store.UserTypes" Multiplicity="0..1" />
+    <End Role="Staff" Type="dbClinicManagementModel.Store.Staffs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserType">
+        <PropertyRef Name="UserTypeID" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="UserTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="MedCheckID">
+    <End Role="MedCheck" Type="dbClinicManagementModel.Store.MedChecks" Multiplicity="1" />
+    <End Role="MedCheckItem" Type="dbClinicManagementModel.Store.MedCheckItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MedCheck">
+        <PropertyRef Name="MedCheckID" />
+      </Principal>
+      <Dependent Role="MedCheckItem">
+        <PropertyRef Name="MedCheckID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemMedCheckItem">
+    <End Role="Item" Type="dbClinicManagementModel.Store.Items" Multiplicity="1" />
+    <End Role="MedCheckItem" Type="dbClinicManagementModel.Store.MedCheckItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="MedCheckItem">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ItemSupply">
+    <End Role="Item" Type="dbClinicManagementModel.Store.Items" Multiplicity="1" />
+    <End Role="Supply" Type="dbClinicManagementModel.Store.Supplies" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Item">
+        <PropertyRef Name="ItemID" />
+      </Principal>
+      <Dependent Role="Supply">
+        <PropertyRef Name="ItemID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="dbClinicManagementModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Inventory">
+        <EntityType Name="Item">
           <Key>
-            <PropertyRef Name="InventoryID" />
+            <PropertyRef Name="ItemID" />
           </Key>
-          <Property Name="InventoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemName" Type="String" Nullable="false" />
+          <Property Name="ItemQuantity" Type="String" Nullable="false" />
           <Property Name="SupplyID" Type="Int32" />
-          <Property Name="StaffID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="SupplyQuantity" Type="Int32" />
-          <Property Name="ExpirationDate" Type="DateTime" Precision="0" />
-          <NavigationProperty Name="Staff" Relationship="Self.FK_Inventory_Staff" FromRole="Inventory" ToRole="Staff" />
-          <NavigationProperty Name="Supply" Relationship="Self.FK_Inventory_Supply" FromRole="Inventory" ToRole="Supply" />
-          <NavigationProperty Name="MedCheckHeaders" Relationship="Self.FK_MedCheckHeader_Inventory" FromRole="Inventory" ToRole="MedCheckHeader" />
+          <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="Item" ToRole="MedCheckItem" />
+          <Property Name="ItemType" Type="String" Nullable="false" />
+          <NavigationProperty Name="Supplies" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Item" ToRole="Supply" />
         </EntityType>
-        <EntityType Name="MedCheckDetail">
+        <EntityType Name="MedCheck">
           <Key>
-            <PropertyRef Name="MedCheckHID" />
+            <PropertyRef Name="MedCheckID" />
           </Key>
-          <Property Name="MedCheckHID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="DateofVisit" Type="DateTime" Precision="0" />
-          <Property Name="TimeofVisit" Type="Time" Precision="7" />
-          <Property Name="Complaint" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Diagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="MedCheckHeader" Relationship="Self.FK_MedCheckDetail_MedCheckHeader" FromRole="MedCheckDetail" ToRole="MedCheckHeader" />
-        </EntityType>
-        <EntityType Name="MedCheckHeader">
-          <Key>
-            <PropertyRef Name="MedCheckHID" />
-          </Key>
-          <Property Name="MedCheckHID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MedCheckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="StaffID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="PatientID" Type="Int32" />
-          <Property Name="InventoryID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="MedCheckType" Type="Int32" />
-          <Property Name="MedCheckStatus" Type="Int32" />
-          <NavigationProperty Name="Inventory" Relationship="Self.FK_MedCheckHeader_Inventory" FromRole="MedCheckHeader" ToRole="Inventory" />
-          <NavigationProperty Name="MedCheckDetail" Relationship="Self.FK_MedCheckDetail_MedCheckHeader" FromRole="MedCheckHeader" ToRole="MedCheckDetail" />
           <NavigationProperty Name="Patient" Relationship="Self.FK_MedCheckHeader_Patient" FromRole="MedCheckHeader" ToRole="Patient" />
           <NavigationProperty Name="Staff" Relationship="Self.FK_MedCheckHeader_Staff" FromRole="MedCheckHeader" ToRole="Staff" />
+          <Property Name="DateTimeOfVisit" Type="DateTime" Nullable="false" />
+          <Property Name="Complaint" Type="String" Nullable="false" />
+          <Property Name="Diagnosis" Type="String" Nullable="false" />
+          <Property Name="Treatment" Type="String" Nullable="false" />
+          <Property Name="Remarks" Type="String" Nullable="false" />
+          <Property Name="MedCheckType" Type="Int32" />
+          <Property Name="MedCheckStatus" Type="Int32" />
+          <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.MedCheckID" FromRole="MedCheck" ToRole="MedCheckItem" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -344,7 +319,6 @@
           <Property Name="StaffPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StaffJoinedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="UserTypeID" Type="Int32" />
-          <NavigationProperty Name="Inventories" Relationship="Self.FK_Inventory_Staff" FromRole="Staff" ToRole="Inventory" />
           <NavigationProperty Name="MedCheckHeaders" Relationship="Self.FK_MedCheckHeader_Staff" FromRole="Staff" ToRole="MedCheckHeader" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_Staff_UserType" FromRole="Staff" ToRole="UserType" />
         </EntityType>
@@ -352,11 +326,12 @@
           <Key>
             <PropertyRef Name="SupplyID" />
           </Key>
-          <Property Name="SupplyID" Type="Int32" Nullable="false" />
-          <Property Name="SupplyName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SupplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="SupplyQuantity" Type="String" Nullable="false" />
           <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
-          <Property Name="SupplyType" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Inventories" Relationship="Self.FK_Inventory_Supply" FromRole="Supply" ToRole="Inventory" />
+          <Property Name="ExpirationDate" Type="String" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Supply" ToRole="Item" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -366,57 +341,9 @@
           <Property Name="TypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_UserType" FromRole="UserType" ToRole="Staff" />
         </EntityType>
-        <Association Name="FK_Inventory_Staff">
-          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Staff">
-              <PropertyRef Name="StaffID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="StaffID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Inventory_Supply">
-          <End Role="Supply" Type="Self.Supply" Multiplicity="0..1" />
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Supply">
-              <PropertyRef Name="SupplyID" />
-            </Principal>
-            <Dependent Role="Inventory">
-              <PropertyRef Name="SupplyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MedCheckHeader_Inventory">
-          <End Role="Inventory" Type="Self.Inventory" Multiplicity="0..1" />
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Inventory">
-              <PropertyRef Name="InventoryID" />
-            </Principal>
-            <Dependent Role="MedCheckHeader">
-              <PropertyRef Name="InventoryID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_MedCheckDetail_MedCheckHeader">
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="1" />
-          <End Role="MedCheckDetail" Type="Self.MedCheckDetail" Multiplicity="0..1" />
-          <ReferentialConstraint>
-            <Principal Role="MedCheckHeader">
-              <PropertyRef Name="MedCheckHID" />
-            </Principal>
-            <Dependent Role="MedCheckDetail">
-              <PropertyRef Name="MedCheckHID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_MedCheckHeader_Patient">
           <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="*" />
+          <End Role="MedCheckHeader" Type="dbClinicManagementModel.MedCheck" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Patient">
               <PropertyRef Name="PatientID" />
@@ -428,7 +355,7 @@
         </Association>
         <Association Name="FK_MedCheckHeader_Staff">
           <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
-          <End Role="MedCheckHeader" Type="Self.MedCheckHeader" Multiplicity="*" />
+          <End Role="MedCheckHeader" Type="dbClinicManagementModel.MedCheck" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Staff">
               <PropertyRef Name="StaffID" />
@@ -475,38 +402,21 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="dbClinicManagementEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Inventories" EntityType="Self.Inventory" />
-          <EntitySet Name="MedCheckDetails" EntityType="Self.MedCheckDetail" />
-          <EntitySet Name="MedCheckHeaders" EntityType="Self.MedCheckHeader" />
+          <EntitySet Name="Items" EntityType="dbClinicManagementModel.Item" />
+          <EntitySet Name="MedChecks" EntityType="dbClinicManagementModel.MedCheck" />
           <EntitySet Name="Patients" EntityType="Self.Patient" />
           <EntitySet Name="PatientTypes" EntityType="Self.PatientType" />
           <EntitySet Name="PColleges" EntityType="Self.PCollege" />
           <EntitySet Name="Staffs" EntityType="Self.Staff" />
           <EntitySet Name="Supplies" EntityType="Self.Supply" />
           <EntitySet Name="UserTypes" EntityType="Self.UserType" />
-          <AssociationSet Name="FK_Inventory_Staff" Association="Self.FK_Inventory_Staff">
-            <End Role="Staff" EntitySet="Staffs" />
-            <End Role="Inventory" EntitySet="Inventories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Inventory_Supply" Association="Self.FK_Inventory_Supply">
-            <End Role="Supply" EntitySet="Supplies" />
-            <End Role="Inventory" EntitySet="Inventories" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedCheckHeader_Inventory" Association="Self.FK_MedCheckHeader_Inventory">
-            <End Role="Inventory" EntitySet="Inventories" />
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeaders" />
-          </AssociationSet>
-          <AssociationSet Name="FK_MedCheckDetail_MedCheckHeader" Association="Self.FK_MedCheckDetail_MedCheckHeader">
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeaders" />
-            <End Role="MedCheckDetail" EntitySet="MedCheckDetails" />
-          </AssociationSet>
           <AssociationSet Name="FK_MedCheckHeader_Patient" Association="Self.FK_MedCheckHeader_Patient">
             <End Role="Patient" EntitySet="Patients" />
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeaders" />
+            <End Role="MedCheckHeader" EntitySet="MedChecks" />
           </AssociationSet>
           <AssociationSet Name="FK_MedCheckHeader_Staff" Association="Self.FK_MedCheckHeader_Staff">
             <End Role="Staff" EntitySet="Staffs" />
-            <End Role="MedCheckHeader" EntitySet="MedCheckHeaders" />
+            <End Role="MedCheckHeader" EntitySet="MedChecks" />
           </AssociationSet>
           <AssociationSet Name="FK_Patient_PatientType" Association="Self.FK_Patient_PatientType">
             <End Role="PatientType" EntitySet="PatientTypes" />
@@ -520,117 +430,177 @@
             <End Role="UserType" EntitySet="UserTypes" />
             <End Role="Staff" EntitySet="Staffs" />
           </AssociationSet>
+          <EntitySet Name="MedCheckItems" EntityType="dbClinicManagementModel.MedCheckItem" />
+          <AssociationSet Name="MedCheckID" Association="dbClinicManagementModel.MedCheckID">
+            <End Role="MedCheck" EntitySet="MedChecks" />
+            <End Role="MedCheckItem" EntitySet="MedCheckItems" />
+          </AssociationSet>
+          <AssociationSet Name="ItemMedCheckItem" Association="dbClinicManagementModel.ItemMedCheckItem">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="MedCheckItem" EntitySet="MedCheckItems" />
+          </AssociationSet>
+          <AssociationSet Name="ItemSupply" Association="dbClinicManagementModel.ItemSupply">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Supply" EntitySet="Supplies" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="MedCheckItem">
+          <Key>
+            <PropertyRef Name="MedCheckID" />
+            <PropertyRef Name="ItemID" />
+          </Key>
+          <NavigationProperty Name="MedCheck" Relationship="dbClinicManagementModel.MedCheckID" FromRole="MedCheckItem" ToRole="MedCheck" />
+          <Property Name="MedCheckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
+          <NavigationProperty Name="Item" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="MedCheckItem" ToRole="Item" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="MedCheckID">
+          <End Type="dbClinicManagementModel.MedCheck" Role="MedCheck" Multiplicity="1" />
+          <End Type="dbClinicManagementModel.MedCheckItem" Role="MedCheckItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MedCheck">
+              <PropertyRef Name="MedCheckID" />
+            </Principal>
+            <Dependent Role="MedCheckItem">
+              <PropertyRef Name="MedCheckID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemMedCheckItem">
+          <End Type="dbClinicManagementModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="dbClinicManagementModel.MedCheckItem" Role="MedCheckItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="MedCheckItem">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ItemSupply">
+          <End Type="dbClinicManagementModel.Item" Role="Item" Multiplicity="1" />
+          <End Type="dbClinicManagementModel.Supply" Role="Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ItemID" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="ItemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="dbClinicManagementModelStoreContainer" CdmEntityContainer="dbClinicManagementEntities">
-          <EntitySetMapping Name="Inventories">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.Inventory">
-              <MappingFragment StoreEntitySet="Inventory">
-                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
-                <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="SupplyQuantity" ColumnName="SupplyQuantity" />
-                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MedCheckDetails">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.MedCheckDetail">
-              <MappingFragment StoreEntitySet="MedCheckDetail">
-                <ScalarProperty Name="MedCheckHID" ColumnName="MedCheckHID" />
-                <ScalarProperty Name="DateofVisit" ColumnName="DateofVisit" />
-                <ScalarProperty Name="TimeofVisit" ColumnName="TimeofVisit" />
-                <ScalarProperty Name="Complaint" ColumnName="Complaint" />
-                <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
-                <ScalarProperty Name="Treatment" ColumnName="Treatment" />
-                <ScalarProperty Name="Remarks" ColumnName="Remarks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="MedCheckHeaders">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.MedCheckHeader">
-              <MappingFragment StoreEntitySet="MedCheckHeader">
-                <ScalarProperty Name="MedCheckHID" ColumnName="MedCheckHID" />
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
-                <ScalarProperty Name="InventoryID" ColumnName="InventoryID" />
-                <ScalarProperty Name="MedCheckType" ColumnName="MedCheckType" />
-                <ScalarProperty Name="MedCheckStatus" ColumnName="MedCheckStatus" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Patients">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.Patient">
-              <MappingFragment StoreEntitySet="Patient">
-                <ScalarProperty Name="PatientID" ColumnName="PatientID" />
-                <ScalarProperty Name="PatientLast" ColumnName="PatientLast" />
-                <ScalarProperty Name="PatientFirst" ColumnName="PatientFirst" />
-                <ScalarProperty Name="PatientMid" ColumnName="PatientMid" />
-                <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
-                <ScalarProperty Name="PatientBDate" ColumnName="PatientBDate" />
-                <ScalarProperty Name="PatientAddrss" ColumnName="PatientAddrss" />
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="PatientClass" ColumnName="PatientClass" />
-                <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PatientTypes">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.PatientType">
-              <MappingFragment StoreEntitySet="PatientType">
-                <ScalarProperty Name="TypeID" ColumnName="TypeID" />
-                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PColleges">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.PCollege">
-              <MappingFragment StoreEntitySet="PCollege">
-                <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
-                <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
-                <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Staffs">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.Staff">
-              <MappingFragment StoreEntitySet="Staff">
-                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
-                <ScalarProperty Name="StaffLast" ColumnName="StaffLast" />
-                <ScalarProperty Name="StaffFirst" ColumnName="StaffFirst" />
-                <ScalarProperty Name="StaffMid" ColumnName="StaffMid" />
-                <ScalarProperty Name="StaffGender" ColumnName="StaffGender" />
-                <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
-                <ScalarProperty Name="StaffJoinedDate" ColumnName="StaffJoinedDate" />
-                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Supplies">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.Supply">
-              <MappingFragment StoreEntitySet="Supply">
-                <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
-                <ScalarProperty Name="SupplyName" ColumnName="SupplyName" />
-                <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
-                <ScalarProperty Name="SupplyType" ColumnName="SupplyType" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="UserTypes">
-            <EntityTypeMapping TypeName="dbClinicManagementModel.UserType">
-              <MappingFragment StoreEntitySet="UserType">
-                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
-                <ScalarProperty Name="TypeDesc" ColumnName="TypeDesc" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="dbClinicManagementModelStoreContainer" CdmEntityContainer="dbClinicManagementEntities">
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.Item)">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="ItemName" ColumnName="ItemName" />
+          <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+          <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
+          <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedChecks">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.MedCheck)">
+        <MappingFragment StoreEntitySet="MedChecks">
+          <ScalarProperty Name="MedCheckID" ColumnName="MedCheckID" />
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="DateTimeOfVisit" ColumnName="DateTimeOfVisit" />
+          <ScalarProperty Name="Complaint" ColumnName="Complaint" />
+          <ScalarProperty Name="Diagnosis" ColumnName="Diagnosis" />
+          <ScalarProperty Name="Treatment" ColumnName="Treatment" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="MedCheckType" ColumnName="MedCheckType" />
+          <ScalarProperty Name="MedCheckStatus" ColumnName="MedCheckStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Patients">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.Patient)">
+        <MappingFragment StoreEntitySet="Patients">
+          <ScalarProperty Name="PatientID" ColumnName="PatientID" />
+          <ScalarProperty Name="PatientLast" ColumnName="PatientLast" />
+          <ScalarProperty Name="PatientFirst" ColumnName="PatientFirst" />
+          <ScalarProperty Name="PatientMid" ColumnName="PatientMid" />
+          <ScalarProperty Name="PatientGender" ColumnName="PatientGender" />
+          <ScalarProperty Name="PatientBDate" ColumnName="PatientBDate" />
+          <ScalarProperty Name="PatientAddrss" ColumnName="PatientAddrss" />
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="PatientClass" ColumnName="PatientClass" />
+          <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PatientTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.PatientType)">
+        <MappingFragment StoreEntitySet="PatientTypes">
+          <ScalarProperty Name="TypeID" ColumnName="TypeID" />
+          <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PColleges">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.PCollege)">
+        <MappingFragment StoreEntitySet="PColleges">
+          <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+          <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
+          <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staffs">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.Staff)">
+        <MappingFragment StoreEntitySet="Staffs">
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="StaffLast" ColumnName="StaffLast" />
+          <ScalarProperty Name="StaffFirst" ColumnName="StaffFirst" />
+          <ScalarProperty Name="StaffMid" ColumnName="StaffMid" />
+          <ScalarProperty Name="StaffGender" ColumnName="StaffGender" />
+          <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
+          <ScalarProperty Name="StaffJoinedDate" ColumnName="StaffJoinedDate" />
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Supplies">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.Supply)">
+        <MappingFragment StoreEntitySet="Supplies">
+          <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="SupplyQuantity" ColumnName="SupplyQuantity" />
+          <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
+          <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserTypes">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.UserType)">
+        <MappingFragment StoreEntitySet="UserTypes">
+          <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="TypeDesc" ColumnName="TypeDesc" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MedCheckItems">
+      <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.MedCheckItem)">
+        <MappingFragment StoreEntitySet="MedCheckItems">
+          <ScalarProperty Name="MedCheckID" ColumnName="MedCheckID" />
+          <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -644,7 +614,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

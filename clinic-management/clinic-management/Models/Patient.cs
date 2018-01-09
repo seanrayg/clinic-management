@@ -17,7 +17,7 @@ namespace clinic_management.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.MedCheckHeaders = new HashSet<MedCheckHeader>();
+            this.MedCheckHeaders = new HashSet<MedCheck>();
         }
     
         public int PatientID { get; set; }
@@ -32,7 +32,7 @@ namespace clinic_management.Models
         public int CollegeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedCheckHeader> MedCheckHeaders { get; set; }
+        public virtual ICollection<MedCheck> MedCheckHeaders { get; set; }
         public virtual PatientType PatientType { get; set; }
         public virtual PCollege PCollege { get; set; }
     }

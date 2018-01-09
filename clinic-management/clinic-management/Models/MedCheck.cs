@@ -12,18 +12,28 @@ namespace clinic_management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class MedCheckHeader
+    public partial class MedCheck
     {
-        public string MedCheckHID { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public MedCheck()
+        {
+            this.MedCheckItems = new HashSet<MedCheckItem>();
+        }
+    
+        public int MedCheckID { get; set; }
         public string StaffID { get; set; }
         public Nullable<int> PatientID { get; set; }
-        public string InventoryID { get; set; }
+        public System.DateTime DateTimeOfVisit { get; set; }
+        public string Complaint { get; set; }
+        public string Diagnosis { get; set; }
+        public string Treatment { get; set; }
+        public string Remarks { get; set; }
         public Nullable<int> MedCheckType { get; set; }
         public Nullable<int> MedCheckStatus { get; set; }
     
-        public virtual Inventory Inventory { get; set; }
-        public virtual MedCheckDetail MedCheckDetail { get; set; }
         public virtual Patient Patient { get; set; }
         public virtual Staff Staff { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<MedCheckItem> MedCheckItems { get; set; }
     }
 }

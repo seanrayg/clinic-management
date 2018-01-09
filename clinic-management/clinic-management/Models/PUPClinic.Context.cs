@@ -25,14 +25,14 @@ namespace clinic_management.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Inventory> Inventories { get; set; }
-        public virtual DbSet<MedCheckDetail> MedCheckDetails { get; set; }
-        public virtual DbSet<MedCheckHeader> MedCheckHeaders { get; set; }
+        public virtual DbSet<Item> Items { get; set; }
+        public virtual DbSet<MedCheck> MedChecks { get; set; }
         public virtual DbSet<Patient> Patients { get; set; }
         public virtual DbSet<PatientType> PatientTypes { get; set; }
         public virtual DbSet<PCollege> PColleges { get; set; }
         public virtual DbSet<Staff> Staffs { get; set; }
         public virtual DbSet<Supply> Supplies { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
+        public virtual DbSet<MedCheckItem> MedCheckItems { get; set; }
     }
 }

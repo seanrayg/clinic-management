@@ -12,23 +12,24 @@ namespace clinic_management.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Inventory
+    public partial class Item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Inventory()
+        public Item()
         {
-            this.MedCheckHeaders = new HashSet<MedCheckHeader>();
+            this.MedCheckItems = new HashSet<MedCheckItem>();
+            this.Supplies = new HashSet<Supply>();
         }
     
-        public string InventoryID { get; set; }
+        public int ItemID { get; set; }
+        public string ItemName { get; set; }
+        public string ItemQuantity { get; set; }
         public Nullable<int> SupplyID { get; set; }
-        public string StaffID { get; set; }
-        public Nullable<int> SupplyQuantity { get; set; }
-        public Nullable<System.DateTime> ExpirationDate { get; set; }
+        public string ItemType { get; set; }
     
-        public virtual Staff Staff { get; set; }
-        public virtual Supply Supply { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedCheckHeader> MedCheckHeaders { get; set; }
+        public virtual ICollection<MedCheckItem> MedCheckItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Supply> Supplies { get; set; }
     }
 }
