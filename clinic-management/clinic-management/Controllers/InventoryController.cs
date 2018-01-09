@@ -14,10 +14,33 @@ namespace clinic_management.Controllers
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
 
-        // GET: Inventory
+        // GET: Items
         public ActionResult Index()
         {
+            return View(db.Items.Where(i => i.ItemType == "Medicine").ToList());
+        }
+
+        // GET: Items/Create
+        public ActionResult Create()
+        {
             return View();
+        }
+
+        // POST: Items/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Items.Add(item);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(item);
         }
     }
 }

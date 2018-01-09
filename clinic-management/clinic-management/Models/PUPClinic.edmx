@@ -55,7 +55,6 @@
     <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ItemQuantity" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="SupplyID" Type="int" Nullable="true" />
     <Property Name="ItemType" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MedChecks">
@@ -249,7 +248,6 @@
           <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ItemName" Type="String" Nullable="false" />
           <Property Name="ItemQuantity" Type="String" Nullable="false" />
-          <Property Name="SupplyID" Type="Int32" />
           <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="Item" ToRole="MedCheckItem" />
           <Property Name="ItemType" Type="String" Nullable="false" />
           <NavigationProperty Name="Supplies" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Item" ToRole="Supply" />
@@ -503,7 +501,6 @@
           <ScalarProperty Name="ItemID" ColumnName="ItemID" />
           <ScalarProperty Name="ItemName" ColumnName="ItemName" />
           <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
-          <ScalarProperty Name="SupplyID" ColumnName="SupplyID" />
           <ScalarProperty Name="ItemType" ColumnName="ItemType" />
         </MappingFragment>
       </EntityTypeMapping>

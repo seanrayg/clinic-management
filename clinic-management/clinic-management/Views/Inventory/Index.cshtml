@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<clinic_management.Models.Item>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -15,7 +16,7 @@
         <div id="medicines" class="tab-pane fade in active">
             <br />
             <div class="btn-group">
-                <button type="button" class="btn btn-default">Add Supply</button>
+                <button type="button" class="btn btn-default" onclick="location.href='@Url.Action("Create", "Inventory")'">Add Medicine</button>
                 <button type="button" class="btn btn-default" disabled>Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
@@ -24,14 +25,31 @@
             <table class="table" id="tableMedicines">
                 <thead>
                     <tr>
-                        <th>Supply ID</th>
-                        <th>Medicine</th>
+                        <th>Item ID</th>
+                        <th>Name</th>
                         <th>Quantity</th>
-                        <th>Recieved Date</th>
-                        <th>Expiration Date</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemQuantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-success" })
+                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-primary" })
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
