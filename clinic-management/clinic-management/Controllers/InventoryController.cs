@@ -17,7 +17,11 @@ namespace clinic_management.Controllers
         // GET: Items
         public ActionResult Index()
         {
-            return View(db.Items.Where(i => i.ItemType == "Medicine").ToList());
+            ModelContainer modelcontainer = new ModelContainer();
+
+            modelcontainer.ItemList = db.Items.Where(i => i.ItemType == "Medicine").ToList();
+
+            return View(modelcontainer);
         }
 
         // GET: Items/Create
