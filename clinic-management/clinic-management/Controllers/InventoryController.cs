@@ -39,12 +39,20 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                item.ItemQuantity = "0";
+                item.ItemType = "Medicine";
+
                 db.Items.Add(item);
                 db.SaveChanges();
+
+                System.Diagnostics.Debug.WriteLine("Medicine Added");
+
                 return RedirectToAction("Index");
             }
 
-            return View(item);
+            System.Diagnostics.Debug.WriteLine("Medicine Not Added");
+
+            return RedirectToAction("Index");
         }
     }
 }
