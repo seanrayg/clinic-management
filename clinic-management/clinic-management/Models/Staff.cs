@@ -26,7 +26,7 @@ namespace clinic_management.Models
         public string StaffMid { get; set; }
         public string StaffGender { get; set; }
         public string StaffPassword { get; set; }
-        public string StaffJoinedDate { get; set; }
+        public Nullable<System.DateTime> StaffJoinedDate { get; set; }
         public Nullable<int> UserTypeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

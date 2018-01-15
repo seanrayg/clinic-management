@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/09/2018 13:43:19
+-- Date Created: 01/15/2018 17:20:28
 -- Generated from EDMX file: F:\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
@@ -140,7 +140,7 @@ CREATE TABLE [dbo].[Staffs] (
     [StaffMid] varchar(50)  NULL,
     [StaffGender] varchar(20)  NULL,
     [StaffPassword] varchar(20)  NOT NULL,
-    [StaffJoinedDate] nchar(10)  NULL,
+    [StaffJoinedDate] datetime  NULL,
     [UserTypeID] int  NULL
 );
 GO

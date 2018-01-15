@@ -112,7 +112,7 @@
     <Property Name="StaffMid" Type="varchar" Nullable="true" MaxLength="50" />
     <Property Name="StaffGender" Type="varchar" Nullable="true" MaxLength="20" />
     <Property Name="StaffPassword" Type="varchar" Nullable="false" MaxLength="20" />
-    <Property Name="StaffJoinedDate" Type="nchar" Nullable="true" MaxLength="10" />
+    <Property Name="StaffJoinedDate" Type="datetime" Nullable="true" />
     <Property Name="UserTypeID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="Supplies">
@@ -312,10 +312,10 @@
           <Property Name="StaffID" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="StaffLast" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="StaffFirst" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="StaffMid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StaffMid" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="true" />
           <Property Name="StaffGender" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="StaffPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="StaffJoinedDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="StaffJoinedDate" Type="DateTime" Nullable="true" />
           <Property Name="UserTypeID" Type="Int32" />
           <NavigationProperty Name="MedCheckHeaders" Relationship="Self.FK_MedCheckHeader_Staff" FromRole="Staff" ToRole="MedCheckHeader" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_Staff_UserType" FromRole="Staff" ToRole="UserType" />
