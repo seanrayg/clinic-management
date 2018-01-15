@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.ItemList)
+                    @foreach (var item in Model.Medicine)
                     {
                         <tr>
                             <td>
@@ -56,7 +56,7 @@
         <div id="utensils" class="tab-pane fade">
             <br />
             <div class="btn-group">
-                <button type="button" class="btn btn-default">Add Supply</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Utensil</button>
                 <button type="button" class="btn btn-default" disabled>Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
@@ -65,27 +65,31 @@
             <table class="table" id="tableUtensils">
                 <thead>
                     <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
+                        <th>Item ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>john@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>Mary</td>
-                        <td>Moe</td>
-                        <td>mary@example.com</td>
-                    </tr>
-                    <tr>
-                        <td>July</td>
-                        <td>Dooley</td>
-                        <td>july@example.com</td>
-                    </tr>
+                    @foreach (var item in Model.Utensil)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemQuantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                            </td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -114,6 +118,13 @@
                             <div class="col-md-6">
                                 @Html.EditorFor(model => model.Item.ItemName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Item.ItemName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            @Html.LabelFor(model => model.Item.ItemType, "Medicine Type", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Item.ItemType, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Item.ItemType, "", new { @class = "text-danger" })
                             </div>
                         </div>
                     </div>

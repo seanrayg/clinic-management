@@ -19,7 +19,8 @@ namespace clinic_management.Controllers
         {
             ModelContainer modelcontainer = new ModelContainer();
 
-            modelcontainer.ItemList = db.Items.Where(i => i.ItemType == "Medicine").ToList();
+            modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").ToList();
+            modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").ToList();
 
             return View(modelcontainer);
         }

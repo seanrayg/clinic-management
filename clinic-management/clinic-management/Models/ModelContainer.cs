@@ -7,7 +7,8 @@ namespace clinic_management.Models
 {
     public class ModelContainer
     {
-        public IEnumerable<Item> ItemList { get; set; }
+        public IEnumerable<Item> Medicine { get; set; }
+        public IEnumerable<Item> Utensil { get; set; }
         public Item Item { get; set; }
     }
 }
