@@ -24,6 +24,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +131,9 @@
     <Content Include="Content\assets\css\bootstrap.css" />
     <Content Include="Content\assets\css\font-awesome.css" />
     <Content Include="Content\assets\css\inventory.css" />
+    <Content Include="Content\assets\css\login_style.css" />
+    <Content Include="Content\assets\css\metisMenu.min.css" />
+    <Content Include="Content\assets\css\sb-admin-2.css" />
     <Content Include="Content\assets\css\style.css" />
     <Content Include="Content\assets\fonts\fontawesome-webfont.svg" />
     <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg" />
@@ -137,6 +141,10 @@
     <Content Include="Content\assets\img\PUPLogo.png" />
     <Content Include="Content\assets\js\bootstrap.js" />
     <Content Include="Content\assets\js\jquery-1.11.1.js" />
+    <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
+    <Content Include="Content\assets\js\jquery-ui.min.js" />
+    <Content Include="Content\assets\js\metisMenu.min.js" />
+    <Content Include="Content\assets\js\sb-admin-2.min.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CPage\css\business-casual.css" />
@@ -156,7 +164,6 @@
     <Content Include="Content\CPage\vendor\jquery\jquery.min.js" />
     <Content Include="Content\CPage\vendor\popper\popper.js" />
     <Content Include="Content\CPage\vendor\popper\popper.min.js" />
-    <Content Include="Content\login_style.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\PUPClinic.Context.tt">
@@ -170,10 +177,13 @@
       <DependentUpon>PUPClinic.edmx</DependentUpon>
       <LastGenOutput>PUPClinic.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -256,11 +266,6 @@
     <Content Include="Views\Patients\Edit.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Staffs\Create.cshtml" />
-    <Content Include="Views\Staffs\Delete.cshtml" />
-    <Content Include="Views\Staffs\Details.cshtml" />
-    <Content Include="Views\Staffs\Edit.cshtml" />
-    <Content Include="Views\Staffs\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Inventory\Index.cshtml" />
     <Content Include="Views\Items\Create.cshtml" />
@@ -269,6 +274,12 @@
     <Content Include="Views\Items\Edit.cshtml" />
     <Content Include="Views\Items\Index.cshtml" />
     <Content Include="Views\Inventory\Create.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Staffs\Create.cshtml" />
+    <Content Include="Views\Staffs\Delete.cshtml" />
+    <Content Include="Views\Staffs\Details.cshtml" />
+    <Content Include="Views\Staffs\Edit.cshtml" />
+    <Content Include="Views\Staffs\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
