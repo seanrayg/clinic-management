@@ -4,37 +4,42 @@
     ViewBag.Title = "Details";
 }
 
-<div class="content-wrapper">
-    <div class="container">
-        <h4>Staff</h4>
-        <hr />
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">User Accounts</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div>
         <dl class="dl-horizontal">
             <dt>
-                Full Name
+                @Html.DisplayNameFor(model => model.StaffLast)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.StaffLast), @Html.DisplayFor(model => model.StaffFirst) @Html.DisplayFor(model => model.StaffMid)
+                @Html.DisplayFor(model => model.StaffLast)
             </dd>
 
-            @*<dt>
-                            @Html.DisplayNameFor(model => model.StaffFirst)
-                            </dt>
+            <dt>
+                @Html.DisplayNameFor(model => model.StaffFirst)
+            </dt>
 
-                <dd>
-                    @Html.DisplayFor(model => model.StaffFirst)
-                </dd>
-
-                <dt>
-                    @Html.DisplayNameFor(model => model.StaffMid)
-                </dt>
-
-                <dd>
-                    @Html.DisplayFor(model => model.StaffMid)
-                </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.StaffFirst)
+            </dd>
 
             <dt>
-                Staff
+                @Html.DisplayNameFor(model => model.StaffMid)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StaffMid)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StaffGender)
             </dt>
 
             <dd>
@@ -42,7 +47,15 @@
             </dd>
 
             <dt>
-                Joined Date
+                @Html.DisplayNameFor(model => model.StaffPassword)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.StaffPassword)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.StaffJoinedDate)
             </dt>
 
             <dd>
@@ -50,7 +63,7 @@
             </dd>
 
             <dt>
-                Staff Type
+                @Html.DisplayNameFor(model => model.UserType.TypeDesc)
             </dt>
 
             <dd>
@@ -58,10 +71,9 @@
             </dd>
 
         </dl>
-        <p>
-        <p class="pull-right">
-            <input type="button" value="Edit" class="btn btn-primary" />
-            <input type="button" value="Back" class="btn btn-primary" />
-        </p>
     </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.StaffID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>

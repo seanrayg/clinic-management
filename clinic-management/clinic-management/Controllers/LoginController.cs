@@ -29,11 +29,9 @@ namespace ClinicManagement.Controllers
 
                 if (query.Any())
                 {
-                    ViewBag.ErrorMessage = "";
-
                     System.Diagnostics.Debug.WriteLine("Login Success");
 
-                    return RedirectToAction("Index", "Patients");
+                    return RedirectToAction("Index", "Inventory");
                 }
                 else
                 {

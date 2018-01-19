@@ -7,6 +7,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+using System.ComponentModel;
+
 namespace clinic_management.Models
 {
     using System;
@@ -17,22 +19,31 @@ namespace clinic_management.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Patient()
         {
-            this.MedCheckHeaders = new HashSet<MedCheckHeader>();
+            this.MedCheckHeaders = new HashSet<MedCheck>();
         }
     
         public int PatientID { get; set; }
+        [DisplayName("Last Name")]
         public string PatientLast { get; set; }
+        [DisplayName("First Name")]
         public string PatientFirst { get; set; }
+        [DisplayName("Midle Name")]
         public string PatientMid { get; set; }
+        [DisplayName("Gender")]
         public string PatientGender { get; set; }
+        [DisplayName("Birthday")]
         public Nullable<System.DateTime> PatientBDate { get; set; }
+        [DisplayName("Address")]
         public string PatientAddrss { get; set; }
+        [DisplayName("Type")]
         public Nullable<int> TypeID { get; set; }
+        [DisplayName("Class")]
         public Nullable<int> PatientClass { get; set; }
+        [DisplayName("College")]
         public int CollegeID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<MedCheckHeader> MedCheckHeaders { get; set; }
+        public virtual ICollection<MedCheck> MedCheckHeaders { get; set; }
         public virtual PatientType PatientType { get; set; }
         public virtual PCollege PCollege { get; set; }
     }

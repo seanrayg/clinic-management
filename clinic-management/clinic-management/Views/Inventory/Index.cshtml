@@ -1,0 +1,153 @@
+﻿@model clinic_management.Models.ModelContainer
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Inventory</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#medicines">Medicines</a></li>
+        <li><a data-toggle="tab" href="#utensils">Utensils</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="medicines" class="tab-pane fade in active">
+            <br />
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Medicine</button>
+                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default">Refresh</button>
+            </div>
+            <br />
+            <br />
+            <table class="table" id="tableMedicines">
+                <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Medicine)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemQuantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div id="utensils" class="tab-pane fade">
+            <br />
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Utensil</button>
+                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default">Refresh</button>
+            </div>
+            <br />
+            <br />
+            <table class="table" id="tableUtensils">
+                <thead>
+                    <tr>
+                        <th>Item ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Utensil)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemID)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ItemQuantity)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add Medicine -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add Medicine</h4>
+            </div>
+            @using (Html.BeginForm("Create", "Inventory", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="modal-body">
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Item.ItemName, "Medicine Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Item.ItemName, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Item.ItemName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group" style="display: none;">
+                            @Html.LabelFor(model => model.Item.ItemType, "Medicine Type", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Item.ItemType, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Item.ItemType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tableMedicines').DataTable();
+        $('#tableUtensils').DataTable();
+    });
+</script>

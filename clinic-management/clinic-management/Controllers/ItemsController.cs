@@ -8,109 +8,109 @@ using System.Web;
 using System.Web.Mvc;
 using clinic_management.Models;
 
-namespace ClinicManagement.Controllers
+namespace clinic_management.Controllers
 {
-    public class SuppliesController : Controller
+    public class ItemsController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
 
-        // GET: Supplies
+        // GET: Items
         public ActionResult Index()
         {
-            return View(db.Supplies.ToList());
+            return View(db.Items.ToList());
         }
 
-        // GET: Supplies/Details/5
+        // GET: Items/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supply supply = db.Supplies.Find(id);
-            if (supply == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(supply);
+            return View(item);
         }
 
-        // GET: Supplies/Create
+        // GET: Items/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Supplies/Create
+        // POST: Items/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "SupplyID,SupplyName,ReceivedDate,SupplyType")] Supply supply)
+        public ActionResult Create([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType")] Item item)
         {
             if (ModelState.IsValid)
             {
-                db.Supplies.Add(supply);
+                db.Items.Add(item);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(supply);
+            return View(item);
         }
 
-        // GET: Supplies/Edit/5
+        // GET: Items/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supply supply = db.Supplies.Find(id);
-            if (supply == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(supply);
+            return View(item);
         }
 
-        // POST: Supplies/Edit/5
+        // POST: Items/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "SupplyID,SupplyName,ReceivedDate,SupplyType")] Supply supply)
+        public ActionResult Edit([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType")] Item item)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(supply).State = EntityState.Modified;
+                db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(supply);
+            return View(item);
         }
 
-        // GET: Supplies/Delete/5
+        // GET: Items/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supply supply = db.Supplies.Find(id);
-            if (supply == null)
+            Item item = db.Items.Find(id);
+            if (item == null)
             {
                 return HttpNotFound();
             }
-            return View(supply);
+            return View(item);
         }
 
-        // POST: Supplies/Delete/5
+        // POST: Items/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Supply supply = db.Supplies.Find(id);
-            db.Supplies.Remove(supply);
+            Item item = db.Items.Find(id);
+            db.Items.Remove(item);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
