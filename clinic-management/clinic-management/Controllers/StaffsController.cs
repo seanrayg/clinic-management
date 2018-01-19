@@ -52,6 +52,10 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                //string joined_date = staff.StaffJoinedDate.ToString().Replace('-', ':') + " 00:00:00";
+                //System.Diagnostics.Debug.WriteLine(staff.StaffJoinedDate);
+                //return View();
+
                 db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");

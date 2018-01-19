@@ -3,63 +3,95 @@
 @{
     ViewBag.Title = "Index";
 }
-@*<head>
-        <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-        <script src="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css"></script>
-    </head>*@
-<div class="content-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h4 class="page-head-line">List of Patients</h4>
-            </div>
-        </div>
-        <!--    Hover Rows  -->
-        <div class="panel panel-default">
-            <div class="panel-heading">
 
-            </div>
-            <div class="panel-body">
-                <div class="table-responsive">
-                    <table class="table table-hover" id="p_table">
-                        <thead>
-                            <tr>
-                                <th>First Name</th>
-                                <th>Middle Name</th>
-                                <th>Last Name</th>
-                                <th>College</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PatientFirst)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PatientMid)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PatientLast)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.PCollege.CollegeCode)
-                                    </td>
-                                    <td>
-                                        <a href="/Patients/Details/@Html.DisplayFor(modelItem => item.PatientID)" type="button" class="btn btn-md btn-success"><i class="fa fa-eye"></i></a>
-                                        <a href="/Patients/Edit/@Html.DisplayFor(modelItem => item.PatientID)" type="button" class="btn btn-md btn-success"><i class="fa fa-pencil-square-o"></i></a>
-                                        <a href="/Patients/Delete/@Html.DisplayFor(modelItem => item.PatientID)" type="button" class="btn btn-md btn-success"><i class="fa fa-times"></i></a>
-
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- End  Hover Rows  -->
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Patients</h1>
     </div>
+    <!-- /.col-lg-12 -->
 </div>
+
+<div class="row">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table" id="tablePatients">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientLast)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientFirst)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientMid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientGender)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientBDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientAddrss)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientClass)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PatientType.TypeName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PCollege.CollegeCode)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientLast)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientFirst)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientMid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientGender)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientBDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientAddrss)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientClass)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PatientType.TypeName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PCollege.CollegeCode)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.PatientID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.PatientID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#tablePatients').DataTable();
+    });
+</script>

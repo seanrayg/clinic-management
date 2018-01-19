@@ -53,7 +53,10 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.StaffGender, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.StaffGender, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type="radio" name="gender" value="Female" id="gender_female" onchange="setGender(this)" /> Female
+                    <br />
+                    <input type="radio" name="gender" value="Male" id="gender_male" onchange="setGender(this)" /> Male
+                    @Html.EditorFor(model => model.StaffGender, new { htmlAttributes = new { @class = "form-control", style = "display: none;" } })
                     @Html.ValidationMessageFor(model => model.StaffGender, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -61,7 +64,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.StaffPassword, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control", type = "password" } })
                     @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -70,12 +73,11 @@
                 @Html.LabelFor(model => model.StaffJoinedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
-                        <input type="text" class="form-control" placeholder="dd.mm.yyyy">
+                        @Html.EditorFor(model => model.StaffJoinedDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
-                    @*@Html.EditorFor(model => model.StaffJoinedDate, new { htmlAttributes = new { @class = "form-control" } })*@
                     @Html.ValidationMessageFor(model => model.StaffJoinedDate, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -107,3 +109,9 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
+
+<script>
+    function setGender(radio_button) {
+        $('#StaffGender').val(radio_button.value);
+    }
+</script>
