@@ -199,6 +199,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PatientTypesController.cs" />
+    <Compile Include="Controllers\PCollegesController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -303,6 +304,11 @@
     <Content Include="Views\PatientTypes\Details.cshtml" />
     <Content Include="Views\PatientTypes\Edit.cshtml" />
     <Content Include="Views\PatientTypes\Index.cshtml" />
+    <Content Include="Views\PColleges\Create.cshtml" />
+    <Content Include="Views\PColleges\Delete.cshtml" />
+    <Content Include="Views\PColleges\Details.cshtml" />
+    <Content Include="Views\PColleges\Edit.cshtml" />
+    <Content Include="Views\PColleges\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

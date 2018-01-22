@@ -1,0 +1,42 @@
+﻿@model clinic_management.Models.PCollege
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PCollege</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CollegeCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollegeCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CollegeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CollegeName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deleted)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CollegeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
