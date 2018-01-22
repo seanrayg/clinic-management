@@ -10,120 +10,111 @@ using clinic_management.Models;
 
 namespace clinic_management.Controllers
 {
-    public class PatientsController : Controller
+    public class UserTypesController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
 
-        // GET: Patients
+        // GET: UserTypes
         public ActionResult Index()
         {
-            var patients = db.Patients.Include(p => p.PatientType).Include(p => p.PCollege).Where(p => p.deleted == "0");
-            return View(patients.ToList());
+            return View(db.UserTypes.ToList().Where(ut => ut.deleted == "0"));
         }
 
-        // GET: Patients/Details/5
+        // GET: UserTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            UserType userType = db.UserTypes.Find(id);
+            if (userType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(userType);
         }
 
-        // GET: Patients/Create
+        // GET: UserTypes/Create
         public ActionResult Create()
         {
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName");
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode");
             return View();
         }
 
-        // POST: Patients/Create
+        // POST: UserTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PatientID,PatientLast,PatientFirst,PatientMid,PatientGender,PatientBDate,PatientAddrss,TypeID,PatientClass,CollegeID")] Patient patient)
+        public ActionResult Create([Bind(Include = "UserTypeID,TypeDesc,deleted")] UserType userType)
         {
             if (ModelState.IsValid)
             {
-                patient.deleted = "0";
-                db.Patients.Add(patient);
+                userType.deleted = "0";
+                db.UserTypes.Add(userType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
-            return View(patient);
+            return View(userType);
         }
 
-        // GET: Patients/Edit/5
+        // GET: UserTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            UserType userType = db.UserTypes.Find(id);
+            if (userType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
-            return View(patient);
+            return View(userType);
         }
 
-        // POST: Patients/Edit/5
+        // POST: UserTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PatientID,PatientLast,PatientFirst,PatientMid,PatientGender,PatientBDate,PatientAddrss,TypeID,PatientClass,CollegeID")] Patient patient)
+        public ActionResult Edit([Bind(Include = "UserTypeID,TypeDesc,deleted")] UserType userType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(patient).State = EntityState.Modified;
+                db.Entry(userType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
-            return View(patient);
+            return View(userType);
         }
 
-        // GET: Patients/Delete/5
+        // GET: UserTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            UserType userType = db.UserTypes.Find(id);
+            if (userType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(userType);
         }
 
-        // POST: Patients/Delete/5
+        // POST: UserTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Patient patient = db.Patients.Find(id);
-            //db.Patients.Remove(patient);
+            //UserType userType = db.UserTypes.Find(id);
+            //db.UserTypes.Remove(userType);
             //db.SaveChanges();
 
-            var result = db.Patients.SingleOrDefault(ut => ut.PatientID == id);
+            var result = db.UserTypes.SingleOrDefault(ut => ut.UserTypeID == id);
             if (result != null)
             {
                 result.deleted = "1";

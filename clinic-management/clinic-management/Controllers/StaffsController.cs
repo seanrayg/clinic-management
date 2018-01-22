@@ -17,7 +17,7 @@ namespace clinic_management.Controllers
         // GET: Staffs
         public ActionResult Index()
         {
-            var staffs = db.Staffs.Include(s => s.UserType);
+            var staffs = db.Staffs.Include(s => s.UserType).Where(s => s.deleted == "0");
             return View(staffs.ToList());
         }
 
@@ -52,10 +52,7 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                //string joined_date = staff.StaffJoinedDate.ToString().Replace('-', ':') + " 00:00:00";
-                //System.Diagnostics.Debug.WriteLine(staff.StaffJoinedDate);
-                //return View();
-
+                staff.deleted = "0";
                 db.Staffs.Add(staff);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -126,9 +123,17 @@ namespace clinic_management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(string id)
         {
-            Staff staff = db.Staffs.Find(id);
-            db.Staffs.Remove(staff);
-            db.SaveChanges();
+            //Staff staff = db.Staffs.Find(id);
+            //db.Staffs.Remove(staff);
+            //db.SaveChanges();
+
+            var result = db.Staffs.SingleOrDefault(s => s.StaffID == id);
+            if (result != null)
+            {
+                result.deleted = "1";
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Index");
         }
 
