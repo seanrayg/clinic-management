@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-
 namespace clinic_management.Models
 {
     using System;
@@ -23,19 +21,14 @@ namespace clinic_management.Models
         }
     
         public string StaffID { get; set; }
-        [DisplayName("Last Name")]
         public string StaffLast { get; set; }
-        [DisplayName("First Name")]
         public string StaffFirst { get; set; }
-        [DisplayName("Middle Name")]
         public string StaffMid { get; set; }
-        [DisplayName("Gender")]
         public string StaffGender { get; set; }
-        [DisplayName("Password")]
         public string StaffPassword { get; set; }
-        [DisplayName("Joined Date")]
         public Nullable<System.DateTime> StaffJoinedDate { get; set; }
         public Nullable<int> UserTypeID { get; set; }
+        public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedCheck> MedCheckHeaders { get; set; }

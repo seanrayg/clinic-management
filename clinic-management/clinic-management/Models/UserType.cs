@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-
 namespace clinic_management.Models
 {
     using System;
@@ -23,8 +21,8 @@ namespace clinic_management.Models
         }
     
         public int UserTypeID { get; set; }
-        [DisplayName("User Type")]
         public string TypeDesc { get; set; }
+        public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Staff> Staffs { get; set; }
