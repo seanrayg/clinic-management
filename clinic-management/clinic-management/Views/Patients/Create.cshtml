@@ -21,7 +21,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientLast, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.PatientLast, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PatientLast, "", new { @class = "text-danger" })
                 </div>
@@ -29,7 +29,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientFirst, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.PatientFirst, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PatientFirst, "", new { @class = "text-danger" })
                 </div>
@@ -37,7 +37,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientMid, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.PatientMid, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PatientMid, "", new { @class = "text-danger" })
                 </div>
@@ -45,23 +45,38 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientGender, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PatientGender, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-5">
+                    <input type="radio" name="gender" value="Female" id="gender_female" onchange="setGender(this)" /> Female
+                    <br />
+                    <input type="radio" name="gender" value="Male" id="gender_male" onchange="setGender(this)" /> Male
+                    @Html.EditorFor(model => model.PatientGender, new { htmlAttributes = new { @class = "form-control", style = "display: none;" } })
                     @Html.ValidationMessageFor(model => model.PatientGender, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientBDate, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.PatientBDate, new { htmlAttributes = new { @class = "form-control" } })
+                <div class="col-md-5">
+                    <div class="input-group date" data-date-format="dd.mm.yyyy">
+                        @Html.EditorFor(model => model.PatientBDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
                     @Html.ValidationMessageFor(model => model.PatientBDate, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <script>
+                $(function () {
+                    $('.input-group.date').datepicker({
+                        format: 'yyyy-mm-dd'
+                    });
+                });
+            </script>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientAddrss, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.PatientAddrss, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PatientAddrss, "", new { @class = "text-danger" })
                 </div>
@@ -69,7 +84,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.TypeID, "TypeID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
                 </div>
@@ -77,7 +92,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientClass, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.EditorFor(model => model.PatientClass, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.PatientClass, "", new { @class = "text-danger" })
                 </div>
@@ -85,7 +100,7 @@
 
             <div class="form-group">
                 @Html.LabelFor(model => model.CollegeID, "CollegeID", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                <div class="col-md-5">
                     @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CollegeID, "", new { @class = "text-danger" })
                 </div>
@@ -104,6 +119,8 @@
     </div>
 </div>
 
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script>
+    function setGender(radio_button) {
+        $('#PatientGender').val(radio_button.value);
+    }
+</script>
