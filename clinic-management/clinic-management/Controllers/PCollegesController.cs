@@ -17,7 +17,7 @@ namespace clinic_management.Controllers
         // GET: PColleges
         public ActionResult Index()
         {
-            return View(db.PColleges.ToList());
+            return View(db.PColleges.ToList().Where(pc => pc.deleted == "0"));
         }
 
         // GET: PColleges/Details/5
@@ -50,6 +50,7 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                pCollege.deleted = "0";
                 db.PColleges.Add(pCollege);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -109,9 +110,17 @@ namespace clinic_management.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PCollege pCollege = db.PColleges.Find(id);
-            db.PColleges.Remove(pCollege);
-            db.SaveChanges();
+            //PCollege pCollege = db.PColleges.Find(id);
+            //db.PColleges.Remove(pCollege);
+            //db.SaveChanges();
+
+            var result = db.PColleges.SingleOrDefault(pc => pc.CollegeID == id);
+            if (result != null)
+            {
+                result.deleted = "1";
+                db.SaveChanges();
+            }
+
             return RedirectToAction("Index");
         }
 

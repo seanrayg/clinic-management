@@ -4,42 +4,55 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Patient Colleges</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.CollegeCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CollegeName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.deleted)
-        </th>
-        <th></th>
-    </tr>
+<div class="row">
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+        <table class="table" id="tablePatientColleges">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollegeCode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CollegeName)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+            {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CollegeCode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CollegeName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CollegeID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CollegeID })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-lg-2"></div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CollegeCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CollegeName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deleted)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CollegeID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CollegeID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CollegeID })
-        </td>
-    </tr>
-}
-
-</table>
+<script>
+    $(document).ready(function () {
+        $('#tablePatientColleges').DataTable();
+    });
+</script>

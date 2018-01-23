@@ -40,7 +40,7 @@ namespace clinic_management.Controllers
         public ActionResult Create()
         {
             ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName");
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode");
+            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeName");
             return View();
         }
 
