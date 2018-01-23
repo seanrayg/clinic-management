@@ -128,6 +128,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\assets\css\bootstrap-datepicker3.css" />
     <Content Include="Content\assets\css\bootstrap.css" />
     <Content Include="Content\assets\css\font-awesome.css" />
     <Content Include="Content\assets\css\inventory.css" />
@@ -139,6 +140,7 @@
     <Content Include="Content\assets\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\assets\img\pup.JPG" />
     <Content Include="Content\assets\img\PUPLogo.png" />
+    <Content Include="Content\assets\js\bootstrap-datepicker.js" />
     <Content Include="Content\assets\js\bootstrap.js" />
     <Content Include="Content\assets\js\jquery-1.11.1.js" />
     <Content Include="Content\assets\js\jquery-3.2.1.min.js" />
@@ -196,7 +198,10 @@
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
+    <Compile Include="Controllers\PatientTypesController.cs" />
+    <Compile Include="Controllers\PCollegesController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
+    <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -289,6 +294,21 @@
     <Content Include="Views\Patients\Edit.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\UserTypes\Create.cshtml" />
+    <Content Include="Views\UserTypes\Delete.cshtml" />
+    <Content Include="Views\UserTypes\Details.cshtml" />
+    <Content Include="Views\UserTypes\Edit.cshtml" />
+    <Content Include="Views\UserTypes\Index.cshtml" />
+    <Content Include="Views\PatientTypes\Create.cshtml" />
+    <Content Include="Views\PatientTypes\Delete.cshtml" />
+    <Content Include="Views\PatientTypes\Details.cshtml" />
+    <Content Include="Views\PatientTypes\Edit.cshtml" />
+    <Content Include="Views\PatientTypes\Index.cshtml" />
+    <Content Include="Views\PColleges\Create.cshtml" />
+    <Content Include="Views\PColleges\Delete.cshtml" />
+    <Content Include="Views\PColleges\Details.cshtml" />
+    <Content Include="Views\PColleges\Edit.cshtml" />
+    <Content Include="Views\PColleges\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

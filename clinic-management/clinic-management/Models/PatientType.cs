@@ -22,6 +22,7 @@ namespace clinic_management.Models
     
         public int TypeID { get; set; }
         public string TypeName { get; set; }
+        public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Patient> Patients { get; set; }

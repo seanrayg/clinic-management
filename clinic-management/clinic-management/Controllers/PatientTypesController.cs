@@ -10,120 +10,111 @@ using clinic_management.Models;
 
 namespace clinic_management.Controllers
 {
-    public class PatientsController : Controller
+    public class PatientTypesController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
 
-        // GET: Patients
+        // GET: PatientTypes
         public ActionResult Index()
         {
-            var patients = db.Patients.Include(p => p.PatientType).Include(p => p.PCollege).Where(p => p.deleted == "0");
-            return View(patients.ToList());
+            return View(db.PatientTypes.ToList().Where(pt => pt.deleted == "0"));
         }
 
-        // GET: Patients/Details/5
+        // GET: PatientTypes/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            PatientType patientType = db.PatientTypes.Find(id);
+            if (patientType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(patientType);
         }
 
-        // GET: Patients/Create
+        // GET: PatientTypes/Create
         public ActionResult Create()
         {
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName");
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeName");
             return View();
         }
 
-        // POST: Patients/Create
+        // POST: PatientTypes/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "PatientID,PatientLast,PatientFirst,PatientMid,PatientGender,PatientBDate,PatientAddrss,TypeID,PatientClass,CollegeID")] Patient patient)
+        public ActionResult Create([Bind(Include = "TypeID,TypeName,deleted")] PatientType patientType)
         {
             if (ModelState.IsValid)
             {
-                patient.deleted = "0";
-                db.Patients.Add(patient);
+                patientType.deleted = "0";
+                db.PatientTypes.Add(patientType);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
-            return View(patient);
+            return View(patientType);
         }
 
-        // GET: Patients/Edit/5
+        // GET: PatientTypes/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            PatientType patientType = db.PatientTypes.Find(id);
+            if (patientType == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
-            return View(patient);
+            return View(patientType);
         }
 
-        // POST: Patients/Edit/5
+        // POST: PatientTypes/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PatientID,PatientLast,PatientFirst,PatientMid,PatientGender,PatientBDate,PatientAddrss,TypeID,PatientClass,CollegeID")] Patient patient)
+        public ActionResult Edit([Bind(Include = "TypeID,TypeName,deleted")] PatientType patientType)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(patient).State = EntityState.Modified;
+                db.Entry(patientType).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
-            return View(patient);
+            return View(patientType);
         }
 
-        // GET: Patients/Delete/5
+        // GET: PatientTypes/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Patient patient = db.Patients.Find(id);
-            if (patient == null)
+            PatientType patientType = db.PatientTypes.Find(id);
+            if (patientType == null)
             {
                 return HttpNotFound();
             }
-            return View(patient);
+            return View(patientType);
         }
 
-        // POST: Patients/Delete/5
+        // POST: PatientTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            //Patient patient = db.Patients.Find(id);
-            //db.Patients.Remove(patient);
+            //PatientType patientType = db.PatientTypes.Find(id);
+            //db.PatientTypes.Remove(patientType);
             //db.SaveChanges();
 
-            var result = db.Patients.SingleOrDefault(ut => ut.PatientID == id);
+            var result = db.PatientTypes.SingleOrDefault(pt => pt.TypeID == id);
             if (result != null)
             {
                 result.deleted = "1";

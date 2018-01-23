@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/15/2018 17:20:28
--- Generated from EDMX file: F:\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
+-- Date Created: 01/22/2018 12:47:43
+-- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -83,7 +83,8 @@ CREATE TABLE [dbo].[Items] (
     [ItemID] int IDENTITY(1,1) NOT NULL,
     [ItemName] nvarchar(max)  NOT NULL,
     [ItemQuantity] nvarchar(max)  NOT NULL,
-    [ItemType] nvarchar(max)  NOT NULL
+    [ItemType] nvarchar(max)  NOT NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -98,7 +99,8 @@ CREATE TABLE [dbo].[MedChecks] (
     [Treatment] nvarchar(max)  NOT NULL,
     [Remarks] nvarchar(max)  NOT NULL,
     [MedCheckType] int  NULL,
-    [MedCheckStatus] int  NULL
+    [MedCheckStatus] int  NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -113,14 +115,16 @@ CREATE TABLE [dbo].[Patients] (
     [PatientAddrss] varchar(max)  NULL,
     [TypeID] int  NULL,
     [PatientClass] int  NULL,
-    [CollegeID] int  NOT NULL
+    [CollegeID] int  NOT NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 
 -- Creating table 'PatientTypes'
 CREATE TABLE [dbo].[PatientTypes] (
     [TypeID] int IDENTITY(1,1) NOT NULL,
-    [TypeName] varchar(20)  NULL
+    [TypeName] varchar(20)  NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -128,7 +132,8 @@ GO
 CREATE TABLE [dbo].[PColleges] (
     [CollegeID] int IDENTITY(1,1) NOT NULL,
     [CollegeCode] varchar(10)  NULL,
-    [CollegeName] varchar(max)  NULL
+    [CollegeName] varchar(max)  NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -141,7 +146,8 @@ CREATE TABLE [dbo].[Staffs] (
     [StaffGender] varchar(20)  NULL,
     [StaffPassword] varchar(20)  NOT NULL,
     [StaffJoinedDate] datetime  NULL,
-    [UserTypeID] int  NULL
+    [UserTypeID] int  NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -158,7 +164,8 @@ GO
 -- Creating table 'UserTypes'
 CREATE TABLE [dbo].[UserTypes] (
     [UserTypeID] int IDENTITY(1,1) NOT NULL,
-    [TypeDesc] varchar(50)  NULL
+    [TypeDesc] varchar(50)  NULL,
+    [deleted] nvarchar(max)  NOT NULL
 );
 GO
 

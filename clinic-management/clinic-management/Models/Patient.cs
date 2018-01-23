@@ -7,8 +7,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.ComponentModel;
-
 namespace clinic_management.Models
 {
     using System;
@@ -23,24 +21,16 @@ namespace clinic_management.Models
         }
     
         public int PatientID { get; set; }
-        [DisplayName("Last Name")]
         public string PatientLast { get; set; }
-        [DisplayName("First Name")]
         public string PatientFirst { get; set; }
-        [DisplayName("Midle Name")]
         public string PatientMid { get; set; }
-        [DisplayName("Gender")]
         public string PatientGender { get; set; }
-        [DisplayName("Birthday")]
         public Nullable<System.DateTime> PatientBDate { get; set; }
-        [DisplayName("Address")]
         public string PatientAddrss { get; set; }
-        [DisplayName("Type")]
         public Nullable<int> TypeID { get; set; }
-        [DisplayName("Class")]
         public Nullable<int> PatientClass { get; set; }
-        [DisplayName("College")]
         public int CollegeID { get; set; }
+        public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedCheck> MedCheckHeaders { get; set; }

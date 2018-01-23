@@ -18,7 +18,8 @@
     <link href="~/Content/assets/css/inventory.css" rel="stylesheet" />
     <link href="~/Content/assets/css/sb-admin-2.css" rel="stylesheet" />
     <link href="~/Content/assets/css/metisMenu.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />
+    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />*@
+    <link href="~/Content/assets/css/bootstrap-datepicker3.css" rel="stylesheet" />
     <!-- DATATABLES -->
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!-- HTML5 Shiv and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -38,7 +39,8 @@
     <!-- CUSTOM SCRIPTS -->
     <script src="~/Content/assets/js/metisMenu.min.js"></script>
     <script src="~/Content/assets/js/sb-admin-2.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>*@
+    <script src="~/Content/assets/js/bootstrap-datepicker.js"></script>
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
@@ -87,10 +89,25 @@
                         <a href="@Url.Action("Index", "Inventory")"><i class="fa fa-list-alt fa-fw"></i> Inventory</a>
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "Staffs")"><i class="fa fa-user fa-fw"></i> User Accounts</a>
+                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Maintenance<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="@Url.Action("Index", "Patients")">Patients</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "PatientTypes")">Patient Types</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "PColleges")">Patient Colleges</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="@Url.Action("Index", "Patients")"><i class="fa fa-hospital-o fa-fw"></i> Patients</a>
+                        <a href="@Url.Action("Index", "Staffs")"><i class="fa fa-users fa-fw"></i> User Accounts</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index", "UserTypes")"><i class="fa fa-user-plus fa-fw"></i> User Types</a>
                     </li>
                 </ul>
             </div>

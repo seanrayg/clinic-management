@@ -56,6 +56,7 @@
     <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ItemQuantity" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ItemType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MedChecks">
     <Key>
@@ -71,6 +72,7 @@
     <Property Name="Remarks" Type="nvarchar(max)" Nullable="false" />
     <Property Name="MedCheckType" Type="int" Nullable="true" />
     <Property Name="MedCheckStatus" Type="int" Nullable="true" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Patients">
     <Key>
@@ -86,6 +88,7 @@
     <Property Name="TypeID" Type="int" Nullable="true" />
     <Property Name="PatientClass" Type="int" Nullable="true" />
     <Property Name="CollegeID" Type="int" Nullable="false" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PatientTypes">
     <Key>
@@ -93,6 +96,7 @@
     </Key>
     <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TypeName" Type="varchar" Nullable="true" MaxLength="20" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="PColleges">
     <Key>
@@ -101,6 +105,7 @@
     <Property Name="CollegeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CollegeCode" Type="varchar" Nullable="true" MaxLength="10" />
     <Property Name="CollegeName" Type="varchar(max)" Nullable="true" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Staffs">
     <Key>
@@ -114,6 +119,7 @@
     <Property Name="StaffPassword" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="StaffJoinedDate" Type="datetime" Nullable="true" />
     <Property Name="UserTypeID" Type="int" Nullable="true" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="Supplies">
     <Key>
@@ -131,6 +137,7 @@
     </Key>
     <Property Name="UserTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TypeDesc" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MedCheckItems">
     <Key>
@@ -251,6 +258,7 @@
           <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="Item" ToRole="MedCheckItem" />
           <Property Name="ItemType" Type="String" Nullable="false" />
           <NavigationProperty Name="Supplies" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Item" ToRole="Supply" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="MedCheck">
           <Key>
@@ -269,6 +277,7 @@
           <Property Name="MedCheckType" Type="Int32" />
           <Property Name="MedCheckStatus" Type="Int32" />
           <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.MedCheckID" FromRole="MedCheck" ToRole="MedCheckItem" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Patient">
           <Key>
@@ -287,6 +296,7 @@
           <NavigationProperty Name="MedCheckHeaders" Relationship="Self.FK_MedCheckHeader_Patient" FromRole="Patient" ToRole="MedCheckHeader" />
           <NavigationProperty Name="PatientType" Relationship="Self.FK_Patient_PatientType" FromRole="Patient" ToRole="PatientType" />
           <NavigationProperty Name="PCollege" Relationship="Self.FK_Patient_PCollege" FromRole="Patient" ToRole="PCollege" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientType">
           <Key>
@@ -295,6 +305,7 @@
           <Property Name="TypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_PatientType" FromRole="PatientType" ToRole="Patient" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="PCollege">
           <Key>
@@ -304,6 +315,7 @@
           <Property Name="CollegeCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CollegeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Patients" Relationship="Self.FK_Patient_PCollege" FromRole="PCollege" ToRole="Patient" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Staff">
           <Key>
@@ -319,6 +331,7 @@
           <Property Name="UserTypeID" Type="Int32" />
           <NavigationProperty Name="MedCheckHeaders" Relationship="Self.FK_MedCheckHeader_Staff" FromRole="Staff" ToRole="MedCheckHeader" />
           <NavigationProperty Name="UserType" Relationship="Self.FK_Staff_UserType" FromRole="Staff" ToRole="UserType" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="Supply">
           <Key>
@@ -338,6 +351,7 @@
           <Property Name="UserTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="TypeDesc" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Staffs" Relationship="Self.FK_Staff_UserType" FromRole="UserType" ToRole="Staff" />
+          <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <Association Name="FK_MedCheckHeader_Patient">
           <End Role="Patient" Type="Self.Patient" Multiplicity="0..1" />
@@ -502,6 +516,7 @@
           <ScalarProperty Name="ItemName" ColumnName="ItemName" />
           <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
           <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -518,6 +533,7 @@
           <ScalarProperty Name="Remarks" ColumnName="Remarks" />
           <ScalarProperty Name="MedCheckType" ColumnName="MedCheckType" />
           <ScalarProperty Name="MedCheckStatus" ColumnName="MedCheckStatus" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -534,6 +550,7 @@
           <ScalarProperty Name="TypeID" ColumnName="TypeID" />
           <ScalarProperty Name="PatientClass" ColumnName="PatientClass" />
           <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -542,6 +559,7 @@
         <MappingFragment StoreEntitySet="PatientTypes">
           <ScalarProperty Name="TypeID" ColumnName="TypeID" />
           <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -551,6 +569,7 @@
           <ScalarProperty Name="CollegeID" ColumnName="CollegeID" />
           <ScalarProperty Name="CollegeCode" ColumnName="CollegeCode" />
           <ScalarProperty Name="CollegeName" ColumnName="CollegeName" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -565,6 +584,7 @@
           <ScalarProperty Name="StaffPassword" ColumnName="StaffPassword" />
           <ScalarProperty Name="StaffJoinedDate" ColumnName="StaffJoinedDate" />
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -584,6 +604,7 @@
         <MappingFragment StoreEntitySet="UserTypes">
           <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
           <ScalarProperty Name="TypeDesc" ColumnName="TypeDesc" />
+          <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

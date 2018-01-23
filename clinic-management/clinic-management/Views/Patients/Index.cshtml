@@ -19,13 +19,7 @@
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientLast)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PatientFirst)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PatientMid)
+                    Name
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.PatientGender)
@@ -53,13 +47,7 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PatientLast)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PatientFirst)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PatientMid)
+                        @Html.DisplayFor(modelItem => item.PatientFirst) @Html.DisplayFor(modelItem => item.PatientLast)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.PatientGender)

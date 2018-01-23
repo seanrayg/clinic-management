@@ -30,6 +30,7 @@ namespace clinic_management.Models
         public string Remarks { get; set; }
         public Nullable<int> MedCheckType { get; set; }
         public Nullable<int> MedCheckStatus { get; set; }
+        public string deleted { get; set; }
     
         public virtual Patient Patient { get; set; }
         public virtual Staff Staff { get; set; }
