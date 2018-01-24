@@ -11,6 +11,7 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     
     public partial class Patient
     {
@@ -19,17 +20,27 @@ namespace clinic_management.Models
         {
             this.MedCheckHeaders = new HashSet<MedCheck>();
         }
-    
+        [DisplayName("Patient ID")]
         public int PatientID { get; set; }
+        [DisplayName("Patient Last Name")]
         public string PatientLast { get; set; }
+        [DisplayName("Patient First Name")]
         public string PatientFirst { get; set; }
+        [DisplayName("Patient Middle Name")]
         public string PatientMid { get; set; }
+        [DisplayName("Patient Gender")]
         public string PatientGender { get; set; }
+        [DisplayName("Patient Birthdate")]
         public Nullable<System.DateTime> PatientBDate { get; set; }
+        [DisplayName("Patient Address")]
         public string PatientAddrss { get; set; }
+        [DisplayName("Patient Type ID")]
         public Nullable<int> TypeID { get; set; }
+        [DisplayName("Patient Class")]
         public Nullable<int> PatientClass { get; set; }
+        [DisplayName("Patient College ID")]
         public int CollegeID { get; set; }
+        [DisplayName("Patient Is Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
