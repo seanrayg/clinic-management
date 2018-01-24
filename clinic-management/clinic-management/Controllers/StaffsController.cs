@@ -83,21 +83,13 @@ namespace clinic_management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "StaffID,StaffLast,StaffFirst,StaffMid,StaffGender,StaffPassword,StaffJoinedDate,UserTypeID")] Staff staff, string confirm_password)
+        public ActionResult Edit([Bind(Include = "StaffID,StaffLast,StaffFirst,StaffMid,StaffGender,StaffPassword,StaffJoinedDate,UserTypeID,deleted")] Staff staff)
         {
             if (ModelState.IsValid)
             {
-                if(staff.StaffPassword == confirm_password)
-                {
-                    db.Entry(staff).State = EntityState.Modified;
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }else
-                {
-                    ViewBag.ErrorMessage = "Passwords do not match";
-                    ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeDesc", staff.UserTypeID);
-                    return View(staff);
-                }
+                db.Entry(staff).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeDesc", staff.UserTypeID);
             return View(staff);
@@ -144,6 +136,44 @@ namespace clinic_management.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // GET: Staffs/ChangePassword
+        public ActionResult ChangePassword(string id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Staff staff = db.Staffs.Find(id);
+            if (staff == null)
+            {
+                return HttpNotFound();
+            }
+            return View(staff);
+        }
+
+        // POST: Staffs/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ChangePassword([Bind(Include = "StaffID,StaffPassword")] Staff staff, string confirm_password)
+        {
+            if (staff.StaffPassword == confirm_password)
+            {
+                var result = db.Staffs.SingleOrDefault(s => s.StaffID == staff.StaffID);
+                if (result != null)
+                {
+                    result.StaffPassword = confirm_password;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                ViewBag.ErrorMessage = "Passwords do not match";
+                ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeDesc", staff.UserTypeID);
+                return View(staff);
+            }
         }
     }
 }

@@ -309,6 +309,7 @@
     <Content Include="Views\PColleges\Details.cshtml" />
     <Content Include="Views\PColleges\Edit.cshtml" />
     <Content Include="Views\PColleges\Index.cshtml" />
+    <Content Include="Views\Staffs\ChangePassword.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
