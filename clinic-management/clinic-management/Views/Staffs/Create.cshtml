@@ -92,7 +92,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.UserTypeID, "UserTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.DropDownList("UserTypeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownList("UserTypeID", null, htmlAttributes: new { @class = "form-control", onchange = "SetID()" })
                     @Html.ValidationMessageFor(model => model.UserTypeID, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -111,7 +111,34 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        SetID();
+    });
+
     function setGender(radio_button) {
         $('#StaffGender').val(radio_button.value);
+    }
+
+    function SetID() {
+        var e = document.getElementById("UserTypeID");
+        var strUserType = e.options[e.selectedIndex].text;
+
+        if (strUserType == "Admin") {
+
+            $('#StaffID').val('@ViewBag.AdminID');
+
+        } else if (strUserType == "Nurse") {
+
+            $('#StaffID').val('@ViewBag.NurseID');
+
+        } else if (strUserType == "Doctor") {
+
+            $('#StaffID').val('@ViewBag.DoctorID');
+
+        } else if (strUserType == "Receptionist") {
+
+            $('#StaffID').val('@ViewBag.ReceptionistID');
+
+        }
     }
 </script>

@@ -25,19 +25,10 @@
                     @Html.DisplayNameFor(model => model.PatientGender)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientBDate)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.PatientAddrss)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientClass)
-                </th>
-                <th>
                     @Html.DisplayNameFor(model => model.PatientType.TypeName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PCollege.CollegeCode)
                 </th>
                 <th></th>
             </tr>
@@ -53,19 +44,10 @@
                         @Html.DisplayFor(modelItem => item.PatientGender)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PatientBDate)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.PatientAddrss)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.PatientClass)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.PatientType.TypeName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PCollege.CollegeCode)
                     </td>
                     <td>
                         @Html.ActionLink("Edit", "Edit", new { id = item.PatientID }) |

@@ -39,8 +39,33 @@ namespace clinic_management.Controllers
         // GET: Staffs/Create
         public ActionResult Create()
         {
+            var intAdminCount = db.Staffs.Where(s => s.UserType.TypeDesc == "Admin").Count();
+            ViewBag.AdminID = GetID("AD", intAdminCount);
+
+            var intNurseCount = db.Staffs.Where(s => s.UserType.TypeDesc == "Nurse").Count();
+            ViewBag.NurseID = GetID("NS", intNurseCount);
+
+            var intDoctorCount = db.Staffs.Where(s => s.UserType.TypeDesc == "Doctor").Count();
+            ViewBag.DoctorID = GetID("DC", intDoctorCount);
+
+            var intReceptionistCount = db.Staffs.Where(s => s.UserType.TypeDesc == "Receptionist").Count();
+            ViewBag.ReceptionistID = GetID("NR", intReceptionistCount);
+
             ViewBag.UserTypeID = new SelectList(db.UserTypes, "UserTypeID", "TypeDesc");
             return View();
+        }
+
+        public string GetID(string format, int count)
+        {
+            string id = format;
+            int idCount = count + 1;
+
+            for(int i = idCount.ToString().Count(); i < 4; i++)
+            {
+                id += '0';
+            }
+
+            return id + idCount;
         }
 
         // POST: Staffs/Create
