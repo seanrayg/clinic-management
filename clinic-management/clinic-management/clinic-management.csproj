@@ -197,6 +197,7 @@
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\MedChecksController.cs" />
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PatientTypesController.cs" />
     <Compile Include="Controllers\PCollegesController.cs" />
@@ -310,6 +311,7 @@
     <Content Include="Views\PColleges\Edit.cshtml" />
     <Content Include="Views\PColleges\Index.cshtml" />
     <Content Include="Views\Staffs\ChangePassword.cshtml" />
+    <Content Include="Views\MedChecks\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
