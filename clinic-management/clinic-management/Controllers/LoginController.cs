@@ -7,8 +7,10 @@ using clinic_management.Models;
 
 namespace ClinicManagement.Controllers
 {
+    
     public class LoginController : Controller
     {
+        private dbClinicManagementEntities db = new dbClinicManagementEntities();
         // GET: Login
         public ActionResult Index()
         {
@@ -19,6 +21,8 @@ namespace ClinicManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "StaffID, StaffPassword")] Staff staff)
         {
+            var usertype = db.Staffs.Where(a => a.StaffID == staff.StaffID && a.StaffPassword == staff.StaffPassword).FirstOrDefault();
+            
             using (var context = new dbClinicManagementEntities())
             {
                 context.Database.Connection.Open();
@@ -27,11 +31,25 @@ namespace ClinicManagement.Controllers
                             where q.StaffID == staff.StaffID && q.StaffPassword == staff.StaffPassword
                             select q;
 
+
+
                 if (query.Any())
                 {
+                    try
+                    {
+                        Session["usertype"] = usertype.UserTypeID;
+                    }
+                    catch (Exception e) { }
                     System.Diagnostics.Debug.WriteLine("Login Success");
 
-                    return RedirectToAction("Index", "Inventory");
+                    if (Convert.ToInt32(usertype.UserTypeID.ToString()) == 2 || Convert.ToInt32(usertype.UserTypeID.ToString()) == 4)
+                    {
+                        return RedirectToAction("Index", "Patients");
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Staffs");
+                    }
                 }
                 else
                 {
