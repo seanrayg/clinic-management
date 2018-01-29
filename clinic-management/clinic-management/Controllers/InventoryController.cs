@@ -19,8 +19,8 @@ namespace clinic_management.Controllers
         {
             ModelContainer modelcontainer = new ModelContainer();
 
-            modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").ToList();
-            modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").ToList();
+            modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").Where(i => i.deleted == "0").ToList();
+            modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").Where(i => i.deleted == "0").ToList();
 
             return View(modelcontainer);
         }
@@ -41,7 +41,7 @@ namespace clinic_management.Controllers
             if (ModelState.IsValid)
             {
                 item.ItemQuantity = "0";
-                item.ItemType = "Medicine";
+                item.deleted = "0";
 
                 db.Items.Add(item);
                 db.SaveChanges();
@@ -54,6 +54,12 @@ namespace clinic_management.Controllers
             System.Diagnostics.Debug.WriteLine("Medicine Not Added");
 
             return RedirectToAction("Index");
+        }
+
+        public string testing(string value)
+        {
+            var jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
+            string json = jsonSerializer.Serialize(value);
         }
     }
 }
