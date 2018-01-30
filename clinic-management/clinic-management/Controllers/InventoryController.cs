@@ -56,10 +56,22 @@ namespace clinic_management.Controllers
             return RedirectToAction("Index");
         }
 
-        public string testing(string value)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult testing(int[] id)
         {
-            var jsonSerializer = new System.Web.Script.Serialization.JavaScriptSerializer();
-            string json = jsonSerializer.Serialize(value);
+            for (int i = 0; i < id.Length; i++)
+            {
+                var selectedID = id[i];
+                var result = db.Items.SingleOrDefault(it => it.ItemID == selectedID);
+                if (result != null)
+                {
+                    result.deleted = "1";
+                    db.SaveChanges();
+                }
+            }
+
+            return Json(new { status = true });
         }
     }
 }

@@ -149,30 +149,18 @@
     </div>
 </div>
 
+<!-- Delete Form -->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
+
 <script>
     $(document).ready(function () {
         $('#tableMedicines').DataTable();
         $('#tableUtensils').DataTable();
 
         $('#Item_ItemType').val("Medicine");
-    });
-
-    var dataObject = { 'newWeekEntry': 1, 'oldWeekEntry': 2 };
-
-    $("#medicineDelete").click(function () {
-        $.ajax({
-            type: "POST",
-            url: "Inventory/testing",
-            data: JSON.stringify(dataObject),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
-            },
-            success: function (result) {
-                alert("We returned: " + result);
-            }
-        });
     });
 
     function SetMedicineType(selectedTab) {
@@ -197,6 +185,27 @@
             $('#medicineDelete').prop('disabled', false);
         } else if (arrID.length == 0) {
             $('#medicineDelete').prop('disabled', true);
-        }
+        } alert(arrID.length);
     }
+
+    $("#medicineDelete").click(function () {
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+        $.ajax({
+            type: "POST",
+            url: "Inventory/testing",
+            data: {
+                __RequestVerificationToken: token,
+                id: arrID
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+                if (result.status) {
+                    window.location.href = '\\Inventory\\Index';
+                }
+            }
+        });
+    });
 </script>
