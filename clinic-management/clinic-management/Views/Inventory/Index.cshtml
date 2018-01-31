@@ -35,6 +35,7 @@
                         <th>Name</th>
                         <th>Quantity</th>
                         <th></th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -57,6 +58,9 @@
                                 @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
                                 @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
                             </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -67,7 +71,7 @@
             <br />
             <div class="btn-group">
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Utensil</button>
-                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default" disabled id="medicineUtensil">Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
             <br />
@@ -75,9 +79,11 @@
             <table class="table" id="tableUtensils">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Item ID</th>
                         <th>Name</th>
                         <th>Quantity</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -85,6 +91,9 @@
                     @foreach (var item in Model.Utensil)
                     {
                         <tr>
+                            <td>
+                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
                             </td>
@@ -97,6 +106,9 @@
                             <td>
                                 @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
                                 @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
                             </td>
                         </tr>
                     }
@@ -183,17 +195,19 @@
 
         if (arrID.length > 0) {
             $('#medicineDelete').prop('disabled', false);
+            $('#medicineUtensil').prop('disabled', false);
         } else if (arrID.length == 0) {
             $('#medicineDelete').prop('disabled', true);
-        } alert(arrID.length);
+            $('#medicineUtensil').prop('disabled', true);
+        }
     }
 
-    $("#medicineDelete").click(function () {
+    $("#medicineDelete, #medicineUtensil").click(function () {
         var form = $('#__AjaxAntiForgeryForm');
         var token = $('input[name="__RequestVerificationToken"]', form).val();
         $.ajax({
             type: "POST",
-            url: "Inventory/testing",
+            url: "Inventory/DeleteItem",
             data: {
                 __RequestVerificationToken: token,
                 id: arrID
@@ -203,7 +217,7 @@
             },
             success: function (result) {
                 if (result.status) {
-                    window.location.href = '\\Inventory\\Index';
+                    location.reload();
                 }
             }
         });

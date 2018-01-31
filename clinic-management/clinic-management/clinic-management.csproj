@@ -312,6 +312,7 @@
     <Content Include="Views\PColleges\Index.cshtml" />
     <Content Include="Views\Staffs\ChangePassword.cshtml" />
     <Content Include="Views\MedChecks\Index.cshtml" />
+    <Content Include="Views\Inventory\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

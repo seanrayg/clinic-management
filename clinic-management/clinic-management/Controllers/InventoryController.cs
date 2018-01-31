@@ -56,9 +56,38 @@ namespace clinic_management.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: Items/Edit
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Item item = db.Items.Find(id);
+            if (item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(item);
+        }
+
+        // POST: Items/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult testing(int[] id)
+        public ActionResult Edit([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType,deleted")] Item item)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(item).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(item);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteItem(int[] id)
         {
             for (int i = 0; i < id.Length; i++)
             {
