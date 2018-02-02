@@ -11,7 +11,8 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MedCheck
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,13 +26,13 @@ namespace clinic_management.Models
         public Nullable<int> PatientID { get; set; }
         public System.DateTime DateTimeOfVisit { get; set; }
         public string Complaint { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Diagnosis { get; set; }
         public string Treatment { get; set; }
         public string Remarks { get; set; }
         public Nullable<int> MedCheckType { get; set; }
         public Nullable<int> MedCheckStatus { get; set; }
         public string deleted { get; set; }
-    
         public virtual Patient Patient { get; set; }
         public virtual Staff Staff { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
