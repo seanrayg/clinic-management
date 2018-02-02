@@ -85,39 +85,38 @@
                         </div>
                         <!-- /input-group -->
                     </li>
-                    @if (Convert.ToInt32(Session["usertype"]) == 2 || Convert.ToInt32(Session["usertype"]) == 3)
+                    @if (Convert.ToInt32(Session["usertype"].ToString()) == 2 || Convert.ToInt32(Session["usertype"].ToString()) == 3)
                     {
-
+                        <li>
+                            <a href="@Url.Action("Index", "Patients")"><i class="fa fa-user"></i> Patients</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index", "MedChecks")"><i class="fa fa-list-alt fa-fw"></i> Medical Check-Ups</a>
+                        </li>
                         <li>
                             <a href="@Url.Action("Index", "Inventory")"><i class="fa fa-list-alt fa-fw"></i> Inventory</a>
                         </li>
-                        <li>
-                            <a href="@Url.Action("Index", "MedChecks")"><i class="fa fa-hospital-o fa-fw"></i> Medical Check</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "Patients")"><i class="fa fa-user fa-fw"></i> Patients</a>
-                        </li>
-
+                    } 
+                    
+                    @if (Convert.ToInt32(Session["usertype"].ToString()) == 1)
+                    {
+                    <li>
+                       <a href="#"><i class="fa fa-wrench fa-fw"></i> Maintenance<span class="fa arrow"></span></a>
+                           <ul class="nav nav-second-level">
+                            @*<li>
+                                <a href="@Url.Action("Index", "PatientTypes")">Patient Types</a>
+                            </li>*@
+                            <li>
+                                <a href="@Url.Action("Index", "PColleges")">Patient Colleges</a>
+                            </li>
+                           </ul>
+                    <!-- /.nav-second-level -->
+                    </li>
                     }
                     @if (Convert.ToInt32(Session["usertype"].ToString()) == 1)
                     {
                         <li>
-                            <a href="#"><i class="fa fa-wrench fa-fw"></i> Maintenance<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
-                                <li>
-                                    <a href="@Url.Action("Index", "PatientTypes")">Patient Types</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "PColleges")">Patient Colleges</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "UserTypes")"> User Types</a>
-                                </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "Staffs")"> User Accounts</a>
-                                </li>
-                            </ul>
-                            <!-- /.nav-second-level -->
+                            <a href="@Url.Action("Index", "Staffs")"><i class="fa fa-users fa-fw"></i> User Accounts</a>
                         </li>
                         <li>
                             <a href="@Url.Action("Index", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>

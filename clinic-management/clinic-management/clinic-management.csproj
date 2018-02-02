@@ -311,6 +311,11 @@
     <Content Include="Views\PColleges\Details.cshtml" />
     <Content Include="Views\PColleges\Edit.cshtml" />
     <Content Include="Views\PColleges\Index.cshtml" />
+    <Content Include="Views\MedChecks\Create.cshtml" />
+    <Content Include="Views\MedChecks\Delete.cshtml" />
+    <Content Include="Views\MedChecks\Details.cshtml" />
+    <Content Include="Views\MedChecks\Edit.cshtml" />
+    <Content Include="Views\MedChecks\Index.cshtml" />
     <Content Include="Views\Staffs\ChangePassword.cshtml" />
     <Content Include="Views\MedChecks\Index.cshtml" />
     <Content Include="Views\Inventory\Edit.cshtml" />
