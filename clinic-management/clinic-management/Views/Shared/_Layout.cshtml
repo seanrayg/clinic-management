@@ -85,7 +85,7 @@
                         </div>
                         <!-- /input-group -->
                     </li>
-                    @if (Convert.ToInt32(Session["usertype"]) == 2 || Convert.ToInt32(Session["usertype"]) == 4)
+                    @if (Convert.ToInt32(Session["usertype"]) == 2 || Convert.ToInt32(Session["usertype"]) == 3)
                     {
 
                         <li>
@@ -99,7 +99,7 @@
                         </li>
 
                     }
-                    @if (Convert.ToInt32(Session["usertype"].ToString()) == 3)
+                    @if (Convert.ToInt32(Session["usertype"].ToString()) == 1)
                     {
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> Maintenance<span class="fa arrow"></span></a>
@@ -110,14 +110,17 @@
                                 <li>
                                     <a href="@Url.Action("Index", "PColleges")">Patient Colleges</a>
                                 </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "UserTypes")"> User Types</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("Index", "Staffs")"> User Accounts</a>
+                                </li>
                             </ul>
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "Staffs")"><i class="fa fa-users fa-fw"></i> User Accounts</a>
-                        </li>
-                        <li>
-                            <a href="@Url.Action("Index", "UserTypes")"><i class="fa fa-user-plus fa-fw"></i> User Types</a>
+                            <a href="@Url.Action("Index", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
                         </li>
                     }
                 </ul>

@@ -11,19 +11,13 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class Supply
     {
-        [DisplayName("Supply ID")]
         public int SupplyID { get; set; }
-        [DisplayName("Item ID")]
         public int ItemID { get; set; }
-        [DisplayName("Supply Quantity")]
         public string SupplyQuantity { get; set; }
-        [DisplayName("Received Date")]
         public Nullable<System.DateTime> ReceivedDate { get; set; }
-        [DisplayName("Expiration Date")]
         public string ExpirationDate { get; set; }
     
         public virtual Item Item { get; set; }

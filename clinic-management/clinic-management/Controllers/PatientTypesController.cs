@@ -124,6 +124,24 @@ namespace clinic_management.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET: PatientTypes/Recover
+        public ActionResult Recover(int? id)
+        {
+            if (id == null)
+            {
+                return View(db.PatientTypes.ToList().Where(pt => pt.deleted == "1"));
+            }
+
+            var result = db.PatientTypes.SingleOrDefault(pt => pt.TypeID == id);
+            if (result != null)
+            {
+                result.deleted = "0";
+                db.SaveChanges();
+            }
+
+            return View(db.PatientTypes.ToList().Where(pt => pt.deleted == "1"));
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

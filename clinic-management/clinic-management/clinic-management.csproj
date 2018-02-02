@@ -194,6 +194,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DeletesController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -313,6 +314,11 @@
     <Content Include="Views\Staffs\ChangePassword.cshtml" />
     <Content Include="Views\MedChecks\Index.cshtml" />
     <Content Include="Views\Inventory\Edit.cshtml" />
+    <Content Include="Views\Deletes\Index.cshtml" />
+    <Content Include="Views\PatientTypes\Recover.cshtml" />
+    <Content Include="Views\PColleges\Recover.cshtml" />
+    <Content Include="Views\UserTypes\Recover.cshtml" />
+    <Content Include="Views\Staffs\Recover.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

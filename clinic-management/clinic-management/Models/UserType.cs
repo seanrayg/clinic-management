@@ -11,7 +11,6 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class UserType
     {
@@ -20,11 +19,9 @@ namespace clinic_management.Models
         {
             this.Staffs = new HashSet<Staff>();
         }
-        [DisplayName("User Type ID")]
+    
         public int UserTypeID { get; set; }
-        [DisplayName("User Type Description")]
         public string TypeDesc { get; set; }
-        [DisplayName("User Type Is Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

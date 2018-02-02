@@ -200,5 +200,23 @@ namespace clinic_management.Controllers
                 return View(staff);
             }
         }
+
+        // GET: PatientTypes/Recover
+        public ActionResult Recover(string id)
+        {
+            if (id == null)
+            {
+                return View(db.Staffs.ToList().Where(s => s.deleted == "1"));
+            }
+
+            var result = db.Staffs.SingleOrDefault(s => s.StaffID == id);
+            if (result != null)
+            {
+                result.deleted = "0";
+                db.SaveChanges();
+            }
+
+            return View(db.Staffs.ToList().Where(s => s.deleted == "1"));
+        }
     }
 }
