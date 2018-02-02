@@ -86,7 +86,7 @@ namespace clinic_management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "PatientID,PatientLast,PatientFirst,PatientMid,PatientGender,PatientBDate,PatientAddrss,TypeID,PatientClass,CollegeID")] Patient patient)
+        public ActionResult Edit([Bind(Include = "PatientID,PatientLast,PatientFirst,PatientMid,PatientGender,PatientBDate,PatientAddrss,TypeID,PatientClass,CollegeID,deleted")] Patient patient)
         {
             if (ModelState.IsValid)
             {

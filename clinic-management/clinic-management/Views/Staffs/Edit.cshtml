@@ -20,7 +20,7 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.StaffID)
 
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
                 @Html.LabelFor(model => model.StaffLast, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.EditorFor(model => model.StaffLast, new { htmlAttributes = new { @class = "form-control" } })
@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
                 @Html.LabelFor(model => model.StaffFirst, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.EditorFor(model => model.StaffFirst, new { htmlAttributes = new { @class = "form-control" } })
@@ -36,7 +36,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
                 @Html.LabelFor(model => model.StaffMid, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.EditorFor(model => model.StaffMid, new { htmlAttributes = new { @class = "form-control" } })
@@ -44,18 +44,34 @@
                 </div>
             </div>
 
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
                 @Html.LabelFor(model => model.StaffGender, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.StaffGender, new { htmlAttributes = new { @class = "form-control" } })
+                    <input type="radio" name="gender" value="Female" id="gender_female" onchange="setGender(this)" /> Female
+                    <br />
+                    <input type="radio" name="gender" value="Male" id="gender_male" onchange="setGender(this)" /> Male
+                    @Html.EditorFor(model => model.StaffGender, new { htmlAttributes = new { @class = "form-control", style = "display: none;" } })
                     @Html.ValidationMessageFor(model => model.StaffGender, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.StaffPassword, "New Password", htmlAttributes: new { @class = "control-label col-md-2" })
+            @if (Model.StaffGender == "Female")
+            {
+                <script>
+                    $('#gender_female').attr('checked', true);
+                </script>
+            }
+            else
+            {
+                <script>
+                    $('#gender_male').attr('checked', true);
+                </script>
+            }
+
+            <div class="form-group" style="display: none;">
+                @Html.LabelFor(model => model.StaffPassword, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control", @Value = "", type = "password" } })
+                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -68,7 +84,7 @@
                 </div>
             </div>
 
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
                 @Html.LabelFor(model => model.UserTypeID, "UserTypeID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.DropDownList("UserTypeID", null, htmlAttributes: new { @class = "form-control" })
@@ -76,16 +92,11 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="control-label col-md-2">Confirm Password</label>
+            <div class="form-group" style="display: none;">
+                @Html.LabelFor(model => model.deleted, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    <input type="password" name="confirm_password" class="form-control" />
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <span class="field-validation-valid text-danger" data-valmsg-replace="true">@ViewBag.ErrorMessage</span>
+                    @Html.EditorFor(model => model.deleted, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.deleted, "", new { @class = "text-danger" })
                 </div>
             </div>
 
@@ -101,3 +112,9 @@
         @Html.ActionLink("Back to List", "Index")
     </div>
 </div>
+
+<script>
+    function setGender(radio_button) {
+        $('#StaffGender').val(radio_button.value);
+    }
+</script>

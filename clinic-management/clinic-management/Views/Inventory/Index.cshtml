@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
-}
+}   
 
 <div class="row">
     <div class="col-lg-12">
@@ -13,8 +13,8 @@
 
 <div class="row">
     <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#medicines">Medicines</a></li>
-        <li><a data-toggle="tab" href="#utensils">Utensils</a></li>
+        <li class="active"><a data-toggle="tab" href="#medicines" onclick="SetMedicineType(this)">Medicines</a></li>
+        <li><a data-toggle="tab" href="#utensils" onclick="SetMedicineType(this)">Utensils</a></li>
     </ul>
 
     <div class="tab-content">
@@ -22,7 +22,7 @@
             <br />
             <div class="btn-group">
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Medicine</button>
-                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default" disabled id="medicineDelete">Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
             <br />
@@ -30,9 +30,11 @@
             <table class="table" id="tableMedicines">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Item ID</th>
                         <th>Name</th>
                         <th>Quantity</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -40,6 +42,9 @@
                     @foreach (var item in Model.Medicine)
                     {
                         <tr>
+                            <td>
+                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
                             </td>
@@ -52,6 +57,9 @@
                             <td>
                                 @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
                                 @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
                             </td>
                         </tr>
                     }
@@ -63,7 +71,7 @@
             <br />
             <div class="btn-group">
                 <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Utensil</button>
-                <button type="button" class="btn btn-default" disabled>Delete</button>
+                <button type="button" class="btn btn-default" disabled id="medicineUtensil">Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
             <br />
@@ -71,9 +79,11 @@
             <table class="table" id="tableUtensils">
                 <thead>
                     <tr>
+                        <th></th>
                         <th>Item ID</th>
                         <th>Name</th>
                         <th>Quantity</th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>
@@ -81,6 +91,9 @@
                     @foreach (var item in Model.Utensil)
                     {
                         <tr>
+                            <td>
+                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                            </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
                             </td>
@@ -93,6 +106,9 @@
                             <td>
                                 @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
                                 @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
                             </td>
                         </tr>
                     }
@@ -110,7 +126,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Add Medicine</h4>
+                <h4 class="modal-title">Add</h4>
             </div>
             @using (Html.BeginForm("Create", "Inventory", FormMethod.Post))
             {
@@ -120,7 +136,7 @@
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                         <div class="form-group">
-                            @Html.LabelFor(model => model.Item.ItemName, "Medicine Name", htmlAttributes: new { @class = "control-label col-md-4" })
+                            <label class="control-label col-md-4">Name</label>
                             <div class="col-md-6">
                                 @Html.EditorFor(model => model.Item.ItemName, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Item.ItemName, "", new { @class = "text-danger" })
@@ -145,9 +161,65 @@
     </div>
 </div>
 
+<!-- Delete Form -->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
+
 <script>
     $(document).ready(function () {
         $('#tableMedicines').DataTable();
         $('#tableUtensils').DataTable();
+
+        $('#Item_ItemType').val("Medicine");
+    });
+
+    function SetMedicineType(selectedTab) {
+        if (selectedTab.text == "Medicines") {
+            $('#Item_ItemType').val("Medicine");
+        } else if (selectedTab.text == "Utensils") {
+            $('#Item_ItemType').val("Utensil");
+        }
+    }
+
+    var arrID = [];
+
+    function SetDelete(selectedRow) {
+        if (selectedRow.checked) {
+            arrID.push(selectedRow.value);
+        } else {
+            var index = arrID.indexOf(selectedRow.Value);
+            arrID.splice(index, 1);
+        }
+
+        if (arrID.length > 0) {
+            $('#medicineDelete').prop('disabled', false);
+            $('#medicineUtensil').prop('disabled', false);
+        } else if (arrID.length == 0) {
+            $('#medicineDelete').prop('disabled', true);
+            $('#medicineUtensil').prop('disabled', true);
+        }
+    }
+
+    $("#medicineDelete, #medicineUtensil").click(function () {
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+        $.ajax({
+            type: "POST",
+            url: "Inventory/DeleteItem",
+            data: {
+                __RequestVerificationToken: token,
+                id: arrID
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+                if (result.status) {
+                    location.reload();
+                }
+            }
+        });
     });
 </script>
