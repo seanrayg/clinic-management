@@ -55,8 +55,7 @@
                                 @Html.DisplayFor(modelItem => item.ItemQuantity)
                             </td>
                             <td>
-                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
-                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Manage Supplies", "Supply", new { id = item.ItemID }, new { @class = "btn btn-default" })
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
@@ -104,8 +103,7 @@
                                 @Html.DisplayFor(modelItem => item.ItemQuantity)
                             </td>
                             <td>
-                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
-                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Manage Supplies", "Supply", new { id = item.ItemID }, new { @class = "btn btn-default" })
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
@@ -221,5 +219,11 @@
                 }
             }
         });
+    });
+
+    var table = $('#tableMedicines').DataTable();
+
+    $('#tableMedicines tbody').on('click', 'tr', function () {
+        alert(table.row(this).data());
     });
 </script>

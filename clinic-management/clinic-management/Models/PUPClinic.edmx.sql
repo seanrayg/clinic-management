@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/02/2018 17:20:26
+-- Date Created: 02/06/2018 16:27:02
 -- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
@@ -157,7 +157,7 @@ CREATE TABLE [dbo].[Supplies] (
     [ItemID] int  NOT NULL,
     [SupplyQuantity] nvarchar(max)  NOT NULL,
     [ReceivedDate] datetime  NULL,
-    [ExpirationDate] nvarchar(max)  NOT NULL
+    [ExpirationDate] datetime  NULL
 );
 GO
 

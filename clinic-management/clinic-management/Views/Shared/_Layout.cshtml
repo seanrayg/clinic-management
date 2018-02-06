@@ -18,7 +18,8 @@
     <link href="~/Content/assets/css/inventory.css" rel="stylesheet" />
     <link href="~/Content/assets/css/sb-admin-2.css" rel="stylesheet" />
     <link href="~/Content/assets/css/metisMenu.min.css" rel="stylesheet" />
-    @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker3.css" />*@
+    <link href="~/Content/assets/css/supply_style.css" rel="stylesheet" />
+    <link href="~/Content/assets/css/dataTables.bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/assets/css/bootstrap-datepicker3.css" rel="stylesheet" />
     <!-- DATATABLES -->
     <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -39,7 +40,6 @@
     <!-- CUSTOM SCRIPTS -->
     <script src="~/Content/assets/js/metisMenu.min.js"></script>
     <script src="~/Content/assets/js/sb-admin-2.min.js"></script>
-    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.min.js"></script>*@
     <script src="~/Content/assets/js/bootstrap-datepicker.js"></script>
 </head>
 <body>
@@ -56,6 +56,9 @@
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
+            <li>
+                <p id="staffname"></p>
+            </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
@@ -96,6 +99,9 @@
                         <li>
                             <a href="@Url.Action("Index", "Inventory")"><i class="fa fa-list-alt fa-fw"></i> Inventory</a>
                         </li>
+                        <li>
+                            <a href="@Url.Action("Regular", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
+                        </li>
                     } 
                     
                     @if (Convert.ToInt32(Session["usertype"].ToString()) == 1)
@@ -103,9 +109,9 @@
                     <li>
                        <a href="#"><i class="fa fa-wrench fa-fw"></i> Maintenance<span class="fa arrow"></span></a>
                            <ul class="nav nav-second-level">
-                            @*<li>
+                            <li>
                                 <a href="@Url.Action("Index", "PatientTypes")">Patient Types</a>
-                            </li>*@
+                            </li>
                             <li>
                                 <a href="@Url.Action("Index", "PColleges")">Patient Colleges</a>
                             </li>
@@ -119,7 +125,7 @@
                             <a href="@Url.Action("Index", "Staffs")"><i class="fa fa-users fa-fw"></i> User Accounts</a>
                         </li>
                         <li>
-                            <a href="@Url.Action("Index", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
+                            <a href="@Url.Action("Admin", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
                         </li>
                     }
                 </ul>
@@ -146,3 +152,7 @@
     <!-- FOOTER SECTION END-->
 </body>
 </html>
+
+<script>
+    $('#staffname').text("Hello, " + "@Session["staffname"]");
+</script>

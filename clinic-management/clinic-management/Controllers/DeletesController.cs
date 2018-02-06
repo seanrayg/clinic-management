@@ -9,7 +9,13 @@ namespace clinic_management.Controllers
     public class DeletesController : Controller
     {
         // GET: Deletes
-        public ActionResult Index()
+        public ActionResult Admin()
+        {
+            return View();
+        }
+
+        // GET: Deletes
+        public ActionResult Regular()
         {
             return View();
         }
