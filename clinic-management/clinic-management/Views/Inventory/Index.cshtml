@@ -43,7 +43,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                                @Html.CheckBox(item.ItemQuantity.ToString(), new { value = item.ItemID, onclick = "return SetDelete(this)" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
@@ -91,7 +91,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                                @Html.CheckBox(item.ItemQuantity.ToString(), new { value = item.ItemID, onclick = "return SetDelete(this)" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
@@ -184,19 +184,26 @@
     var arrID = [];
 
     function SetDelete(selectedRow) {
-        if (selectedRow.checked) {
-            arrID.push(selectedRow.value);
-        } else {
-            var index = arrID.indexOf(selectedRow.Value);
-            arrID.splice(index, 1);
-        }
+        if (parseInt(selectedRow.name) == 0) {
+            if (selectedRow.checked) {
+                arrID.push(selectedRow.value);
+            } else {
+                var index = arrID.indexOf(selectedRow.Value);
+                arrID.splice(index, 1);
+            }
 
-        if (arrID.length > 0) {
-            $('#medicineDelete').prop('disabled', false);
-            $('#medicineUtensil').prop('disabled', false);
-        } else if (arrID.length == 0) {
-            $('#medicineDelete').prop('disabled', true);
-            $('#medicineUtensil').prop('disabled', true);
+            if (arrID.length > 0) {
+                $('#medicineDelete').prop('disabled', false);
+                $('#medicineUtensil').prop('disabled', false);
+            } else if (arrID.length == 0) {
+                $('#medicineDelete').prop('disabled', true);
+                $('#medicineUtensil').prop('disabled', true);
+            }
+        } else {
+            //selectedRow.preventDefault();
+            //selectedRow.stopPropagation();
+
+            return false;
         }
     }
 
@@ -219,11 +226,5 @@
                 }
             }
         });
-    });
-
-    var table = $('#tableMedicines').DataTable();
-
-    $('#tableMedicines tbody').on('click', 'tr', function () {
-        alert(table.row(this).data());
     });
 </script>
