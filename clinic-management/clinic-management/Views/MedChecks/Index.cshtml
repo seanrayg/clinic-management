@@ -31,9 +31,6 @@
                         @Html.Label("Complaint")
                     </th>
                     <th>
-                        @Html.Label("Diagnosis")
-                    </th>
-                    <th>
                         @Html.Label("Status")
                     </th>
                     <th></th>
@@ -44,19 +41,16 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Patient.PatientLast)
+                            @Html.DisplayFor(modelItem => item.Patient.PatientFirst) @Html.DisplayFor(modelItem => item.Patient.PatientLast)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Staff.StaffLast)
+                            @Html.DisplayFor(modelItem => item.Staff.StaffFirst) @Html.DisplayFor(modelItem => item.Staff.StaffLast)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DateTimeOfVisit)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Complaint)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Diagnosis)
                         </td>
                         <td>
                             @if (item.MedCheckStatus == 1)
