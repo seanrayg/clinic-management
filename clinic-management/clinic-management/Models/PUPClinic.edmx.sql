@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/06/2018 16:27:02
+-- Date Created: 02/09/2018 13:56:39
 -- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
@@ -84,6 +84,7 @@ CREATE TABLE [dbo].[Items] (
     [ItemName] nvarchar(max)  NOT NULL,
     [ItemQuantity] nvarchar(max)  NOT NULL,
     [ItemType] nvarchar(max)  NOT NULL,
+    [ItemPurpose] nvarchar(max)  NOT NULL,
     [deleted] nvarchar(max)  NOT NULL
 );
 GO

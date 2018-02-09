@@ -36,7 +36,7 @@ namespace clinic_management.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType")] Item item)
+        public ActionResult Create([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemPurpose,ItemType")] Item item)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace clinic_management.Controllers
         // POST: Items/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType,deleted")] Item item)
+        public ActionResult Edit([Bind(Include = "ItemID,ItemName,ItemQuantity,ItemType,ItemPurpose,deleted")] Item item)
         {
             if (ModelState.IsValid)
             {

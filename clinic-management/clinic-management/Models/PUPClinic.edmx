@@ -56,6 +56,7 @@
     <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ItemQuantity" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ItemType" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ItemPurpose" Type="nvarchar(max)" Nullable="false" />
     <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
   </EntityType>
   <EntityType Name="MedChecks">
@@ -517,6 +518,7 @@
           <ScalarProperty Name="ItemName" ColumnName="ItemName" />
           <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
           <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+          <ScalarProperty Name="ItemPurpose" ColumnName="ItemPurpose" />
           <ScalarProperty Name="deleted" ColumnName="deleted" />
         </MappingFragment>
       </EntityTypeMapping>
