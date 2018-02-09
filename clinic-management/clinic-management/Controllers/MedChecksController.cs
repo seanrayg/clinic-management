@@ -15,6 +15,7 @@ namespace clinic_management.Controllers
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
 
+
         // GET: MedChecks
         public ActionResult Index()
         {
@@ -41,7 +42,7 @@ namespace clinic_management.Controllers
         // GET: MedChecks/Create
         public ActionResult Create()
         {
-            var staff = db.Staffs.Where(x => x.UserTypeID != 1)
+            var staff = db.Staffs.Where(x => (x.UserTypeID != 1) && (x.UserTypeID != 3))
                         .Select(s => new
                         {
                             Text = s.StaffFirst + " " + s.StaffLast,
@@ -59,6 +60,8 @@ namespace clinic_management.Controllers
             .ToList();
             ViewBag.ddlPatient = new SelectList(patient, "Value", "Text");
 
+            
+            //ViewBag.staffName = Session["fname"].ToString() + Session["lname"].ToString();
             //ViewBag.PatientID = new SelectList(db.Patients, "PatientID", "PatientLast");
             //ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "StaffLast");
             return View();

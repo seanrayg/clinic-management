@@ -20,7 +20,6 @@
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MedCheckID)
-
         <div class="form-group">
             @Html.LabelFor(model => model.StaffID, "StaffID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -78,6 +77,8 @@
             </div>
         </div>
 
+        @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+        {
         <div class="form-group">
             @Html.LabelFor(model => model.Diagnosis, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -112,11 +113,11 @@
                         new SelectListItem{ Text="Done", Value = "2" },
                         new SelectListItem{ Text="Cancelled", Value = "3" },
                     },
-                    "Select the status of visit")
+                     "Select the status of visit")
                 @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        }
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />

@@ -38,12 +38,14 @@ namespace ClinicManagement.Controllers
                     try
                     {
                         Session["usertype"] = usertype.UserTypeID;
+                        Session["fname"] = usertype.StaffFirst;
+                        Session["lname"] = usertype.StaffLast;
                         Session["staffname"] = usertype.StaffFirst + ' ' + usertype.StaffLast + " (" + usertype.UserType.TypeDesc + ')';
                     }
                     catch (Exception e) { }
                     System.Diagnostics.Debug.WriteLine("Login Success");
 
-                    if (Convert.ToInt32(usertype.UserTypeID.ToString()) == 2 || Convert.ToInt32(usertype.UserTypeID.ToString()) == 4)
+                    if (Convert.ToInt32(usertype.UserTypeID.ToString()) == 2 || Convert.ToInt32(usertype.UserTypeID.ToString()) == 3)
                     {
                         return RedirectToAction("Index", "Patients");
                     }

@@ -22,13 +22,15 @@
             <div class="login-container">
                 <div id="output"></div>
                 <div class="form-box">
-                    @Html.EditorFor(model => model.StaffID, new { htmlAttributes = new { @placeholder = "id", @type = "text" } })
-                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @placeholder = "password", @type = "password" } })
-                    <hr />
-                    @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-danger" })
-                    <br />
-                    @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
                     <label class="text-danger">@ViewBag.ErrorMessage</label>
+                    <hr />
+                    @Html.EditorFor(model => model.StaffID, new { htmlAttributes = new { @placeholder = " Enter Account ID", @type = "text" } })
+                    @Html.EditorFor(model => model.StaffPassword, new { htmlAttributes = new { @placeholder = "Enter Account Password", @type = "password" } })
+                    
+                    @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-danger" })
+                    
+                    @Html.ValidationMessageFor(model => model.StaffPassword, "", new { @class = "text-danger" })
+                    
                     <button class="btn btn-info btn-block login" type="submit">Login</button>
                 </div>
             </div>
