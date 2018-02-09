@@ -14,17 +14,16 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
+  
         <div class="form-horizontal">
-
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
-                @Html.LabelFor(model => model.StaffID, "Staff Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.StaffID, "Doctor", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Medical Staff", htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Doctor", htmlAttributes: new { @class = "form-control" })
                 </div>
             </div>
-
+            @ViewBag.staffName
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientID, "Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -34,7 +33,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.DateTimeOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.DateTimeOfVisit, "Date of Visit", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
                         @Html.EditorFor(model => model.DateTimeOfVisit, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
@@ -54,28 +53,29 @@
             </script>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MedCheckType, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.MedCheckType, "Medical Type", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.MedCheckType, new List<SelectListItem>
                     {
-                        new SelectListItem{ Text="For Check-up", Value = "1" },
-                        new SelectListItem{ Text="For Medical Clearance", Value = "2" },
+                        new SelectListItem{ Text="Check-up", Value = "1" },
+                        new SelectListItem{ Text="Medical Clearance", Value = "2" },
                     },
-                    "Select the purpose of visit")
+                    "Select purpose of visit")
                     @Html.ValidationMessageFor(model => model.MedCheckType, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Complaint, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Complaint, "Complaint", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(model => model.Complaint, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Complaint, "", new { @class = "text-danger" })
                 </div>
             </div>
 
+            @if (Convert.ToInt32(Session["usertype"].ToString()) == 2) { 
             <div class="form-group">
-                @Html.LabelFor(model => model.Diagnosis, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Diagnosis, "Diagnosis", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(model => model.Diagnosis, 3, 98, new { htmlAttributes = new { @class = "form-control"} })
                     @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
@@ -83,7 +83,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Treatment, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Treatment, "Treatment", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(model => model.Treatment, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Treatment, "", new { @class = "text-danger" })
@@ -91,27 +91,44 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Remarks, "Remarks", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.TextAreaFor(model => model.Remarks, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
                 </div>
             </div>
+            }
 
-
+            @if (Convert.ToInt32(Session["usertype"].ToString()) == 3) { 
             <div class="form-group">
-                @Html.LabelFor(model => model.MedCheckStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.MedCheckStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
                     {
-                        new SelectListItem{ Text="Ongoing", Value = "1" },
+                        new SelectListItem{ Text="Ongoing", Value = "1", Selected = true },
                         new SelectListItem{ Text="Done", Value = "2" },
                         new SelectListItem{ Text="Cancelled", Value = "3" },
-                    },
-                    "Select the status of visit")
+                    },  new { @disabled = "disabled" })
                     @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
                 </div>
             </div>
+            }
+
+            @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MedCheckStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
+                    {
+                        new SelectListItem{ Text="Ongoing", Value = "1", Selected = true },
+                        new SelectListItem{ Text="Done", Value = "2" },
+                        new SelectListItem{ Text="Cancelled", Value = "3" },
+                    })
+                        @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            }
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -120,6 +137,7 @@
                 </div>
             </div>
         </div>
+        
     }
 
 </div>

@@ -153,6 +153,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\CPage\css\business-casual.css" />
     <Content Include="Content\CPage\img\bg.jpg" />
+    <Content Include="Content\CPage\img\bg1.jpg" />
     <Content Include="Content\CPage\img\header.JPG" />
     <Content Include="Content\CPage\img\login.jpg" />
     <Content Include="Content\CPage\img\login1.jpg" />
@@ -319,7 +320,6 @@
     <Content Include="Views\MedChecks\Edit.cshtml" />
     <Content Include="Views\MedChecks\Index.cshtml" />
     <Content Include="Views\Staffs\ChangePassword.cshtml" />
-    <Content Include="Views\MedChecks\Index.cshtml" />
     <Content Include="Views\Inventory\Edit.cshtml" />
     <Content Include="Views\Deletes\Admin.cshtml" />
     <Content Include="Views\PatientTypes\Recover.cshtml" />
