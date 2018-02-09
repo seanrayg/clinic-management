@@ -43,7 +43,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                                @Html.CheckBox(item.ItemQuantity.ToString(), new { value = item.ItemID, onclick = "return SetDelete(this)" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
@@ -55,8 +55,7 @@
                                 @Html.DisplayFor(modelItem => item.ItemQuantity)
                             </td>
                             <td>
-                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
-                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Manage Supplies", "Supply", new { id = item.ItemID }, new { @class = "btn btn-default" })
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
@@ -92,7 +91,7 @@
                     {
                         <tr>
                             <td>
-                                @Html.CheckBox(item.ItemID.ToString(), new { value = item.ItemID, onclick = "SetDelete(this)" })
+                                @Html.CheckBox(item.ItemQuantity.ToString(), new { value = item.ItemID, onclick = "return SetDelete(this)" })
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.ItemID)
@@ -104,8 +103,7 @@
                                 @Html.DisplayFor(modelItem => item.ItemQuantity)
                             </td>
                             <td>
-                                @Html.ActionLink("Add Supply", "Edit", new { id = item.ItemID }, new { @class = "btn btn-default" })
-                                @Html.ActionLink("View Supply", "Details", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                @Html.ActionLink("Manage Supplies", "Supply", new { id = item.ItemID }, new { @class = "btn btn-default" })
                             </td>
                             <td>
                                 @Html.ActionLink("Edit", "Edit", new { id = item.ItemID })
@@ -186,19 +184,26 @@
     var arrID = [];
 
     function SetDelete(selectedRow) {
-        if (selectedRow.checked) {
-            arrID.push(selectedRow.value);
-        } else {
-            var index = arrID.indexOf(selectedRow.Value);
-            arrID.splice(index, 1);
-        }
+        if (parseInt(selectedRow.name) == 0) {
+            if (selectedRow.checked) {
+                arrID.push(selectedRow.value);
+            } else {
+                var index = arrID.indexOf(selectedRow.Value);
+                arrID.splice(index, 1);
+            }
 
-        if (arrID.length > 0) {
-            $('#medicineDelete').prop('disabled', false);
-            $('#medicineUtensil').prop('disabled', false);
-        } else if (arrID.length == 0) {
-            $('#medicineDelete').prop('disabled', true);
-            $('#medicineUtensil').prop('disabled', true);
+            if (arrID.length > 0) {
+                $('#medicineDelete').prop('disabled', false);
+                $('#medicineUtensil').prop('disabled', false);
+            } else if (arrID.length == 0) {
+                $('#medicineDelete').prop('disabled', true);
+                $('#medicineUtensil').prop('disabled', true);
+            }
+        } else {
+            //selectedRow.preventDefault();
+            //selectedRow.stopPropagation();
+
+            return false;
         }
     }
 

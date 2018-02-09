@@ -21,14 +21,14 @@ namespace ClinicManagement.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index([Bind(Include = "StaffID, StaffPassword")] Staff staff)
         {
-            var usertype = db.Staffs.Where(a => a.StaffID == staff.StaffID && a.StaffPassword == staff.StaffPassword).FirstOrDefault();
+            var usertype = db.Staffs.Where(a => a.StaffID == staff.StaffID && a.StaffPassword == staff.StaffPassword && a.deleted == "0").FirstOrDefault();
             
             using (var context = new dbClinicManagementEntities())
             {
                 context.Database.Connection.Open();
 
                 var query = from q in context.Staffs
-                            where q.StaffID == staff.StaffID && q.StaffPassword == staff.StaffPassword
+                            where q.StaffID == staff.StaffID && q.StaffPassword == staff.StaffPassword && q.deleted == "0"
                             select q;
 
 
@@ -40,6 +40,7 @@ namespace ClinicManagement.Controllers
                         Session["usertype"] = usertype.UserTypeID;
                         Session["fname"] = usertype.StaffFirst;
                         Session["lname"] = usertype.StaffLast;
+                        Session["staffname"] = usertype.StaffFirst + ' ' + usertype.StaffLast + " (" + usertype.UserType.TypeDesc + ')';
                     }
                     catch (Exception e) { }
                     System.Diagnostics.Debug.WriteLine("Login Success");

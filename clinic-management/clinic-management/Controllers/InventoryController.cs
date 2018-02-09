@@ -102,5 +102,85 @@ namespace clinic_management.Controllers
 
             return Json(new { status = true });
         }
+
+        // GET: Inventory/Supply/{id}
+        public ActionResult Supply(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ModelContainer container = new ModelContainer();
+            container.Item = db.Items.Find(id);
+            container.SupplyList = db.Supplies.Where(s => s.ItemID == id).ToList();
+            if (container.Item == null)
+            {
+                return HttpNotFound();
+            }
+            return View(container);
+        }
+
+        // GET: Inventory/AddSupply/{id}
+        public ActionResult AddSupply(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ViewBag.ItemID = id;
+
+            return View();
+        }
+
+        // POST: Inventory/AddSupply/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddSupply([Bind(Include = "SupplyID,ItemID,SupplyQuantity,ReceivedDate,ExpirationDate")] Supply supply)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Supplies.Add(supply);
+                db.SaveChanges();
+
+                var result = db.Items.SingleOrDefault(it => it.ItemID == supply.ItemID);
+                if (result != null)
+                {
+                    result.ItemQuantity = (int.Parse(result.ItemQuantity) + int.Parse(supply.SupplyQuantity)).ToString();
+                    db.SaveChanges();
+                }
+
+                return RedirectToAction("Supply", new { id = supply.ItemID });
+            }
+            return RedirectToAction("Supply", new { id = supply.ItemID });
+        }
+
+        // GET: Inventory/EditSupply/{id}
+        public ActionResult EditSupply(int? id)
+        {
+            if(id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Supply supply = db.Supplies.Find(id);
+            if (supply == null)
+            {
+                return HttpNotFound();
+            }
+            return View(supply);
+        }
+
+        // POST: Inventory/EditSupply/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditSupply([Bind(Include = "SupplyID,ItemID,SupplyQuantity,ReceivedDate,ExpirationDate")] Supply supply)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(supply).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Supply", new { id = supply.ItemID });
+            }
+            return RedirectToAction("Supply", new { id = supply.ItemID });
+        }
     }
 }
