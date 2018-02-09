@@ -258,6 +258,7 @@
           <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="Item" ToRole="MedCheckItem" />
           <Property Name="ItemType" Type="String" Nullable="false" />
           <NavigationProperty Name="Supplies" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Item" ToRole="Supply" />
+          <Property Name="ItemPurpose" Type="String" Nullable="false" />
           <Property Name="deleted" Type="String" Nullable="false" />
         </EntityType>
         <EntityType Name="MedCheck">

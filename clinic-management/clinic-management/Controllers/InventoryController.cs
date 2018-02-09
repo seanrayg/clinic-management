@@ -172,12 +172,30 @@ namespace clinic_management.Controllers
         // POST: Inventory/EditSupply/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSupply([Bind(Include = "SupplyID,ItemID,SupplyQuantity,ReceivedDate,ExpirationDate")] Supply supply)
+        public ActionResult EditSupply([Bind(Include = "SupplyID,ItemID,SupplyQuantity,ReceivedDate,ExpirationDate")] Supply supply, int oldSupplyQuantity)
         {
             if (ModelState.IsValid)
             {
+
                 db.Entry(supply).State = EntityState.Modified;
                 db.SaveChanges();
+
+                var result = db.Items.SingleOrDefault(it => it.ItemID == supply.ItemID);
+
+                if (int.Parse(supply.SupplyQuantity) != oldSupplyQuantity)
+                {
+                    if (oldSupplyQuantity > int.Parse(supply.SupplyQuantity))
+                    {
+                        result.ItemQuantity = (int.Parse(result.ItemQuantity) - (oldSupplyQuantity - int.Parse(supply.SupplyQuantity))).ToString();
+                    }
+                    else
+                    {
+                        result.ItemQuantity = (int.Parse(result.ItemQuantity) + (int.Parse(supply.SupplyQuantity) - oldSupplyQuantity)).ToString();
+                    }
+
+                    db.SaveChanges();
+                }
+
                 return RedirectToAction("Supply", new { id = supply.ItemID });
             }
             return RedirectToAction("Supply", new { id = supply.ItemID });
