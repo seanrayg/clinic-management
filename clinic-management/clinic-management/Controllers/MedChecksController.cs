@@ -77,6 +77,11 @@ namespace clinic_management.Controllers
             if (ModelState.IsValid)
             {
                 medCheck.deleted = "0";
+                medCheck.Diagnosis = " ";
+                medCheck.Treatment = " ";
+                medCheck.Remarks = " ";
+                medCheck.MedCheckStatus = '1';
+
                 db.MedChecks.Add(medCheck);
                 db.SaveChanges();
                 return RedirectToAction("Index");
