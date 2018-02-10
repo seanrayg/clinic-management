@@ -22,6 +22,9 @@ namespace clinic_management.Controllers
             modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").Where(i => i.deleted == "0").ToList();
             modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").Where(i => i.deleted == "0").ToList();
 
+            ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == "0").Count();
+            //ViewBag.CriticalStock = db.Items.Where(int.Parse(i => i.ItemQuantity) <= 10).Count();
+
             return View(modelcontainer);
         }
 
