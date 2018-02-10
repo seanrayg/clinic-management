@@ -55,15 +55,15 @@
                         <td>
                             @if (item.MedCheckStatus == 1)
                             {
-                                @Html.Label("Ongoing")
+                                @Html.Display("Ongoing")
                             }
                             @if (item.MedCheckStatus == 2)
                             {
-                                @Html.Label("Done")
+                                @Html.Display("Done")
                             }
                             @if (item.MedCheckStatus == 3)
                             {
-                                @Html.Label("Cancelled")
+                                @Html.Display("Cancelled")
                             }
                         </td>
                         <td>

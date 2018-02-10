@@ -65,15 +65,18 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.MedCheckStatus)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.deleted)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.deleted)
+            @if (Model.MedCheckStatus == 1)
+            {
+                @Html.Display("Ongoing")
+            }
+            @if (Model.MedCheckStatus == 2)
+            {
+                @Html.Display("Done")
+            }
+            @if (Model.MedCheckStatus == 3)
+            {
+                @Html.Display("Cancelled")
+            }            
         </dd>
 
         <dt>
