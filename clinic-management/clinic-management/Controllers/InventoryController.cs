@@ -22,8 +22,8 @@ namespace clinic_management.Controllers
             modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").Where(i => i.deleted == "0").ToList();
             modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").Where(i => i.deleted == "0").ToList();
 
-            ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == "0").Count();
-            //ViewBag.CriticalStock = db.Items.Where(int.Parse(i => i.ItemQuantity) <= 10).Count();
+            ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Count();
+            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Count();
 
             return View(modelcontainer);
         }
@@ -43,7 +43,7 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                item.ItemQuantity = "0";
+                item.ItemQuantity = 0;
                 item.deleted = "0";
 
                 db.Items.Add(item);
@@ -148,7 +148,7 @@ namespace clinic_management.Controllers
                 var result = db.Items.SingleOrDefault(it => it.ItemID == supply.ItemID);
                 if (result != null)
                 {
-                    result.ItemQuantity = (int.Parse(result.ItemQuantity) + int.Parse(supply.SupplyQuantity)).ToString();
+                    result.ItemQuantity = (Int16)(result.ItemQuantity + supply.SupplyQuantity);
                     db.SaveChanges();
                 }
 
@@ -185,15 +185,15 @@ namespace clinic_management.Controllers
 
                 var result = db.Items.SingleOrDefault(it => it.ItemID == supply.ItemID);
 
-                if (int.Parse(supply.SupplyQuantity) != oldSupplyQuantity)
+                if (supply.SupplyQuantity != oldSupplyQuantity)
                 {
-                    if (oldSupplyQuantity > int.Parse(supply.SupplyQuantity))
+                    if (oldSupplyQuantity > supply.SupplyQuantity)
                     {
-                        result.ItemQuantity = (int.Parse(result.ItemQuantity) - (oldSupplyQuantity - int.Parse(supply.SupplyQuantity))).ToString();
+                        result.ItemQuantity = (Int16)(result.ItemQuantity - (oldSupplyQuantity - supply.SupplyQuantity));
                     }
                     else
                     {
-                        result.ItemQuantity = (int.Parse(result.ItemQuantity) + (int.Parse(supply.SupplyQuantity) - oldSupplyQuantity)).ToString();
+                        result.ItemQuantity = (Int16)(result.ItemQuantity + (supply.SupplyQuantity - oldSupplyQuantity));
                     }
 
                     db.SaveChanges();

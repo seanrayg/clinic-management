@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/09/2018 13:56:39
+-- Date Created: 02/12/2018 16:23:20
 -- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
@@ -82,7 +82,7 @@ GO
 CREATE TABLE [dbo].[Items] (
     [ItemID] int IDENTITY(1,1) NOT NULL,
     [ItemName] nvarchar(max)  NOT NULL,
-    [ItemQuantity] nvarchar(max)  NOT NULL,
+    [ItemQuantity] smallint  NOT NULL,
     [ItemType] nvarchar(max)  NOT NULL,
     [ItemPurpose] nvarchar(max)  NOT NULL,
     [deleted] nvarchar(max)  NOT NULL
@@ -156,7 +156,7 @@ GO
 CREATE TABLE [dbo].[Supplies] (
     [SupplyID] int IDENTITY(1,1) NOT NULL,
     [ItemID] int  NOT NULL,
-    [SupplyQuantity] nvarchar(max)  NOT NULL,
+    [SupplyQuantity] smallint  NOT NULL,
     [ReceivedDate] datetime  NULL,
     [ExpirationDate] datetime  NULL
 );

@@ -23,7 +23,7 @@ namespace clinic_management.Models
     
         public int ItemID { get; set; }
         public string ItemName { get; set; }
-        public string ItemQuantity { get; set; }
+        public short ItemQuantity { get; set; }
         public string ItemType { get; set; }
         public string ItemPurpose { get; set; }
         public string deleted { get; set; }
