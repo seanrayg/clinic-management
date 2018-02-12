@@ -25,6 +25,11 @@ namespace clinic_management.Controllers
             ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Count();
             ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Count();
 
+            if (TempData.ContainsKey("isUtensil"))
+            {
+                ViewBag.isUtensil = true;
+            }
+
             return View(modelcontainer);
         }
 
@@ -50,6 +55,11 @@ namespace clinic_management.Controllers
                 db.SaveChanges();
 
                 System.Diagnostics.Debug.WriteLine("Medicine Added");
+
+                if(item.ItemType == "Utensil")
+                {
+                    TempData["isUtensil"] = true;
+                }
 
                 return RedirectToAction("Index");
             }

@@ -36,7 +36,7 @@
 </div>
 
 <div class="row">
-    <ul class="nav nav-tabs">
+    <ul class="nav nav-tabs" id="myTab">
         <li class="active"><a data-toggle="tab" href="#medicines" onclick="SetMedicineType(this)">Medicines</a></li>
         <li><a data-toggle="tab" href="#utensils" onclick="SetMedicineType(this)">Utensils</a></li>
     </ul>
@@ -204,6 +204,14 @@
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
     @Html.AntiForgeryToken()
+}
+
+@if (ViewBag.isUtensil != null && ViewBag.isUtensil)
+{
+    <script>
+        $('#myTab a[href="#utensils"]').tab('show');
+        alert('puta');
+    </script>
 }
 
 <script>
