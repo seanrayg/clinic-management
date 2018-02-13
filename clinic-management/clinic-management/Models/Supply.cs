@@ -15,7 +15,7 @@ namespace clinic_management.Models
     public partial class Supply
     {
         public int SupplyID { get; set; }
-        public int ItemID { get; set; }
+        public string ItemID { get; set; }
         public short SupplyQuantity { get; set; }
         public Nullable<System.DateTime> ReceivedDate { get; set; }
         public Nullable<System.DateTime> ExpirationDate { get; set; }

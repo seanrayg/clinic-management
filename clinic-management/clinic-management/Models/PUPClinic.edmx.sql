@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/12/2018 16:23:20
+-- Date Created: 02/13/2018 12:26:30
 -- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
@@ -37,9 +37,6 @@ IF OBJECT_ID(N'[dbo].[FK_MedCheckID]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ItemMedCheckItem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedCheckItems] DROP CONSTRAINT [FK_ItemMedCheckItem];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ItemSupply]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Supplies] DROP CONSTRAINT [FK_ItemSupply];
 GO
 
 -- --------------------------------------------------
@@ -80,7 +77,7 @@ GO
 
 -- Creating table 'Items'
 CREATE TABLE [dbo].[Items] (
-    [ItemID] int IDENTITY(1,1) NOT NULL,
+    [ItemID] varchar(20)  NOT NULL,
     [ItemName] nvarchar(max)  NOT NULL,
     [ItemQuantity] smallint  NOT NULL,
     [ItemType] nvarchar(max)  NOT NULL,
@@ -155,7 +152,7 @@ GO
 -- Creating table 'Supplies'
 CREATE TABLE [dbo].[Supplies] (
     [SupplyID] int IDENTITY(1,1) NOT NULL,
-    [ItemID] int  NOT NULL,
+    [ItemID] varchar(20)  NOT NULL,
     [SupplyQuantity] smallint  NOT NULL,
     [ReceivedDate] datetime  NULL,
     [ExpirationDate] datetime  NULL
@@ -173,7 +170,7 @@ GO
 -- Creating table 'MedCheckItems'
 CREATE TABLE [dbo].[MedCheckItems] (
     [MedCheckID] int  NOT NULL,
-    [ItemID] int  NOT NULL,
+    [ItemID] varchar(20)  NOT NULL,
     [Quantity] int  NOT NULL
 );
 GO

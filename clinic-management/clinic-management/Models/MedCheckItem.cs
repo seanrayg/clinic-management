@@ -15,7 +15,7 @@ namespace clinic_management.Models
     public partial class MedCheckItem
     {
         public int MedCheckID { get; set; }
-        public int ItemID { get; set; }
+        public string ItemID { get; set; }
         public int Quantity { get; set; }
     
         public virtual MedCheck MedCheck { get; set; }

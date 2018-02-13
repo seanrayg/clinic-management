@@ -27,7 +27,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Critical Stock</label>
-                        <p class="itemData">0</p>
+                        <p class="itemData">@ViewBag.CriticalStock</p>
                     </div>
                 </div>
             </div>
@@ -45,7 +45,7 @@
         <div id="medicines" class="tab-pane fade in active">
             <br />
             <div class="btn-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Medicine</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="addMedicine">Add Medicine</button>
                 <button type="button" class="btn btn-default" disabled id="medicineDelete">Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
@@ -97,8 +97,8 @@
         <div id="utensils" class="tab-pane fade">
             <br />
             <div class="btn-group">
-                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Add Utensil</button>
-                <button type="button" class="btn btn-default" disabled id="medicineUtensil">Delete</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal" id="addUtensil">Add Utensil</button>
+                <button type="button" class="btn btn-default" disabled id="utensilDelete">Delete</button>
                 <button type="button" class="btn btn-default">Refresh</button>
             </div>
             <br />
@@ -165,6 +165,14 @@
                 <div class="modal-body">
                     <div class="form-horizontal">
                         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group" style="display: none;">
+                            <label class="control-label col-md-4">ItemID</label>
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.Item.ItemID, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Item.ItemID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
                         <div class="form-group">
                             <label class="control-label col-md-4">Name</label>
                             <div class="col-md-6">
@@ -200,17 +208,17 @@
     </div>
 </div>
 
-<!-- Delete Form -->
+<!-- Anti Forgery Form -->
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
     @Html.AntiForgeryToken()
 }
 
-@if (ViewBag.isUtensil != null && ViewBag.isUtensil)
+<!-- Change tab content respective on user's selected action -->
+@if (ViewBag.isUtensil != null && ViewBag.isUtensil == true)
 {
     <script>
         $('#myTab a[href="#utensils"]').tab('show');
-        alert('puta');
     </script>
 }
 
@@ -243,10 +251,10 @@
 
             if (arrID.length > 0) {
                 $('#medicineDelete').prop('disabled', false);
-                $('#medicineUtensil').prop('disabled', false);
+                $('#utensilDelete').prop('disabled', false);
             } else if (arrID.length == 0) {
                 $('#medicineDelete').prop('disabled', true);
-                $('#medicineUtensil').prop('disabled', true);
+                $('#utensilDelete').prop('disabled', true);
             }
         } else {
             alert("Can't delete this item! (still have stock)");
@@ -254,7 +262,38 @@
         }
     }
 
-    $("#medicineDelete, #medicineUtensil").click(function () {
+    $("#addMedicine, #addUtensil").click(function () {
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+
+        var strType = "";
+
+        if (this.id == "addMedicine") {
+            strType = "m";
+        } else {
+            strType = "u"
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "Inventory/getItemID",
+            data: {
+                __RequestVerificationToken: token,
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+                if (strType == "m") {
+                    $("#Item_ItemID").val(result.mid);
+                } else {
+                    $("#Item_ItemID").val(result.uid);
+                }
+            }
+        });
+    });
+
+    $("#medicineDelete, #utensilDelete").click(function () {
         var form = $('#__AjaxAntiForgeryForm');
         var token = $('input[name="__RequestVerificationToken"]', form).val();
         $.ajax({

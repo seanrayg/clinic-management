@@ -52,7 +52,7 @@
     <Key>
       <PropertyRef Name="ItemID" />
     </Key>
-    <Property Name="ItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemID" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="ItemName" Type="nvarchar(max)" Nullable="false" />
     <Property Name="ItemQuantity" Type="smallint" Nullable="false" />
     <Property Name="ItemType" Type="nvarchar(max)" Nullable="false" />
@@ -127,7 +127,7 @@
       <PropertyRef Name="SupplyID" />
     </Key>
     <Property Name="SupplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="ItemID" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="SupplyQuantity" Type="smallint" Nullable="false" />
     <Property Name="ReceivedDate" Type="datetime" Nullable="true" />
     <Property Name="ExpirationDate" Type="datetime" Nullable="true" />
@@ -146,7 +146,7 @@
       <PropertyRef Name="ItemID" />
     </Key>
     <Property Name="MedCheckID" Type="int" Nullable="false" />
-    <Property Name="ItemID" Type="int" Nullable="false" />
+    <Property Name="ItemID" Type="varchar" Nullable="false" MaxLength="20" />
     <Property Name="Quantity" Type="int" Nullable="false" />
   </EntityType>
   <Association Name="FK_MedCheckHeader_Patient">
@@ -253,14 +253,14 @@
           <Key>
             <PropertyRef Name="ItemID" />
           </Key>
-          <Property Name="ItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ItemID" Type="String" Nullable="false" annotation:StoreGeneratedPattern="None" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="ItemName" Type="String" Nullable="false" />
           <Property Name="ItemQuantity" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="Item" ToRole="MedCheckItem" />
           <Property Name="ItemType" Type="String" Nullable="false" />
-          <NavigationProperty Name="Supplies" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Item" ToRole="Supply" />
           <Property Name="ItemPurpose" Type="String" Nullable="false" />
           <Property Name="deleted" Type="String" Nullable="false" />
+          <NavigationProperty Name="MedCheckItems" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="Item" ToRole="MedCheckItem" />
+          <NavigationProperty Name="Supplies" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Item" ToRole="Supply" />
         </EntityType>
         <EntityType Name="MedCheck">
           <Key>
@@ -340,7 +340,7 @@
             <PropertyRef Name="SupplyID" />
           </Key>
           <Property Name="SupplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="SupplyQuantity" Type="Int16" Nullable="false" />
           <Property Name="ReceivedDate" Type="DateTime" Precision="0" />
           <Property Name="ExpirationDate" Type="DateTime" Nullable="true" />
@@ -465,9 +465,9 @@
           </Key>
           <NavigationProperty Name="MedCheck" Relationship="dbClinicManagementModel.MedCheckID" FromRole="MedCheckItem" ToRole="MedCheck" />
           <Property Name="MedCheckID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="None" />
-          <NavigationProperty Name="Item" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="MedCheckItem" ToRole="Item" />
-          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="ItemID" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="dbClinicManagementModel.ItemMedCheckItem" FromRole="MedCheckItem" ToRole="Item" />
         </EntityType>
         <Association Name="MedCheckID">
           <End Type="dbClinicManagementModel.MedCheck" Role="MedCheck" Multiplicity="1" />

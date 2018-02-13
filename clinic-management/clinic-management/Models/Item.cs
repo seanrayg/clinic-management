@@ -21,7 +21,7 @@ namespace clinic_management.Models
             this.Supplies = new HashSet<Supply>();
         }
     
-        public int ItemID { get; set; }
+        public string ItemID { get; set; }
         public string ItemName { get; set; }
         public short ItemQuantity { get; set; }
         public string ItemType { get; set; }

@@ -22,21 +22,50 @@ namespace clinic_management.Controllers
             modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").Where(i => i.deleted == "0").ToList();
             modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").Where(i => i.deleted == "0").ToList();
 
-            ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Count();
-            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Count();
+            ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").Count();
+            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.deleted == "0").Count();
 
             if (TempData.ContainsKey("isUtensil"))
             {
-                ViewBag.isUtensil = true;
+                if (TempData["isUtensil"].ToString() == "T")
+                {
+                    ViewBag.isUtensil = true;
+                }
+                else
+                {
+                    ViewBag.isUtensil = false;
+                }
             }
 
             return View(modelcontainer);
         }
 
         // GET: Items/Create
-        public ActionResult Create()
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult getItemID()
         {
-            return View();
+            var intMedicineCount = db.Items.Where(s => s.ItemType == "Medicine").Count();
+            var medicineID = GetID("MD", intMedicineCount);
+
+            var intUtensilCount = db.Items.Where(s => s.ItemType == "Utensil").Count();
+            var utensilID = GetID("UT", intUtensilCount);
+
+            return Json(new { mid = medicineID, uid = utensilID });
+        }
+
+        // Returns the required ID
+        public string GetID(string format, int count)
+        {
+            string id = format;
+            int idCount = count + 1;
+
+            for (int i = idCount.ToString().Count(); i < 4; i++)
+            {
+                id += '0';
+            }
+
+            return id + idCount;
         }
 
         // POST: Items/Create
@@ -48,6 +77,8 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["isUtensil"] = "F";
+
                 item.ItemQuantity = 0;
                 item.deleted = "0";
 
@@ -58,7 +89,7 @@ namespace clinic_management.Controllers
 
                 if(item.ItemType == "Utensil")
                 {
-                    TempData["isUtensil"] = true;
+                    TempData["isUtensil"] = "T";
                 }
 
                 return RedirectToAction("Index");
@@ -70,7 +101,7 @@ namespace clinic_management.Controllers
         }
 
         // GET: Items/Edit
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
@@ -91,8 +122,16 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                TempData["isUtensil"] = "F";
+
                 db.Entry(item).State = EntityState.Modified;
                 db.SaveChanges();
+
+                if (item.ItemType == "Utensil")
+                {
+                    TempData["isUtensil"] = "T";
+                }
+
                 return RedirectToAction("Index");
             }
             return View(item);
@@ -100,7 +139,7 @@ namespace clinic_management.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteItem(int[] id)
+        public ActionResult DeleteItem(string[] id)
         {
             for (int i = 0; i < id.Length; i++)
             {
@@ -117,7 +156,7 @@ namespace clinic_management.Controllers
         }
 
         // GET: Inventory/Supply/{id}
-        public ActionResult Supply(int? id)
+        public ActionResult Supply(string id)
         {
             if (id == null)
             {

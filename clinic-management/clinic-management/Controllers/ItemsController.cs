@@ -38,7 +38,27 @@ namespace clinic_management.Controllers
         // GET: Items/Create
         public ActionResult Create()
         {
+            var intMedicineCount = db.Items.Where(s => s.ItemType == "Medicine").Count();
+            ViewBag.MedicineID = GetID("MD", intMedicineCount);
+
+            var intUtensilCount = db.Items.Where(s => s.ItemType == "Utensil").Count();
+            ViewBag.UtensilID = GetID("UT", intUtensilCount);
+
             return View();
+        }
+
+        // Returns the required ID
+        public string GetID(string format, int count)
+        {
+            string id = format;
+            int idCount = count + 1;
+
+            for (int i = idCount.ToString().Count(); i < 4; i++)
+            {
+                id += '0';
+            }
+
+            return id + idCount;
         }
 
         // POST: Items/Create
@@ -116,7 +136,7 @@ namespace clinic_management.Controllers
         }
 
         // GET: PatientTypes/Recover
-        public ActionResult Recover(int? id)
+        public ActionResult Recover(string id)
         {
             if (id == null)
             {
