@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/13/2018 12:26:30
+-- Date Created: 03/08/2018 11:25:42
 -- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
@@ -37,6 +37,9 @@ IF OBJECT_ID(N'[dbo].[FK_MedCheckID]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_ItemMedCheckItem]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedCheckItems] DROP CONSTRAINT [FK_ItemMedCheckItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ItemSupply]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Supplies] DROP CONSTRAINT [FK_ItemSupply];
 GO
 
 -- --------------------------------------------------
@@ -175,6 +178,15 @@ CREATE TABLE [dbo].[MedCheckItems] (
 );
 GO
 
+-- Creating table 'SupplyChanges'
+CREATE TABLE [dbo].[SupplyChanges] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [SupplyID] int  NOT NULL,
+    [DateChange] datetime  NOT NULL,
+    [ChangeReason] nvarchar(max)  NOT NULL
+);
+GO
+
 -- --------------------------------------------------
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
@@ -231,6 +243,12 @@ GO
 ALTER TABLE [dbo].[MedCheckItems]
 ADD CONSTRAINT [PK_MedCheckItems]
     PRIMARY KEY CLUSTERED ([MedCheckID], [ItemID] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'SupplyChanges'
+ALTER TABLE [dbo].[SupplyChanges]
+ADD CONSTRAINT [PK_SupplyChanges]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
 -- --------------------------------------------------
@@ -349,6 +367,21 @@ GO
 CREATE INDEX [IX_FK_ItemSupply]
 ON [dbo].[Supplies]
     ([ItemID]);
+GO
+
+-- Creating foreign key on [SupplyID] in table 'SupplyChanges'
+ALTER TABLE [dbo].[SupplyChanges]
+ADD CONSTRAINT [FK_SupplySupplyChanges]
+    FOREIGN KEY ([SupplyID])
+    REFERENCES [dbo].[Supplies]
+        ([SupplyID])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_SupplySupplyChanges'
+CREATE INDEX [IX_FK_SupplySupplyChanges]
+ON [dbo].[SupplyChanges]
+    ([SupplyID]);
 GO
 
 -- --------------------------------------------------

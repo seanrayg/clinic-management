@@ -41,24 +41,49 @@
                         </thead>
                         <tbody>
                             @foreach (var item in Model.SupplyList)
-            {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SupplyID)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.SupplyQuantity)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ReceivedDate)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ExpirationDate)
-                                    </td>
-                                    <td>
-                                        <button onclick="location.href='@Url.Action("EditSupply", "Inventory", new { id = item.SupplyID })'"><i class="fa fa-edit fa-fw"></i></button>
-                                    </td>
-                                </tr>
+                            {
+                                if (item.Item.ItemType == "Medicine" && item.ExpirationDate <= DateTime.Now)
+                                {
+                                    <tr style="background-color: #ff6666;">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SupplyID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SupplyQuantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ReceivedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ExpirationDate)
+                                        </td>
+                                        <td>
+                                            <button onclick="location.href='@Url.Action("EditSupply", "Inventory", new { id = item.SupplyID })'" disabled><i class="fa fa-edit fa-fw"></i></button>
+                                            <button onclick="location.href='@Url.Action("ViewEditsSupply", "Inventory", new { id = item.SupplyID })'"><i class="fa fa-eye fa-fw"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                                else
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SupplyID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SupplyQuantity)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ReceivedDate)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ExpirationDate)
+                                        </td>
+                                        <td>
+                                            <button onclick="location.href='@Url.Action("EditSupply", "Inventory", new { id = item.SupplyID })'"><i class="fa fa-edit fa-fw"></i></button>
+                                            <button onclick="location.href='@Url.Action("ViewEditsSupply", "Inventory", new { id = item.SupplyID })'"><i class="fa fa-eye fa-fw"></i></button>
+                                        </td>
+                                    </tr>
+                                }
                             }
                         </tbody>
                     </table>
@@ -71,7 +96,12 @@
 <script>
     $(document).ready(function () {
         $('#tableItems').DataTable({
-            responsive: true
+            //"createdRow": function (row, data, dataIndex) {
+            //    if (data[1] <= 10) {
+            //        alert(true);
+            //        $(row).addClass('redClass');
+            //    }
+            //}
         });
     });
 </script>

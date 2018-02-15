@@ -1,4 +1,4 @@
-﻿@model clinic_management.Models.Supply
+﻿@model clinic_management.Models.ModelContainer
 
 @{
     ViewBag.Title = "EditSupply";
@@ -18,51 +18,59 @@
 
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.HiddenFor(model => model.SupplyID)
+            @Html.HiddenFor(model => model.Supply.SupplyID)
 
             <div class="form-group" style="display: none;">
-                @Html.LabelFor(model => model.ItemID, "ItemID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Supply.ItemID, "ItemID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.ItemID, new { htmlAttributes = new { @class = "form-control", type = "number" } })
-                    @Html.ValidationMessageFor(model => model.ItemID, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Supply.ItemID, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Supply.ItemID, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SupplyQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Supply.SupplyQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.SupplyQuantity, new { htmlAttributes = new { @class = "form-control", type = "number" } })
-                    @Html.ValidationMessageFor(model => model.SupplyQuantity, "", new { @class = "text-danger" })
+                    @Html.EditorFor(model => model.Supply.SupplyQuantity, new { htmlAttributes = new { @class = "form-control", type = "number" } })
+                    @Html.ValidationMessageFor(model => model.Supply.SupplyQuantity, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ReceivedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Supply.ReceivedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
-                        @Html.EditorFor(model => model.ReceivedDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
+                        @Html.EditorFor(model => model.Supply.ReceivedDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
-                    @Html.ValidationMessageFor(model => model.ReceivedDate, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Supply.ReceivedDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ExpirationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Supply.ExpirationDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
-                        @Html.EditorFor(model => model.ExpirationDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
+                        @Html.EditorFor(model => model.Supply.ExpirationDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
-                    @Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Supply.ExpirationDate, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <input type="hidden" name="oldSupplyQuantity" value="@Model.SupplyQuantity" />
+            <input type="hidden" name="oldSupplyQuantity" value="@Model.Supply.SupplyQuantity" />
+
+            <div class="form-group">
+                <label class="control-label col-md-2">Reason</label>
+                <div class="col-md-5">
+                    <input name="ChangeReason" type="text" class="form-control" />
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Reason" data-valmsg-replace="true"></span>
+                </div>
+            </div>
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -73,7 +81,7 @@
     }
 
     <div>
-        @Html.ActionLink("Back", "Supply", new { id = Model.ItemID })
+        @Html.ActionLink("Back", "Supply", new { id = Model.Supply.ItemID })
     </div>
 </div>
 

@@ -250,6 +250,9 @@
     <Compile Include="Models\Supply.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SupplyChanges.cs">
+      <DependentUpon>PUPClinic.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserType.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
@@ -332,6 +335,7 @@
     <Content Include="Views\Inventory\Supply.cshtml" />
     <Content Include="Views\Inventory\AddSupply.cshtml" />
     <Content Include="Views\Inventory\EditSupply.cshtml" />
+    <Content Include="Views\Inventory\ViewEditsSupply.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

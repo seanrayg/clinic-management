@@ -22,6 +22,8 @@
         <AssociationConnector Association="dbClinicManagementModel.MedCheckID" />
         <AssociationConnector Association="dbClinicManagementModel.ItemMedCheckItem" />
         <AssociationConnector Association="dbClinicManagementModel.ItemSupply" />
+        <EntityTypeShape EntityType="dbClinicManagementModel.SupplyChanges" Width="1.5" PointX="1" PointY="6.125" />
+        <AssociationConnector Association="dbClinicManagementModel.SupplySupplyChanges" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,26 +12,30 @@
 </div>
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default pull-right">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="itemDescLabel"><i class="fa fa-exclamation-triangle fa-fw"></i> Out of Stock</label>
-                        <p class="itemData">@ViewBag.OutOfStock</p>
+        <a href="#" data-toggle="modal" data-target="#modalOutOfStocks">
+            <div class="panel panel-default pull-right">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="itemDescLabel"><i class="fa fa-exclamation-triangle fa-fw"></i> Out of Stock</label>
+                            <p class="itemData">@ViewBag.OutOfStock</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-default pull-right">
-            <div class="panel-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Critical Stock</label>
-                        <p class="itemData">@ViewBag.CriticalStock</p>
+        </a>
+        <a href="#" data-toggle="modal" data-target="#modalCriticalStocks">
+            <div class="panel panel-default pull-right">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Critical Stock</label>
+                            <p class="itemData">@ViewBag.CriticalStock</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
 </div>
 
@@ -203,6 +207,102 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                 </div>
             }
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Show Critical Stocks -->
+<div class="modal fade" id="modalCriticalStocks" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Critical Stocks</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="tableCriticalStocks">
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.CriticalStock)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemQuantity)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Manage Supplies", "Supply", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Show Critical Stocks -->
+<div class="modal fade" id="modalOutOfStocks" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Out of Stocks</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="tableOutOfStocks">
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Name</th>
+                            <th>Quantity</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.OutOfStock)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemQuantity)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Manage Supplies", "Supply", new { id = item.ItemID }, new { @class = "btn btn-default" })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+            </div>
         </div>
 
     </div>

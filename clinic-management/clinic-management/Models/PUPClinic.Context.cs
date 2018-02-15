@@ -34,5 +34,6 @@ namespace clinic_management.Models
         public virtual DbSet<Supply> Supplies { get; set; }
         public virtual DbSet<UserType> UserTypes { get; set; }
         public virtual DbSet<MedCheckItem> MedCheckItems { get; set; }
+        public virtual DbSet<SupplyChanges> SupplyChanges { get; set; }
     }
 }

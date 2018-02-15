@@ -14,6 +14,12 @@ namespace clinic_management.Models
     
     public partial class Supply
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Supply()
+        {
+            this.SupplyChanges = new HashSet<SupplyChanges>();
+        }
+    
         public int SupplyID { get; set; }
         public string ItemID { get; set; }
         public short SupplyQuantity { get; set; }
@@ -21,5 +27,7 @@ namespace clinic_management.Models
         public Nullable<System.DateTime> ExpirationDate { get; set; }
     
         public virtual Item Item { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SupplyChanges> SupplyChanges { get; set; }
     }
 }

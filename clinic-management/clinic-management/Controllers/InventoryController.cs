@@ -17,13 +17,28 @@ namespace clinic_management.Controllers
         // GET: Items
         public ActionResult Index()
         {
+            //IEnumerable<Supply> supply = db.Supplies.Where(i => i.ExpirationDate <= DateTime.Now).ToList();
+
+            //foreach(var s in supply)
+            //{
+            //    var result = db.Items.SingleOrDefault(i => i.ItemID == s.ItemID);
+            //    if(result != null)
+            //    {
+            //        result.ItemQuantity -= s.SupplyQuantity;
+            //        db.SaveChanges();
+            //    }
+            //}
+
             ModelContainer modelcontainer = new ModelContainer();
 
             modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").Where(i => i.deleted == "0").ToList();
             modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").Where(i => i.deleted == "0").ToList();
 
+            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").Count();
             ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").Count();
-            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.deleted == "0").Count();
+
+            modelcontainer.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").ToList();
+            modelcontainer.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").ToList();
 
             if (TempData.ContainsKey("isUtensil"))
             {
@@ -173,7 +188,7 @@ namespace clinic_management.Controllers
         }
 
         // GET: Inventory/AddSupply/{id}
-        public ActionResult AddSupply(int? id)
+        public ActionResult AddSupply(string id)
         {
             if (id == null)
             {
@@ -213,18 +228,19 @@ namespace clinic_management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Supply supply = db.Supplies.Find(id);
-            if (supply == null)
+            ModelContainer container = new ModelContainer();
+            container.Supply = db.Supplies.Find(id);
+            if (container.Supply == null)
             {
                 return HttpNotFound();
             }
-            return View(supply);
+            return View(container);
         }
 
         // POST: Inventory/EditSupply/{id}
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult EditSupply([Bind(Include = "SupplyID,ItemID,SupplyQuantity,ReceivedDate,ExpirationDate")] Supply supply, int oldSupplyQuantity)
+        public ActionResult EditSupply([Bind(Include = "SupplyID,ItemID,SupplyQuantity,ReceivedDate,ExpirationDate")] Supply supply, int oldSupplyQuantity, string ChangeReason)
         {
             if (ModelState.IsValid)
             {
@@ -248,9 +264,32 @@ namespace clinic_management.Controllers
                     db.SaveChanges();
                 }
 
+                SupplyChanges supplychanges = new SupplyChanges();
+                supplychanges.SupplyID = supply.SupplyID;
+                supplychanges.DateChange = DateTime.Now;
+                supplychanges.ChangeReason = oldSupplyQuantity + " -> " + supply.SupplyQuantity + ": " + ChangeReason;
+
+                db.SupplyChanges.Add(supplychanges);
+                db.SaveChanges();
+
                 return RedirectToAction("Supply", new { id = supply.ItemID });
             }
             return RedirectToAction("Supply", new { id = supply.ItemID });
+        }
+
+        //GET: Inventory/ViewEditsSupply/id
+        public ActionResult ViewEditsSupply(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var result = db.SupplyChanges.FirstOrDefault(sc => sc.SupplyID == id);
+            if(result != null)
+            {
+                ViewBag.ItemName = result.Supply.Item.ItemName;
+            }
+            return View(db.SupplyChanges.Where(sc => sc.SupplyID == id).ToList());
         }
     }
 }

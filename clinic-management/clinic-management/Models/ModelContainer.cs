@@ -9,6 +9,8 @@ namespace clinic_management.Models
     {
         public IEnumerable<Item> Medicine { get; set; }
         public IEnumerable<Item> Utensil { get; set; }
+        public IEnumerable<Item> CriticalStock { get; set; }
+        public IEnumerable<Item> OutOfStock { get; set; }
         public Item Item { get; set; }
         public IEnumerable<Supply> SupplyList { get; set; }
         public Supply Supply { get; set; }
