@@ -31,6 +31,8 @@ namespace clinic_management.Models
         public Nullable<int> MedCheckType { get; set; }
         public Nullable<int> MedCheckStatus { get; set; }
         public string deleted { get; set; }
+        public Nullable<System.DateTime> Time_in { get; set; }
+        public Nullable<System.DateTime> Time_out { get; set; }
     
         public virtual Patient Patient { get; set; }
         public virtual Staff Staff { get; set; }

@@ -81,7 +81,7 @@ namespace clinic_management.Controllers
                 medCheck.Treatment = " ";
                 medCheck.Remarks = " ";
                 medCheck.MedCheckStatus = '1';
-
+                medCheck.Time_in = DateTime.Now;
                 db.MedChecks.Add(medCheck);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -118,9 +118,34 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(medCheck).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (Convert.ToInt32(Session["usertype"].ToString()) == 3)
+                {
+                    MedCheck md = db.MedChecks.Find(medCheck.MedCheckID);
+                    md.StaffID = medCheck.StaffID;
+                    md.DateTimeOfVisit = medCheck.DateTimeOfVisit;
+                    md.MedCheckType = medCheck.MedCheckType;
+                    md.Complaint = medCheck.Complaint;
+                    db.Entry(md).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+                {
+                    MedCheck md2 = db.MedChecks.Find(medCheck.MedCheckID) ;
+                    md2.StaffID = medCheck.StaffID;
+                    md2.DateTimeOfVisit = medCheck.DateTimeOfVisit;
+                    md2.MedCheckType = medCheck.MedCheckType;
+                    md2.Complaint = medCheck.Complaint;
+                    md2.Diagnosis = medCheck.Diagnosis;
+                    md2.Treatment = medCheck.Treatment;
+                    md2.Remarks = medCheck.Remarks;
+                    md2.MedCheckStatus = medCheck.MedCheckStatus;
+                    md2.Time_out = DateTime.Now;
+                    db.Entry(md2).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                
             }
             ViewBag.PatientID = new SelectList(db.Patients, "PatientID", "PatientLast", medCheck.PatientID);
             ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "StaffLast", medCheck.StaffID);
