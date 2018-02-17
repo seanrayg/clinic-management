@@ -31,12 +31,14 @@ namespace clinic_management.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            MedCheck medCheck = db.MedChecks.Find(id);
-            if (medCheck == null)
+            ModelContainer container = new ModelContainer();
+            container.medcheck = db.MedChecks.Find(id);
+            container.ItemList = db.Items.ToList();
+            if (container == null)
             {
                 return HttpNotFound();
             }
-            return View(medCheck);
+            return View(container);
         }
 
         // GET: MedChecks/Create
@@ -106,6 +108,7 @@ namespace clinic_management.Controllers
             }
             ViewBag.PatientID = new SelectList(db.Patients, "PatientID", "PatientLast", medCheck.PatientID);
             ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "StaffLast", medCheck.StaffID);
+            ViewBag.Items = new SelectList(db.Items, "ItemID", "ItemName");
             return View(medCheck);
         }
 

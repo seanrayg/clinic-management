@@ -15,14 +15,14 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MedCheckID)
         <div class="form-group">
             @Html.LabelFor(model => model.StaffID, "StaffID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
+            <div class="col-md-5">
                 @Html.DropDownList("StaffID", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-danger" })
             </div>
@@ -30,8 +30,8 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.PatientID, "PatientID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "readonly"})
+            <div class="col-md-5">
+                @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.PatientID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -49,22 +49,22 @@
             </div>
         </div>
         <script>
-                $(function () {
-                    $('.input-group.date').datepicker({
-                        format: 'yyyy-mm-dd'
-                    });
+            $(function () {
+                $('.input-group.date').datepicker({
+                    format: 'yyyy-mm-dd'
                 });
+            });
         </script>
 
         <div class="form-group">
             @Html.LabelFor(model => model.MedCheckType, htmlAttributes: new { @class = "control-label col-md-2", disabled = "disabled", @readonly = "readonly" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.MedCheckType, new List<SelectListItem>
-                    {
-                        new SelectListItem{ Text="For Check-up", Value = "1" },
-                        new SelectListItem{ Text="For Medical Clearance", Value = "2" },
-                    },
-                    "Select the purpose of visit")
+                {
+                    new SelectListItem{ Text="For Check-up", Value = "1" },
+                    new SelectListItem{ Text="For Medical Clearance", Value = "2" },
+                },
+                              "Select the purpose of visit")
                 @Html.ValidationMessageFor(model => model.MedCheckType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -79,53 +79,110 @@
 
         @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
         {
-        <div class="form-group">
-            @Html.LabelFor(model => model.Diagnosis, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Diagnosis, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Diagnosis, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Diagnosis, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Treatment, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Treatment, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Treatment, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <label class="control-label col-md-2">Medicine</label>
+                <div class="col-md-5">
+                    @Html.DropDownList("Items", null, htmlAttributes: new { @class = "js-example-basic-single form-control" })
+                    <span class="field-validation-valid text-danger" data-valmsg-for="Medicine" data-valmsg-replace="true"></span>
+                </div>
             </div>
-        </div>
+            <script>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextAreaFor(model => model.Remarks, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                var data;
+
+                $(document).ready(function () {
+                    $('.js-example-basic-single').select2({
+                        placeholder: "Select Medicine",
+                        allowClear: true
+                    });
+
+                    $('#Items').val(null).trigger('change');
+
+                    $('#Items').on('select2:select', function (e) {
+                        data = e.params.data;
+                        $("#modalQuantity").modal()
+                    });
+                });
+            </script>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Treatment, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Treatment, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Treatment, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
 
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.MedCheckStatus, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
-                    {
-                        new SelectListItem{ Text="Ongoing", Value = "1" },
-                        new SelectListItem{ Text="Done", Value = "2" },
-                        new SelectListItem{ Text="Cancelled", Value = "3" },
-                    },
-                     "Select the status of visit")
-                @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Remarks, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Remarks, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MedCheckStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
+                {
+                    new SelectListItem{ Text="Ongoing", Value = "1" },
+                    new SelectListItem{ Text="Done", Value = "2" },
+                    new SelectListItem{ Text="Cancelled", Value = "3" },
+                },
+                                   "Select the status of visit")
+                    @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
         }
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Save" class="btn btn-default" />
-                @Html.ActionLink("Back", "Index", null, new { @class= "btn btn-default" })
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 }
-<script src="~/Scripts/jquery-1.10.2.min.js"></script>
-<script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<!-- Modal Show Medicine Quantity -->
+<div class="modal fade" id="modalQuantity" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">How Many?</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label col-md-4">Quantity</label>
+                    <div class="col-md-6">
+                        <input type="number" id="medicineQuantity" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <br />
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="appendTreatment()">OK</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function appendTreatment() {
+        $('#Treatment').append($('#medicineQuantity').val() + '-' + data.text + ','); 
+        $('#medicineQuantity').val("");
+        $('#modalQuantity').modal('hide');
+    }
+</script>
