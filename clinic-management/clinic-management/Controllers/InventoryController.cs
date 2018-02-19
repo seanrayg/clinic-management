@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Diagnostics;
 using clinic_management.Models;
 
 namespace clinic_management.Controllers
@@ -17,17 +18,18 @@ namespace clinic_management.Controllers
         // GET: Items
         public ActionResult Index()
         {
-            //IEnumerable<Supply> supply = db.Supplies.Where(i => i.ExpirationDate <= DateTime.Now).ToList();
+            var supply = db.Supplies.Where(s => s.ExpirationDate >= DateTime.Now).GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, SupplyQuantity = g.Sum(ss => ss.SupplyQuantity) }).ToList();
 
-            //foreach(var s in supply)
-            //{
-            //    var result = db.Items.SingleOrDefault(i => i.ItemID == s.ItemID);
-            //    if(result != null)
-            //    {
-            //        result.ItemQuantity -= s.SupplyQuantity;
-            //        db.SaveChanges();
-            //    }
-            //}
+            foreach (var s in supply)
+            {
+                System.Diagnostics.Debug.WriteLine(s.ItemID + ' ' + s.SupplyQuantity);
+                var result = db.Items.SingleOrDefault(i => i.ItemID == s.ItemID);
+                if (result != null)
+                {
+                    result.ItemQuantity = (Int16)(s.SupplyQuantity);
+                    db.SaveChanges();
+                }
+            }
 
             ModelContainer modelcontainer = new ModelContainer();
 
