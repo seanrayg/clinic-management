@@ -138,6 +138,7 @@
     <Property Name="SupplyQuantity" Type="smallint" Nullable="false" />
     <Property Name="ReceivedDate" Type="datetime" Nullable="true" />
     <Property Name="ExpirationDate" Type="datetime" Nullable="true" />
+    <Property Name="removed" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="UserTypes">
     <Key>
@@ -376,6 +377,7 @@
           <Property Name="ExpirationDate" Type="DateTime" Nullable="true" Precision="3" />
           <NavigationProperty Name="Item" Relationship="dbClinicManagementModel.ItemSupply" FromRole="Supply" ToRole="Item" />
           <NavigationProperty Name="SupplyChanges" Relationship="dbClinicManagementModel.SupplySupplyChanges" FromRole="Supply" ToRole="SupplyChanges" />
+          <Property Name="removed" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserType">
           <Key>
@@ -659,6 +661,7 @@
           <ScalarProperty Name="SupplyQuantity" ColumnName="SupplyQuantity" />
           <ScalarProperty Name="ReceivedDate" ColumnName="ReceivedDate" />
           <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+          <ScalarProperty Name="removed" ColumnName="removed" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

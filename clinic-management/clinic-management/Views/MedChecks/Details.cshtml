@@ -72,15 +72,18 @@
             <dd>
                 @if (Model.medcheck.MedCheckStatus == 1)
                 {
-                    @Html.Display("Ongoing")
+                    <label>Ongoing</label>
                 }
                 @if (Model.medcheck.MedCheckStatus == 2)
                 {
-                    @Html.Display("Done")
+                    <label>Done</label>
                 }
                 @if (Model.medcheck.MedCheckStatus == 3)
                 {
-                    @Html.Display("Cancelled")
+                    <label>Cancelled</label>
+                    <script>
+                        $("#btnMedicineCheckout").prop('disabled', true);
+                    </script>
                 }
             </dd>
 
@@ -102,6 +105,45 @@
 
         </dl>
     </div>
+    <div id="divMedicineGiven" class="col-lg-8" style="display: none;">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <hr />
+                <table class="table table-striped table-bordered" cellspacing="0" id="tableItemGiven">
+                    <thead>
+                        <tr>
+                            <td style="width: 40%">Item ID</td>
+                            <td style="width: 40%">Item Name</td>
+                            <td style="width: 20%">Quantity Given</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.MedCheckItem)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Item.ItemName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Quantity)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    @if (Model.medcheck.MedCheckStatus == 2)
+    {
+        <script>
+            $("#btnMedicineCheckout").prop('disabled', true);
+            $("#divMedicineGiven").show();
+        </script>
+    }
     <div id="divMedicineCheckout" class="col-lg-8" style="display: none;">
         <div class="panel panel-default">
             <div class="panel-body">
@@ -150,6 +192,12 @@
     @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
 </p>
 
+<!-- Anti Forgery Form -->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
+{
+    @Html.AntiForgeryToken()
+}
+
 <script>
     $(document).ready(function () {
         $('#tableItems').DataTable();
@@ -187,20 +235,42 @@
     $("#btnContinue").click(function () {
         var table = $("#tableItems tbody");
 
-        var arrData = new Array();
+        var arrData = [];
 
-        for (var i = 0; i < arrData.length; i++) {
-            alert(arrData[i].firstname + arrData[i].lastname);
-        }
+        table.find('tr').each(function (i) {
+            var $tds = $(this).find('td'),
+                ItemID = $tds.eq(0).text().trim(),
+                ItemName = $tds.eq(1).text().trim(),
+                ItemStock = $tds.eq(2).text().trim(),
+                Qty = $tds.eq(3);
+            Qty = Qty.find('input');
+            Qty = Qty.val().trim();
 
-        //table.find('tr').each(function (i) {
-        //    var $tds = $(this).find('td'),
-        //        ItemID = $tds.eq(0).text(),
-        //        ItemName = $tds.eq(1).text(),
-        //        ItemStock = $tds.eq(2).text(),
-        //        Qty = $tds.eq(3);
-        //    Qty = Qty.find('input');
-        //    Qty = Qty.val();
-        //});
+            arrData.push([ItemID, ItemName, ItemStock, Qty]);
+        });
+
+        //for (var i = 0; i < arrData.length; i++) {
+        //    alert(arrData[i][0] + arrData[i][1] + arrData[i][2] + arrData[i][3])
+        //}
+
+        var form = $('#__AjaxAntiForgeryForm');
+        var token = $('input[name="__RequestVerificationToken"]', form).val();
+        $.ajax({
+            type: "POST",
+            url: "../Checkout",
+            data: {
+                __RequestVerificationToken: token,
+                MedCheckID: "@Model.medcheck.MedCheckID",
+                arrData: arrData
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Request: " + XMLHttpRequest.toString() + "\n\nStatus: " + textStatus + "\n\nError: " + errorThrown);
+            },
+            success: function (result) {
+                if (result.status) {
+                    window.location = "../Index";
+                }
+            }
+        });
     });
 </script>

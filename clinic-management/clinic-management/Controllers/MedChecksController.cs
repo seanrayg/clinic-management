@@ -34,11 +34,44 @@ namespace clinic_management.Controllers
             ModelContainer container = new ModelContainer();
             container.medcheck = db.MedChecks.Find(id);
             container.ItemList = db.Items.ToList();
+            container.MedCheckItem = db.MedCheckItems.Where(mi => mi.MedCheckID == id).ToList();
             if (container == null)
             {
                 return HttpNotFound();
             }
             return View(container);
+        }
+
+        // POST: MedChecks/Checkout
+        public ActionResult Checkout(int MedCheckID, string[][] arrData)
+        {
+            if (arrData == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            for(var i = 0; i < arrData.Length; i++)
+            {
+                if(arrData[i][3].ToString() != "")
+                {
+                    System.Diagnostics.Debug.WriteLine(MedCheckID + " " + arrData[i][0] + " " + arrData[i][3]);
+
+                    MedCheckItem medcheckitem = new MedCheckItem();
+                    medcheckitem.MedCheckID = MedCheckID;
+                    medcheckitem.ItemID = arrData[i][0].ToString();
+                    medcheckitem.Quantity = int.Parse(arrData[i][3].ToString());
+                    db.MedCheckItems.Add(medcheckitem);
+                    db.SaveChanges();
+
+                    var result = db.Items.Find(medcheckitem.ItemID);
+                    if (result != null)
+                    {
+                        result.ItemQuantity -= (Int16)(medcheckitem.Quantity);
+                        db.SaveChanges();
+                    }
+                }
+            }
+
+            return Json(new { status = true });
         }
 
         // GET: MedChecks/Create
