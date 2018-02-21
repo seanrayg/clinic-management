@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/16/2018 15:52:46
--- Generated from EDMX file: C:\Users\seang\Documents\Git\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
+-- Date Created: 02/19/2018 16:23:55
+-- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,20 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_ItemMedCheckItem]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MedCheckItems] DROP CONSTRAINT [FK_ItemMedCheckItem];
-GO
-IF OBJECT_ID(N'[dbo].[FK_ItemSupply]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Supplies] DROP CONSTRAINT [FK_ItemSupply];
-GO
 IF OBJECT_ID(N'[dbo].[FK_MedCheckHeader_Patient]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedChecks] DROP CONSTRAINT [FK_MedCheckHeader_Patient];
 GO
 IF OBJECT_ID(N'[dbo].[FK_MedCheckHeader_Staff]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[MedChecks] DROP CONSTRAINT [FK_MedCheckHeader_Staff];
-GO
-IF OBJECT_ID(N'[dbo].[FK_MedCheckID]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[MedCheckItems] DROP CONSTRAINT [FK_MedCheckID];
 GO
 IF OBJECT_ID(N'[dbo].[FK_Patient_PatientType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Patients] DROP CONSTRAINT [FK_Patient_PatientType];
@@ -40,6 +31,15 @@ IF OBJECT_ID(N'[dbo].[FK_Patient_PCollege]', 'F') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[FK_Staff_UserType]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[Staffs] DROP CONSTRAINT [FK_Staff_UserType];
+GO
+IF OBJECT_ID(N'[dbo].[FK_MedCheckID]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MedCheckItems] DROP CONSTRAINT [FK_MedCheckID];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ItemMedCheckItem]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[MedCheckItems] DROP CONSTRAINT [FK_ItemMedCheckItem];
+GO
+IF OBJECT_ID(N'[dbo].[FK_ItemSupply]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Supplies] DROP CONSTRAINT [FK_ItemSupply];
 GO
 IF OBJECT_ID(N'[dbo].[FK_SupplySupplyChanges]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[SupplyChanges] DROP CONSTRAINT [FK_SupplySupplyChanges];
@@ -51,9 +51,6 @@ GO
 
 IF OBJECT_ID(N'[dbo].[Items]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Items];
-GO
-IF OBJECT_ID(N'[dbo].[MedCheckItems]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[MedCheckItems];
 GO
 IF OBJECT_ID(N'[dbo].[MedChecks]', 'U') IS NOT NULL
     DROP TABLE [dbo].[MedChecks];
@@ -73,11 +70,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Supplies]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Supplies];
 GO
-IF OBJECT_ID(N'[dbo].[SupplyChanges]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[SupplyChanges];
-GO
 IF OBJECT_ID(N'[dbo].[UserTypes]', 'U') IS NOT NULL
     DROP TABLE [dbo].[UserTypes];
+GO
+IF OBJECT_ID(N'[dbo].[MedCheckItems]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[MedCheckItems];
+GO
+IF OBJECT_ID(N'[dbo].[SupplyChanges]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[SupplyChanges];
 GO
 
 -- --------------------------------------------------
