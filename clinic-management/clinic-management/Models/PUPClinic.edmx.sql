@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/19/2018 16:23:55
--- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
+-- Date Created: 02/21/2018 20:13:02
+-- Generated from EDMX file: C:\Users\seang\Documents\Git\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -166,7 +166,8 @@ CREATE TABLE [dbo].[Supplies] (
     [ItemID] varchar(20)  NOT NULL,
     [SupplyQuantity] smallint  NOT NULL,
     [ReceivedDate] datetime  NULL,
-    [ExpirationDate] datetime  NULL
+    [ExpirationDate] datetime  NULL,
+    [removed] int  NOT NULL
 );
 GO
 

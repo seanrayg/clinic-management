@@ -18,15 +18,24 @@ namespace clinic_management.Controllers
         // GET: Items
         public ActionResult Index()
         {
-            var supply = db.Supplies.Where(s => s.ExpirationDate >= DateTime.Now).GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, SupplyQuantity = g.Sum(ss => ss.SupplyQuantity) }).ToList();
+            var supply = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).Where(s => s.removed == 0).GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, SupplyQuantity = g.Sum(ss => ss.SupplyQuantity) }).ToList();
 
             foreach (var s in supply)
             {
-                System.Diagnostics.Debug.WriteLine(s.ItemID + ' ' + s.SupplyQuantity);
-                var result = db.Items.SingleOrDefault(i => i.ItemID == s.ItemID);
-                if (result != null)
+                var supplies = db.Supplies.Where(sp => sp.ItemID == s.ItemID).Where(sp => sp.ExpirationDate <= DateTime.Now).ToList();
+                if(supplies != null)
                 {
-                    result.ItemQuantity = (Int16)(s.SupplyQuantity);
+                    foreach(var x in supplies)
+                    {
+                        x.removed = 1;
+                        db.SaveChanges();
+                    }
+                }
+                System.Diagnostics.Debug.WriteLine(s.ItemID + ' ' + s.SupplyQuantity);
+                var item = db.Items.SingleOrDefault(i => i.ItemID == s.ItemID);
+                if (item != null)
+                {
+                    item.ItemQuantity -= (Int16)(s.SupplyQuantity);
                     db.SaveChanges();
                 }
             }
@@ -38,9 +47,11 @@ namespace clinic_management.Controllers
 
             ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").Count();
             ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").Count();
+            ViewBag.ItemsUsed = db.MedCheckItems.GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, QuantityUsed = g.Sum(ss => ss.Quantity) }).Count();
 
             modelcontainer.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").ToList();
             modelcontainer.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").ToList();
+            modelcontainer.MedCheckItem = db.MedCheckItems.SqlQuery("SELECT COUNT(MedCheckID) as MedCheckID, ItemID, SUM(Quantity) as Quantity FROM dbo.MedCheckItems GROUP BY ItemID").ToList();
 
             if (TempData.ContainsKey("isUtensil"))
             {
@@ -208,6 +219,7 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
+                supply.removed = 0;
                 db.Supplies.Add(supply);
                 db.SaveChanges();
 
