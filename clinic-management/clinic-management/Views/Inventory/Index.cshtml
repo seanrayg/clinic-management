@@ -375,6 +375,12 @@
 {
     <script>
         $('#myTab a[href="#utensils"]').tab('show');
+        $('#Item_ItemType').val("Utensil");
+    </script>
+}else
+{
+    <script>
+        $('#Item_ItemType').val("Medicine");
     </script>
 }
 
@@ -382,8 +388,6 @@
     $(document).ready(function () {
         $('#tableMedicines').DataTable();
         $('#tableUtensils').DataTable();
-
-        $('#Item_ItemType').val("Medicine");
     });
 
     function SetMedicineType(selectedTab) {

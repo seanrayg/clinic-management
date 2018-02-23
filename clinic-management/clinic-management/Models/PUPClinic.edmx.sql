@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/21/2018 20:13:02
--- Generated from EDMX file: C:\Users\seang\Documents\Git\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
+-- Date Created: 02/23/2018 14:31:16
+-- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
