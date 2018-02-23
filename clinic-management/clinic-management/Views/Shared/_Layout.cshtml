@@ -101,6 +101,18 @@
                             <a href="@Url.Action("Index", "Inventory")"><i class="fa fa-list-alt fa-fw"></i> Inventory</a>
                         </li>
                         <li>
+                            <a href="#"><i class="fa fa-file-o"></i> Reports <span class="fa arrow"></span></a>
+                            <ul class="nav nav-second-level">
+                                <li>
+                                    <a href="@Url.Action("GenerateLogbook", "Reports")">Daily Time Record</a>
+                                </li>
+                                <li>
+                                    <a href="@Url.Action("MedHistory", "Reports")">Medical History</a>
+                                </li>
+                            </ul>
+                            <!-- /.nav-second-level -->
+                        </li>
+                        <li>
                             <a href="@Url.Action("Regular", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
                         </li>
                     } 

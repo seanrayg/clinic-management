@@ -1,0 +1,43 @@
+﻿@using ReportViewerForMvc
+@{
+    ViewBag.Title = "MedHistory";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">Patient Medical History</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.Label("Patient", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.DropDownList("PatientName", (SelectList)ViewBag.ddlPatient, "Select Patient", htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+    }
+
+</div>
+
+
+
+
+<div class="ReportHolder">
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { @style = "border: none; width:100% !important;" })
+
+</div>

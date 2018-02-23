@@ -97,6 +97,10 @@
       <HintPath>..\packages\Microsoft.Report.Viewer.11.0.0.0\lib\net\Microsoft.ReportViewer.WebForms.DLL</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.0\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReportViewerForMvc, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ReportViewerForMvc.1.1.1\lib\net45\ReportViewerForMvc.dll</HintPath>
       <Private>True</Private>
@@ -200,6 +204,17 @@
       <DependentUpon>PUPClinic.edmx</DependentUpon>
       <LastGenOutput>PUPClinic.cs</LastGenOutput>
     </Content>
+    <Content Include="Models\dsReports.xsc">
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </Content>
+    <None Include="Models\dsReports.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReports.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Models\dsReports.xss">
+      <DependentUpon>dsReports.xsd</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="ReportViewerWebForm.aspx" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -209,6 +224,8 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial110.dll" />
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial110.dll" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -224,10 +241,16 @@
     <Compile Include="Controllers\PatientsController.cs" />
     <Compile Include="Controllers\PatientTypesController.cs" />
     <Compile Include="Controllers\PCollegesController.cs" />
+    <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
     <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\dsReports.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReports.xsd</DependentUpon>
     </Compile>
     <Compile Include="Models\Item.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
@@ -355,6 +378,8 @@
     <Content Include="Views\Inventory\AddSupply.cshtml" />
     <Content Include="Views\Inventory\EditSupply.cshtml" />
     <Content Include="Views\Inventory\ViewEditsSupply.cshtml" />
+    <Content Include="Views\Reports\GenerateLogbook.cshtml" />
+    <Content Include="Views\Reports\MedHistory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -367,6 +392,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Reports\Logbook.rdlc" />
+    <EmbeddedResource Include="Views\Reports\MedHistory.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
