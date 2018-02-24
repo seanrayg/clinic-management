@@ -34,7 +34,22 @@ namespace clinic_management.Controllers
 
                 foreach (var item in x)
                 {
-                    _dsrep.DTR.AddDTRRow(item.DateTimeOfVisit.ToShortDateString(), item.Patient.PatientLast + ", " + item.Patient.PatientFirst, item.Patient.PCollege.CollegeName, item.Complaint, item.Treatment, item.Time_in.Value.ToShortTimeString(), item.Time_out.Value.ToShortTimeString(), item.Diagnosis);
+                    if (item.Time_out == null && item.Time_in == null)
+                    {
+                        _dsrep.DTR.AddDTRRow(item.DateTimeOfVisit.ToShortDateString(), item.Patient.PatientLast + ", " + item.Patient.PatientFirst, item.Patient.PCollege.CollegeName, item.Complaint, item.Treatment, "n/a", "n/a", item.Diagnosis);
+                    }
+                    else if (item.Time_in == null)
+                    {
+                        _dsrep.DTR.AddDTRRow(item.DateTimeOfVisit.ToShortDateString(), item.Patient.PatientLast + ", " + item.Patient.PatientFirst, item.Patient.PCollege.CollegeName, item.Complaint, item.Treatment, "n/a", item.Time_out.Value.ToShortTimeString(), item.Diagnosis);
+                    }
+                    else if (item.Time_out == null)
+                    {
+                        _dsrep.DTR.AddDTRRow(item.DateTimeOfVisit.ToShortDateString(), item.Patient.PatientLast + ", " + item.Patient.PatientFirst, item.Patient.PCollege.CollegeName, item.Complaint, item.Treatment, item.Time_in.Value.ToShortTimeString(), "n/a", item.Diagnosis);
+                    }
+                    else
+                    {
+                        _dsrep.DTR.AddDTRRow(item.DateTimeOfVisit.ToShortDateString(), item.Patient.PatientLast + ", " + item.Patient.PatientFirst, item.Patient.PCollege.CollegeName, item.Complaint, item.Treatment, item.Time_in.Value.ToShortTimeString(), item.Time_out.Value.ToShortTimeString(), item.Diagnosis);
+                    }
                 }
 
                 rds.Value = _dsrep.DTR;
