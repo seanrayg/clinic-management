@@ -85,7 +85,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TypeID, "TypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
@@ -101,7 +101,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CollegeID, "CollegeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.CollegeID, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.CollegeID, "", new { @class = "text-danger" })
@@ -116,7 +116,6 @@
                 </div>
             </div>
 
-            
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Save" class="btn btn-default" />

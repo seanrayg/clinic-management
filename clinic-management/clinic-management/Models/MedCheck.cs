@@ -11,7 +11,9 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class MedCheck
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,19 +21,30 @@ namespace clinic_management.Models
         {
             this.MedCheckItems = new HashSet<MedCheckItem>();
         }
-    
+        [DisplayName("MedCheck ID")]
         public int MedCheckID { get; set; }
+        [DisplayName("Staff")]
         public string StaffID { get; set; }
+        [DisplayName("Patient")]
         public Nullable<int> PatientID { get; set; }
+        [DisplayName("Date of Visit")]
         public System.DateTime DateTimeOfVisit { get; set; }
+        [DisplayName("Complaint")]
         public string Complaint { get; set; }
+        [DisplayName("Diagnosis")]
         public string Diagnosis { get; set; }
+        [DisplayName("Treatment")]
         public string Treatment { get; set; }
+        [DisplayName("Remarks")]
         public string Remarks { get; set; }
+        [DisplayName("Purpose of Visit")]
         public Nullable<int> MedCheckType { get; set; }
+        [DisplayName("Status")]
         public Nullable<int> MedCheckStatus { get; set; }
         public string deleted { get; set; }
+        [DisplayName("Time-In")]
         public Nullable<System.DateTime> Time_in { get; set; }
+        [DisplayName("Time-Out")]
         public Nullable<System.DateTime> Time_out { get; set; }
     
         public virtual Patient Patient { get; set; }

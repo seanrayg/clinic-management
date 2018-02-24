@@ -77,7 +77,7 @@ namespace clinic_management.Controllers
                 return HttpNotFound();
             }
             ViewBag.TypeID = new SelectList(db.PatientTypes, "TypeID", "TypeName", patient.TypeID);
-            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeCode", patient.CollegeID);
+            ViewBag.CollegeID = new SelectList(db.PColleges, "CollegeID", "CollegeName", patient.CollegeID);
             return View(patient);
         }
 

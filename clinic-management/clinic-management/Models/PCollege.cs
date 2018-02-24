@@ -11,7 +11,8 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class PCollege
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,9 +20,11 @@ namespace clinic_management.Models
         {
             this.Patients = new HashSet<Patient>();
         }
-    
+        [DisplayName("College ID")]
         public int CollegeID { get; set; }
+        [DisplayName("College Code")]
         public string CollegeCode { get; set; }
+        [DisplayName("Name of College")]
         public string CollegeName { get; set; }
         public string deleted { get; set; }
     

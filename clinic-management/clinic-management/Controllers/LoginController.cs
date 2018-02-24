@@ -31,13 +31,12 @@ namespace ClinicManagement.Controllers
                             where q.StaffID == staff.StaffID && q.StaffPassword == staff.StaffPassword && q.deleted == "0"
                             select q;
 
-
-
                 if (query.Any())
                 {
                     try
                     {
                         Session["usertype"] = usertype.UserTypeID;
+                        Session["staffid"] = usertype.StaffID;
                         Session["fname"] = usertype.StaffFirst;
                         Session["lname"] = usertype.StaffLast;
                         Session["staffname"] = usertype.StaffFirst + ' ' + usertype.StaffLast + " (" + usertype.UserType.TypeDesc + ')';
@@ -45,7 +44,11 @@ namespace ClinicManagement.Controllers
                     catch (Exception e) { }
                     System.Diagnostics.Debug.WriteLine("Login Success");
 
-                    if (Convert.ToInt32(usertype.UserTypeID.ToString()) == 2 || Convert.ToInt32(usertype.UserTypeID.ToString()) == 3)
+                    if (Convert.ToInt32(usertype.UserTypeID.ToString()) == 2)
+                    {
+                        return RedirectToAction("Index", "MedChecks");
+                    }
+                    if (Convert.ToInt32(usertype.UserTypeID.ToString()) == 3)
                     {
                         return RedirectToAction("Index", "Patients");
                     }

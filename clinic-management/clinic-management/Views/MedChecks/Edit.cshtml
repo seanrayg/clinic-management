@@ -21,17 +21,16 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.MedCheckID)
         <div class="form-group">
-            @Html.LabelFor(model => model.StaffID, "StaffID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                @Html.DropDownList("StaffID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.StaffID, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.StaffID, "Doctor", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Doctor", htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientID, "PatientID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                @Html.DropDownList("PatientID", null, htmlAttributes: new { @class = "form-control", disabled = "disabled", @readonly = "readonly" })
+            @Html.LabelFor(model => model.PatientID, "Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.ddlPatient, "Select Patient", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PatientID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -51,7 +50,8 @@
         <script>
             $(function () {
                 $('.input-group.date').datepicker({
-                    format: 'yyyy-mm-dd'
+                    format: 'yyyy-mm-dd',
+                    autoclose: true
                 });
             });
         </script>

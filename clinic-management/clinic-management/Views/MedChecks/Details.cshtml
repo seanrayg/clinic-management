@@ -18,6 +18,21 @@
     <div class="col-md-4">
         <dl class="dl-horizontal">
             <dt>
+                Patient Name
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.medcheck.Patient.PatientFirst) @Html.DisplayFor(model => model.medcheck.Patient.PatientMid) @Html.DisplayFor(model => model.medcheck.Patient.PatientLast)
+            </dd>
+
+            <dt>
+                Doctor
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.medcheck.Staff.StaffFirst) @Html.DisplayFor(model => model.medcheck.Staff.StaffLast)
+            </dd>
+            <dt>
                 @Html.DisplayNameFor(model => model.medcheck.DateTimeOfVisit)
             </dt>
 
@@ -62,7 +77,14 @@
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.medcheck.MedCheckType)
+                @if (Model.medcheck.MedCheckType == 1)
+                {
+                    <label>Check-up</label>
+                }
+                @if (Model.medcheck.MedCheckType == 2)
+                {
+                    <label>Clearance</label>
+                }
             </dd>
 
             <dt>
@@ -86,23 +108,6 @@
                     </script>
                 }
             </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.medcheck.Patient.PatientLast)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.medcheck.Patient.PatientLast)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.medcheck.Staff.StaffLast)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.medcheck.Staff.StaffLast)
-            </dd>
-
         </dl>
     </div>
     <div id="divMedicineGiven" class="col-lg-8" style="display: none;">
@@ -187,10 +192,11 @@
         </div>
     </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.medcheck.MedCheckID }) |
-    @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
-</p>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+    </div>
+</div>
 
 <!-- Anti Forgery Form -->
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))

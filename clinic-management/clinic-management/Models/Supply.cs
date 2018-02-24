@@ -11,7 +11,8 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class Supply
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,11 +20,15 @@ namespace clinic_management.Models
         {
             this.SupplyChanges = new HashSet<SupplyChanges>();
         }
-    
+        [DisplayName("Supply ID")]
         public int SupplyID { get; set; }
+        [DisplayName("Item ID")]
         public string ItemID { get; set; }
+        [DisplayName("Quantity")]
         public short SupplyQuantity { get; set; }
+        [DisplayName("Received Date")]
         public Nullable<System.DateTime> ReceivedDate { get; set; }
+        [DisplayName("Expiration Date")]
         public Nullable<System.DateTime> ExpirationDate { get; set; }
         public int removed { get; set; }
     

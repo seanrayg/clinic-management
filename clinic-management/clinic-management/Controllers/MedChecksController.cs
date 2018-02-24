@@ -19,9 +19,22 @@ namespace clinic_management.Controllers
         // GET: MedChecks
         public ActionResult Index()
         {
+            string staff = Session["staffid"].ToString();
+
+            if (Convert.ToInt32(Session["usertype"].ToString()) == 3)
+            { 
             var medChecks = db.MedChecks.Include(m => m.Patient).Include(m => m.Staff).Where(p => p.deleted == "0");
-            
-            return View(medChecks.ToList());
+                return View(medChecks);
+            }
+
+            if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+            {
+                var medChecks = db.MedChecks.Include(m => m.Patient).Include(m => m.Staff).Where(p => p.deleted == "0").Where(m => m.StaffID == staff);
+                return View(medChecks);
+            }
+
+            var medChecksAll = db.MedChecks.Include(m => m.Patient).Include(m => m.Staff);
+            return View(medChecksAll);
         }
 
         // GET: MedChecks/Details/5
@@ -139,9 +152,25 @@ namespace clinic_management.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.PatientID = new SelectList(db.Patients, "PatientID", "PatientLast", medCheck.PatientID);
-            ViewBag.StaffID = new SelectList(db.Staffs, "StaffID", "StaffLast", medCheck.StaffID);
-            ViewBag.Items = new SelectList(db.Items, "ItemID", "ItemName");
+
+            var staff = db.Staffs.Where(x => (x.UserTypeID != 1) && (x.UserTypeID != 3))
+            .Select(s => new
+            {
+                Text = s.StaffFirst + " " + s.StaffLast,
+                Value = s.StaffID
+            })
+            .ToList();
+            ViewBag.ddlStaff = new SelectList(staff, "Value", "Text");
+
+            var patient = db.Patients
+            .Select(s => new
+            {
+                Text = s.PatientFirst + " " + s.PatientMid + " " + s.PatientLast,
+                Value = s.PatientID
+            })
+            .ToList();
+            ViewBag.ddlPatient = new SelectList(patient, "Value", "Text");
+
             return View(medCheck);
         }
 

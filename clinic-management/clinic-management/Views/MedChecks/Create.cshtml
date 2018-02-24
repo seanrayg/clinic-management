@@ -23,7 +23,7 @@
                     @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Doctor", htmlAttributes: new { @class = "form-control" })
                 </div>
             </div>
-            @ViewBag.staffName
+            
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientID, "Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -47,7 +47,8 @@
             <script>
                 $(function () {
                     $('.input-group.date').datepicker({
-                        format: 'yyyy-mm-dd'
+                        format: 'yyyy-mm-dd',
+                        autoclose: true
                     });
                 });
             </script>

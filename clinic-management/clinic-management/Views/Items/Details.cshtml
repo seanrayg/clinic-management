@@ -36,7 +36,9 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ItemID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        @Html.ActionLink("Edit", "Edit", "Items", new { id = Model.ItemID }, new { @class = "btn btn-default" })
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+    </div>
+</div>

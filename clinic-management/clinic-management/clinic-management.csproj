@@ -380,6 +380,8 @@
     <Content Include="Views\Inventory\ViewEditsSupply.cshtml" />
     <Content Include="Views\Reports\GenerateLogbook.cshtml" />
     <Content Include="Views\Reports\MedHistory.cshtml" />
+    <Content Include="Views\Reports\ExcuseLetter.cshtml" />
+    <Content Include="Views\Reports\Clearance_PF.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -394,6 +396,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\Reports\Clearance_PF.rdlc" />
+    <EmbeddedResource Include="Views\Reports\ExcuseLetter.rdlc" />
     <EmbeddedResource Include="Views\Reports\Logbook.rdlc" />
     <EmbeddedResource Include="Views\Reports\MedHistory.rdlc" />
   </ItemGroup>

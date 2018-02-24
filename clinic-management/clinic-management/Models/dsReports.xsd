@@ -39,6 +39,24 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="ExcuseLetter" msprop:Generator_TableClassName="ExcuseLetterDataTable" msprop:Generator_TableVarName="tableExcuseLetter" msprop:Generator_RowChangedName="ExcuseLetterRowChanged" msprop:Generator_TablePropName="ExcuseLetter" msprop:Generator_RowDeletingName="ExcuseLetterRowDeleting" msprop:Generator_RowChangingName="ExcuseLetterRowChanging" msprop:Generator_RowEvHandlerName="ExcuseLetterRowChangeEventHandler" msprop:Generator_RowDeletedName="ExcuseLetterRowDeleted" msprop:Generator_RowClassName="ExcuseLetterRow" msprop:Generator_UserTableName="ExcuseLetter" msprop:Generator_RowEvArgName="ExcuseLetterRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Diagnosis" msprop:Generator_ColumnVarNameInTable="columnDiagnosis" msprop:Generator_ColumnPropNameInRow="Diagnosis" msprop:Generator_ColumnPropNameInTable="DiagnosisColumn" msprop:Generator_UserColumnName="Diagnosis" type="xs:string" minOccurs="0" />
+              <xs:element name="Doctor" msprop:Generator_ColumnVarNameInTable="columnDoctor" msprop:Generator_ColumnPropNameInRow="Doctor" msprop:Generator_ColumnPropNameInTable="DoctorColumn" msprop:Generator_UserColumnName="Doctor" type="xs:string" minOccurs="0" />
+              <xs:element name="TimeIn" msprop:Generator_ColumnVarNameInTable="columnTimeIn" msprop:Generator_ColumnPropNameInRow="TimeIn" msprop:Generator_ColumnPropNameInTable="TimeInColumn" msprop:Generator_UserColumnName="TimeIn" type="xs:string" minOccurs="0" />
+              <xs:element name="TimeOut" msprop:Generator_ColumnVarNameInTable="columnTimeOut" msprop:Generator_ColumnPropNameInRow="TimeOut" msprop:Generator_ColumnPropNameInTable="TimeOutColumn" msprop:Generator_UserColumnName="TimeOut" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Clearance_PF" msprop:Generator_TableClassName="Clearance_PFDataTable" msprop:Generator_TableVarName="tableClearance_PF" msprop:Generator_TablePropName="Clearance_PF" msprop:Generator_RowDeletingName="Clearance_PFRowDeleting" msprop:Generator_RowChangingName="Clearance_PFRowChanging" msprop:Generator_RowEvHandlerName="Clearance_PFRowChangeEventHandler" msprop:Generator_RowDeletedName="Clearance_PFRowDeleted" msprop:Generator_UserTableName="Clearance_PF" msprop:Generator_RowChangedName="Clearance_PFRowChanged" msprop:Generator_RowEvArgName="Clearance_PFRowChangeEvent" msprop:Generator_RowClassName="Clearance_PFRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
+              <xs:element name="Doctor" msprop:Generator_ColumnVarNameInTable="columnDoctor" msprop:Generator_ColumnPropNameInRow="Doctor" msprop:Generator_ColumnPropNameInTable="DoctorColumn" msprop:Generator_UserColumnName="Doctor" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
   </xs:element>

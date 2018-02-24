@@ -11,12 +11,17 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+
     public partial class SupplyChanges
     {
+
         public int Id { get; set; }
+        [DisplayName("Supply ID")]
         public int SupplyID { get; set; }
+        [DisplayName("Date Change")]
         public System.DateTime DateChange { get; set; }
+        [DisplayName("Reason of Change")]
         public string ChangeReason { get; set; }
     
         public virtual Supply Supply { get; set; }

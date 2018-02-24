@@ -11,70 +11,133 @@
     <!-- /.col-lg-12 -->
 </div>
 
-<div class="row">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-        <table class="table" id="tableMedCheck">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.Label("Patient")
-                    </th>
-                    <th>
-                        @Html.Label("Staff")
-                    </th>
-                    <th>
-                        @Html.Label("Date of Visit")
-                    </th>
-                    <th>
-                        @Html.Label("Complaint")
-                    </th>
-                    <th>
-                        @Html.Label("Status")
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
+    @if (Convert.ToInt32(Session["usertype"].ToString()) == 3)
+    {
+        <div class="row">
+            <p>
+                @Html.ActionLink("Create New", "Create")
+            </p>
+            <table class="table" id="tableMedCheck">
+                <thead>
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Patient.PatientFirst) @Html.DisplayFor(modelItem => item.Patient.PatientLast)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Staff.StaffFirst) @Html.DisplayFor(modelItem => item.Staff.StaffLast)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DateTimeOfVisit)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Complaint)
-                        </td>
-                        <td>
-                            @if (item.MedCheckStatus == 1)
-                            {
-                                @Html.Display("Ongoing")
-                            }
-                            @if (item.MedCheckStatus == 2)
-                            {
-                                @Html.Display("Done")
-                            }
-                            @if (item.MedCheckStatus == 3)
-                            {
-                                @Html.Display("Cancelled")
-                            }
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.MedCheckID }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.MedCheckID })
-                        </td>
+                        <th>
+                            @Html.Label("Patient")
+                        </th>
+                        <th>
+                            @Html.Label("Staff")
+                        </th>
+                        <th>
+                            @Html.Label("Date of Visit")
+                        </th>
+                        <th>
+                            @Html.Label("Complaint")
+                        </th>
+                        <th>
+                            @Html.Label("Status")
+                        </th>
+                        <th></th>
                     </tr>
-                }
-            </tbody>
-        </table>
-</div>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Patient.PatientFirst) @Html.DisplayFor(modelItem => item.Patient.PatientLast)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Staff.StaffFirst) @Html.DisplayFor(modelItem => item.Staff.StaffLast)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateTimeOfVisit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Complaint)
+                            </td>
+                            <td>
+                                @if (item.MedCheckStatus == 1)
+                                {
+                                    <label>Ongoing</label>
+                                }
+                                @if (item.MedCheckStatus == 2)
+                                {
+                                    <label>Done</label>
+                                }
+                                @if (item.MedCheckStatus == 3)
+                                {
+                                    <label>Cancelled</label>
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MedCheckID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MedCheckID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+
+
+    @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+    {
+        <div class="row">
+            <table class="table" id="tableMedCheck">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.Label("Patient")
+                        </th>
+                        <th>
+                            @Html.Label("Date of Visit")
+                        </th>
+                        <th>
+                            @Html.Label("Complaint")
+                        </th>
+                        <th>
+                            @Html.Label("Status")
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Patient.PatientFirst) @Html.DisplayFor(modelItem => item.Patient.PatientLast)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateTimeOfVisit)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Complaint)
+                            </td>
+                            <td>
+                                @if (item.MedCheckStatus == 1)
+                                {
+                                    <label>Ongoing</label>
+                                }
+                                @if (item.MedCheckStatus == 2)
+                                {
+                                    <label>Done</label>
+                                }
+                                @if (item.MedCheckStatus == 3)
+                                {
+                                    <label>Cancelled</label>
+                                }
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", new { id = item.MedCheckID }) |
+                                @Html.ActionLink("Details", "Details", new { id = item.MedCheckID })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
 
 <script>
     $(document).ready(function () {

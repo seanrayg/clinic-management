@@ -76,13 +76,26 @@
                 </div>
             </div>
 
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
                 @Html.LabelFor(model => model.StaffJoinedDate, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    @Html.EditorFor(model => model.StaffJoinedDate, new { htmlAttributes = new { @class = "form-control" } })
+                    <div class="input-group date" data-date-format="dd.mm.yyyy">
+                        @Html.EditorFor(model => model.StaffJoinedDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
+                        <div class="input-group-addon">
+                            <span class="glyphicon glyphicon-th"></span>
+                        </div>
+                    </div>
                     @Html.ValidationMessageFor(model => model.StaffJoinedDate, "", new { @class = "text-danger" })
                 </div>
             </div>
+            <script>
+                $(function () {
+                    $('.input-group.date').datepicker({
+                        format: 'yyyy-mm-dd',
+                        autoclose:true
+                    });
+                });
+            </script>
 
             <div class="form-group">
                 @Html.LabelFor(model => model.UserTypeID, "UserTypeID", htmlAttributes: new { @class = "control-label col-md-2" })

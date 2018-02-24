@@ -1,11 +1,11 @@
 ﻿@using ReportViewerForMvc
 @{
-    ViewBag.Title = "GenerateLogbook";
+    ViewBag.Title = "Clearance_PF";
 }
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Daily Time Record</h1>
+        <h1 class="page-header">Physical Fit Clearance</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -14,32 +14,24 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-
         <div class="form-horizontal">
             <div class="form-group">
-                @Html.Label("DateFrom", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
-                    <div class="input-group date" data-date-format="dd.mm.yyyy">
-                        @Html.Editor("DateFrom", new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
-                        <div class="input-group-addon">
-                            <span class="glyphicon glyphicon-th"></span>
-                        </div>
-                    </div>
+                    @Html.DropDownList("PatientName", (SelectList)ViewBag.ddlPatient, "Select Patient", htmlAttributes: new { @class = "form-control" })
                 </div>
             </div>
-
             <div class="form-group">
-                @Html.Label("DateTo", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Issued Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
-                        @Html.Editor("DateTo", new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
+                        @Html.Editor("IssuedDate", new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
                         <div class="input-group-addon">
                             <span class="glyphicon glyphicon-th"></span>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Submit" class="btn btn-default" />
