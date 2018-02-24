@@ -81,6 +81,13 @@ namespace clinic_management.Controllers
                         result.ItemQuantity -= (Int16)(medcheckitem.Quantity);
                         db.SaveChanges();
                     }
+
+                    var medcheck = db.MedChecks.Find(MedCheckID);
+                    if(result != null)
+                    {
+                        medcheck.MedCheckStatus = 2;
+                        db.SaveChanges();
+                    }
                 }
             }
 
