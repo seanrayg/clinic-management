@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/23/2018 14:31:16
--- Generated from EDMX file: C:\Git\proj mana\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
+-- Date Created: 02/26/2018 11:05:19
+-- Generated from EDMX file: C:\Users\Jonina Fontanilla\Desktop\PM Project\clinic-management\clinic-management\clinic-management\Models\PUPClinic.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -123,7 +123,7 @@ CREATE TABLE [dbo].[Patients] (
     [PatientBDate] datetime  NULL,
     [PatientAddrss] varchar(max)  NULL,
     [TypeID] int  NULL,
-    [PatientClass] int  NULL,
+    [PatientClass] nvarchar(max)  NULL,
     [CollegeID] int  NOT NULL,
     [deleted] nvarchar(max)  NOT NULL
 );

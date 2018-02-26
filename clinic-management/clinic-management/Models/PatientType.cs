@@ -11,8 +11,7 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class PatientType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +19,8 @@ namespace clinic_management.Models
         {
             this.Patients = new HashSet<Patient>();
         }
-        [DisplayName("Patient Type ID")]
+    
         public int TypeID { get; set; }
-        [DisplayName("Patient Type")]
         public string TypeName { get; set; }
         public string deleted { get; set; }
     
