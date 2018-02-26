@@ -177,6 +177,7 @@ namespace clinic_management.Controllers
             })
             .ToList();
             ViewBag.ddlPatient = new SelectList(patient, "Value", "Text");
+            ViewBag.Items = new SelectList(db.Items, "ItemID", "ItemName");
 
             return View(medCheck);
         }
