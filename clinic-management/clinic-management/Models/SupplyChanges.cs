@@ -12,6 +12,7 @@ namespace clinic_management.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class SupplyChanges
     {
@@ -22,6 +23,7 @@ namespace clinic_management.Models
         [DisplayName("Date Change")]
         public System.DateTime DateChange { get; set; }
         [DisplayName("Reason of Change")]
+        [Required]
         public string ChangeReason { get; set; }
     
         public virtual Supply Supply { get; set; }

@@ -262,6 +262,7 @@
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelContainer.cs" />
+    <Compile Include="Models\ModelExpiredItem.cs" />
     <Compile Include="Models\Patient.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>

@@ -24,12 +24,24 @@
                 </div>
             </div>
         </a>
+        <a href="#" data-toggle="modal" data-target="#modelExpiredItems">
+            <div class="panel panel-default pull-right">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Expired in Items</label>
+                            <p class="itemData">@ViewBag.ExpiredItems</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
         <a href="#" data-toggle="modal" data-target="#modalOutOfStocks">
             <div class="panel panel-default pull-right">
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="itemDescLabel"><i class="fa fa-exclamation-triangle fa-fw"></i> Out of Stock</label>
+                            <label class="itemDescLabel"><i class="fa fa-exclamation-triangle fa-fw"></i> Out of Stocks</label>
                             <p class="itemData">@ViewBag.OutOfStock</p>
                         </div>
                     </div>
@@ -41,7 +53,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Critical Stock</label>
+                            <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Critical Stocks</label>
                             <p class="itemData">@ViewBag.CriticalStock</p>
                         </div>
                     </div>
@@ -354,6 +366,46 @@
                                 </td>
                             </tr>
                         }
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- Modal Expired Stocks -->
+<div class="modal fade" id="modelExpiredItems" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Expired Stocks</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table" id="tableExpiredStocks">
+                    <thead>
+                        <tr>
+                            <th>Item ID</th>
+                            <th>Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @*@foreach (var item in Model.ModelExpiredItem)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ItemID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Count)
+                                </td>
+                            </tr>
+                        }*@
                     </tbody>
                 </table>
             </div>
