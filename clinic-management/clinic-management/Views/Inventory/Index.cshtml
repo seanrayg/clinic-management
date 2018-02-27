@@ -17,7 +17,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="itemDescLabel"><i class="fa fa-bell fa-fw"></i> Items Used</label>
+                            <label class="itemDescLabel"><i class="fa fa-bell fa-fw"></i> Items Used in this Week</label>
                             <p class="itemData">@ViewBag.ItemsUsed</p>
                         </div>
                     </div>
@@ -29,8 +29,8 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <label class="itemDescLabel"><i class="fa fa-exclamation-circle fa-fw"></i> Expired in Items</label>
-                            <p class="itemData">@ViewBag.ExpiredItems</p>
+                            <label class="itemDescLabel"><i class="fa fa-times fa-fw"></i> Expired Stocks</label>
+                            <p class="itemData">@ViewBag.ExpiredStocks</p>
                         </div>
                     </div>
                 </div>
@@ -250,7 +250,7 @@
                 <table class="table table-striped table-bordered" cellspacing="0" id="tableItemGiven">
                     <thead>
                         <tr>
-                            <td style="width: 40%">Item ID</td>
+                            <td style="width: 40%">Patient</td>
                             <td style="width: 40%">Item Name</td>
                             <td style="width: 20%">Quantity Given</td>
                         </tr>
@@ -260,7 +260,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ItemID)
+                                    @Html.DisplayFor(modelItem => item.MedCheck.Patient.PatientFirst) @Html.DisplayFor(modelItem => item.MedCheck.Patient.PatientLast)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Item.ItemName)
@@ -390,22 +390,26 @@
                 <table class="table" id="tableExpiredStocks">
                     <thead>
                         <tr>
-                            <th>Item ID</th>
-                            <th>Name</th>
+                            <th>Supply ID</th>
+                            <th>Item Name</th>
+                            <th>Expired Quantity</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @*@foreach (var item in Model.ModelExpiredItem)
+                        @foreach (var item in Model.SupplyList)
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ItemID)
+                                    @Html.DisplayFor(modelItem => item.SupplyID)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Count)
+                                    @Html.DisplayFor(modelItem => item.Item.ItemName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.SupplyQuantity)
                                 </td>
                             </tr>
-                        }*@
+                        }
                     </tbody>
                 </table>
             </div>

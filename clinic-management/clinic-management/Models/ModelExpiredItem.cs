@@ -8,6 +8,7 @@ namespace clinic_management.Models
     public class ModelExpiredItem
     {
         public string ItemID { get; set; }
+        public string ItemName { get; set; }
         public int Count { get; set; }
     }
 }

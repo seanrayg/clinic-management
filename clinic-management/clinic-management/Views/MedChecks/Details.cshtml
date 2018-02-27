@@ -11,7 +11,7 @@
     <!-- /.col-lg-12 -->
 </div>
 <div class="row">
-    <button class="btn btn-primary" id="btnMedicineCheckout">Medicine Checkout</button>
+    <button class="btn btn-primary" id="btnMedicineCheckout">Checkout</button>
 </div>
 <br />
 <div class="row">
@@ -194,6 +194,14 @@
         @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
     </div>
 </div>
+
+@if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+{
+    <script>
+        $("#btnMedicineCheckout").hide();
+        $("#divMedicineGiven").hide();
+    </script>
+}
 
 <!-- Anti Forgery Form -->
 @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
