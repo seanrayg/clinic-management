@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics;
 using clinic_management.Models;
+using System.IO;
 
 namespace clinic_management.Controllers
 {
@@ -18,6 +19,19 @@ namespace clinic_management.Controllers
         // GET: Items
         public ActionResult Index()
         {
+            //Get the critical stock
+            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/critical_stock_value.txt";
+
+            FileStream reader = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+
+            var critical_stock_value = 0;
+            using (StreamReader sr = new StreamReader(reader))
+            {
+                critical_stock_value = int.Parse(sr.ReadToEnd());
+            }
+            reader.Close();
+            System.Diagnostics.Debug.WriteLine(critical_stock_value);
+
             var supply = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).Where(s => s.removed == 0).GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, SupplyQuantity = g.Sum(ss => ss.SupplyQuantity) }).ToList();
 
             foreach (var s in supply)
@@ -45,13 +59,15 @@ namespace clinic_management.Controllers
             modelcontainer.Medicine = db.Items.Where(i => i.ItemType == "Medicine").Where(i => i.deleted == "0").ToList();
             modelcontainer.Utensil = db.Items.Where(i => i.ItemType == "Utensil").Where(i => i.deleted == "0").ToList();
 
-            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").Count();
+            ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= critical_stock_value).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").Count();
             ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").Count();
-            ViewBag.ItemsUsed = db.MedCheckItems.GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, QuantityUsed = g.Sum(ss => ss.Quantity) }).Count();
+            ViewBag.ItemsUsed = db.MedCheckItems.Where(s => s.Item.ItemType == "Utensil").GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, QuantityUsed = g.Sum(ss => ss.Quantity) }).Count();
+            ViewBag.ExpiredStocks = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).Count();
 
-            modelcontainer.CriticalStock = db.Items.Where(i => i.ItemQuantity <= 10).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").ToList();
+            modelcontainer.CriticalStock = db.Items.Where(i => i.ItemQuantity <= critical_stock_value).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").ToList();
             modelcontainer.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").ToList();
-            modelcontainer.MedCheckItem = db.MedCheckItems.SqlQuery("SELECT COUNT(MedCheckID) as MedCheckID, ItemID, SUM(Quantity) as Quantity FROM dbo.MedCheckItems GROUP BY ItemID").ToList();
+            modelcontainer.MedCheckItem = db.MedCheckItems.SqlQuery("SELECT MedCheckItems.* FROM dbo.MedCheckItems, dbo.MedChecks WHERE ItemID LIKE 'UT%' AND MedCheckItems.MedCheckID = MedChecks.MedCheckID AND MedChecks.Time_out BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE()").ToList();
+            modelcontainer.SupplyList = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).ToList();
 
             if (TempData.ContainsKey("isUtensil"))
             {
@@ -230,6 +246,28 @@ namespace clinic_management.Controllers
                     db.SaveChanges();
                 }
 
+                var supply2 = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).Where(s => s.removed == 0).GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, SupplyQuantity = g.Sum(ss => ss.SupplyQuantity) }).ToList();
+
+                foreach (var s in supply2)
+                {
+                    var supplies = db.Supplies.Where(sp => sp.ItemID == s.ItemID).Where(sp => sp.ExpirationDate <= DateTime.Now).ToList();
+                    if (supplies != null)
+                    {
+                        foreach (var x in supplies)
+                        {
+                            x.removed = 1;
+                            db.SaveChanges();
+                        }
+                    }
+                    System.Diagnostics.Debug.WriteLine(s.ItemID + ' ' + s.SupplyQuantity);
+                    var item = db.Items.SingleOrDefault(i => i.ItemID == s.ItemID);
+                    if (item != null)
+                    {
+                        item.ItemQuantity -= (Int16)(s.SupplyQuantity);
+                        db.SaveChanges();
+                    }
+                }
+
                 return RedirectToAction("Supply", new { id = supply.ItemID });
             }
             return RedirectToAction("Supply", new { id = supply.ItemID });
@@ -248,6 +286,16 @@ namespace clinic_management.Controllers
             {
                 return HttpNotFound();
             }
+            if (TempData.ContainsKey("error"))
+            {
+                if (TempData["error"].Equals(true))
+                {
+                    ViewBag.ErrorMessage = "Change Reason is required!";
+                }else
+                {
+                    ViewBag.ErrorMessage = "";
+                }
+            }
             return View(container);
         }
 
@@ -258,35 +306,42 @@ namespace clinic_management.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                db.Entry(supply).State = EntityState.Modified;
-                db.SaveChanges();
-
-                var result = db.Items.SingleOrDefault(it => it.ItemID == supply.ItemID);
-
-                if (supply.SupplyQuantity != oldSupplyQuantity)
+                if(ChangeReason != "")
                 {
-                    if (oldSupplyQuantity > supply.SupplyQuantity)
-                    {
-                        result.ItemQuantity = (Int16)(result.ItemQuantity - (oldSupplyQuantity - supply.SupplyQuantity));
-                    }
-                    else
-                    {
-                        result.ItemQuantity = (Int16)(result.ItemQuantity + (supply.SupplyQuantity - oldSupplyQuantity));
-                    }
-
+                    db.Entry(supply).State = EntityState.Modified;
                     db.SaveChanges();
+
+                    var result = db.Items.SingleOrDefault(it => it.ItemID == supply.ItemID);
+
+                    if (supply.SupplyQuantity != oldSupplyQuantity)
+                    {
+                        if (oldSupplyQuantity > supply.SupplyQuantity)
+                        {
+                            result.ItemQuantity = (Int16)(result.ItemQuantity - (oldSupplyQuantity - supply.SupplyQuantity));
+                        }
+                        else
+                        {
+                            result.ItemQuantity = (Int16)(result.ItemQuantity + (supply.SupplyQuantity - oldSupplyQuantity));
+                        }
+
+                        db.SaveChanges();
+                    }
+
+                    SupplyChanges supplychanges = new SupplyChanges();
+                    supplychanges.SupplyID = supply.SupplyID;
+                    supplychanges.DateChange = DateTime.Now;
+                    supplychanges.ChangeReason = oldSupplyQuantity + " -> " + supply.SupplyQuantity + ": " + ChangeReason;
+
+                    db.SupplyChanges.Add(supplychanges);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Supply", new { id = supply.ItemID });
                 }
-
-                SupplyChanges supplychanges = new SupplyChanges();
-                supplychanges.SupplyID = supply.SupplyID;
-                supplychanges.DateChange = DateTime.Now;
-                supplychanges.ChangeReason = oldSupplyQuantity + " -> " + supply.SupplyQuantity + ": " + ChangeReason;
-
-                db.SupplyChanges.Add(supplychanges);
-                db.SaveChanges();
-
-                return RedirectToAction("Supply", new { id = supply.ItemID });
+                else
+                {
+                    TempData["error"] = true;
+                    return RedirectToAction("EditSupply", new { id = supply.SupplyID });
+                }
             }
             return RedirectToAction("Supply", new { id = supply.ItemID });
         }

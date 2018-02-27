@@ -233,6 +233,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\csValueController.cs" />
     <Compile Include="Controllers\DeletesController.cs" />
     <Compile Include="Controllers\InventoryController.cs" />
     <Compile Include="Controllers\ItemsController.cs" />
@@ -262,6 +263,7 @@
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ModelContainer.cs" />
+    <Compile Include="Models\ModelExpiredItem.cs" />
     <Compile Include="Models\Patient.cs">
       <DependentUpon>PUPClinic.tt</DependentUpon>
     </Compile>
@@ -382,6 +384,8 @@
     <Content Include="Views\Reports\MedHistory.cshtml" />
     <Content Include="Views\Reports\ExcuseLetter.cshtml" />
     <Content Include="Views\Reports\Clearance_PF.cshtml" />
+    <Content Include="Views\csValue\Index.cshtml" />
+    <Content Include="Views\csValue\Change.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
