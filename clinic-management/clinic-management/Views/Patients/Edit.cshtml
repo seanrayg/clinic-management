@@ -100,21 +100,13 @@
                 </div>
             </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CollegeID, "CollegeID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "js-example-basic-single form-control" })
-                @Html.ValidationMessageFor(model => model.CollegeID, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.CollegeID, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-5">
+                    @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CollegeID, "", new { @class = "text-danger" })
+                </div>
             </div>
-        </div>
-        <script>
-                $(document).ready(function () {
-                    $('.js-example-basic-single').select2({
-                        placeholder: "Select College",
-                        allowClear: true
-                    });
-                });
-        </script>
 
             <div class="form-group" style="display: none;">
                 @Html.LabelFor(model => model.deleted, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -134,3 +126,6 @@
         </div>
         
 }
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>

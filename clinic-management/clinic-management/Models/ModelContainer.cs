@@ -17,6 +17,5 @@ namespace clinic_management.Models
         public Supply Supply { get; set; }
         public MedCheck medcheck { get; set; }
         public IEnumerable<MedCheckItem> MedCheckItem { get; set; }
-        public IEnumerable<ModelExpiredItem> ModelExpiredItem { get; set;}
     }
 }

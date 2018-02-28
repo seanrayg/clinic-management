@@ -116,7 +116,7 @@
                             <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="@Url.Action("Regular", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recovery</a>
+                            <a href="@Url.Action("Regular", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
                         </li>
                     }
                     @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
@@ -152,14 +152,11 @@
                                 <li>
                                     <a href="@Url.Action("Index", "PColleges")">Patient Colleges</a>
                                 </li>
-                                <li>
-                                    <a href="@Url.Action("Index", "csValue")">Set Critical Stock</a>
-                                </li>
                                </ul>
                         <!-- /.nav-second-level -->
                         </li>
                         <li>
-                            <a href="@Url.Action("Admin", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recovery</a>
+                            <a href="@Url.Action("Admin", "Deletes")"><i class="fa fa-recycle fa-fw"></i> Recover</a>
                         </li>
                       }
                 </ul>
