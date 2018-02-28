@@ -47,21 +47,21 @@ namespace clinic_management.Controllers
             ModelContainer container = new ModelContainer();
             container.medcheck = db.MedChecks.Find(id);
 
-            string strTreatment = container.medcheck.Treatment;
-            string[] arrMedicine = strTreatment.Split(',');
+            //string strTreatment = container.medcheck.Treatment;
+            //string[] arrMedicine = strTreatment.Split(',');
 
-            if(arrMedicine.Length == 1)
-            {
-                string[] arrMedDetails = arrMedicine[0].Split('-');
-                container.ItemList = db.Items.Where(i => i.ItemName == arrMedDetails[1]).ToList();
-            }else if(arrMedicine.Length == 2)
-            {
-                string[] arrMedDetails;
-                for(var i = 0; i < arrMedicine.Length; i++)
-                {
-                    arrMedDetails[i] = arrMedicine[i].Split('-');
-                }
-            }
+            //if(arrMedicine.Length == 1)
+            //{
+            //    string[] arrMedDetails = arrMedicine[0].Split('-');
+            //    container.ItemList = db.Items.Where(i => i.ItemName == arrMedDetails[1]).ToList();
+            //}else if(arrMedicine.Length == 2)
+            //{
+            //    string[] arrMedDetails;
+            //    for(var i = 0; i < arrMedicine.Length; i++)
+            //    {
+            //        arrMedDetails[i] = arrMedicine[i].Split('-');
+            //    }
+            //}
 
             container.ItemList = db.Items.ToList();
             container.MedCheckItem = db.MedCheckItems.Where(mi => mi.MedCheckID == id).ToList();

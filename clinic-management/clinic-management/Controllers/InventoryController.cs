@@ -20,7 +20,7 @@ namespace clinic_management.Controllers
         public ActionResult Index()
         {
             //Get the critical stock
-            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/critical_stock_value.txt";
+            string filePath = System.AppDomain.CurrentDomain.BaseDirectory + "/config.conf";
 
             FileStream reader = new FileStream(filePath, FileMode.Open, FileAccess.Read);
 
