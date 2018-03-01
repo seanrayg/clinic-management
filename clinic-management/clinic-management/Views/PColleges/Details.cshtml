@@ -33,7 +33,7 @@
         </dl>
     </div>
     <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.CollegeID }) |
-        @Html.ActionLink("Back to List", "Index")
+        @Html.ActionLink("Edit", "Edit", new { id = Model.CollegeID, @class = "btn btn-default" })
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
     </p>
 </div>

@@ -244,7 +244,6 @@
     <Compile Include="Controllers\PCollegesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
-    <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -346,11 +345,6 @@
     <Content Include="Views\Patients\Edit.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\UserTypes\Create.cshtml" />
-    <Content Include="Views\UserTypes\Delete.cshtml" />
-    <Content Include="Views\UserTypes\Details.cshtml" />
-    <Content Include="Views\UserTypes\Edit.cshtml" />
-    <Content Include="Views\UserTypes\Index.cshtml" />
     <Content Include="Views\PatientTypes\Create.cshtml" />
     <Content Include="Views\PatientTypes\Delete.cshtml" />
     <Content Include="Views\PatientTypes\Details.cshtml" />
@@ -371,7 +365,6 @@
     <Content Include="Views\Deletes\Admin.cshtml" />
     <Content Include="Views\PatientTypes\Recover.cshtml" />
     <Content Include="Views\PColleges\Recover.cshtml" />
-    <Content Include="Views\UserTypes\Recover.cshtml" />
     <Content Include="Views\Staffs\Recover.cshtml" />
     <Content Include="Views\Deletes\Regular.cshtml" />
     <Content Include="Views\Items\Recover.cshtml" />

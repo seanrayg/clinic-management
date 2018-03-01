@@ -11,7 +11,6 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class PCollege
     {
@@ -22,11 +21,8 @@ namespace clinic_management.Models
         }
     
         public int CollegeID { get; set; }
-        [DisplayName("College Code")]
         public string CollegeCode { get; set; }
-        [DisplayName("College Name")]
         public string CollegeName { get; set; }
-        [DisplayName("Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -83,7 +83,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.TypeID, "TypeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Patient Type", "TypeID", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
                     @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
@@ -99,7 +99,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.CollegeID, "CollegeID", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("College", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "js-example-basic-single form-control" })
                     @Html.ValidationMessageFor(model => model.CollegeID, "", new { @class = "text-danger" })

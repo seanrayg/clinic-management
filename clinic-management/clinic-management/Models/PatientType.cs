@@ -11,7 +11,6 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class PatientType
     {
@@ -20,11 +19,9 @@ namespace clinic_management.Models
         {
             this.Patients = new HashSet<Patient>();
         }
-        
+    
         public int TypeID { get; set; }
-        [DisplayName("Type Name")]
         public string TypeName { get; set; }
-        [DisplayName("Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

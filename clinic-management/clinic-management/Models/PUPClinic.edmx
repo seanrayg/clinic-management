@@ -56,7 +56,7 @@
           <Property Name="PatientBDate" Type="datetime" />
           <Property Name="PatientAddrss" Type="varchar(max)" />
           <Property Name="TypeID" Type="int" />
-          <Property Name="PatientClass" Type="int" />
+          <Property Name="PatientClass" Type="nvarchar(max)" />
           <Property Name="CollegeID" Type="int" Nullable="false" />
           <Property Name="deleted" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
@@ -325,7 +325,7 @@
           <Property Name="PatientBDate" Type="DateTime" Precision="3" />
           <Property Name="PatientAddrss" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="TypeID" Type="Int32" />
-          <Property Name="PatientClass" Type="Int32" />
+          <Property Name="PatientClass" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="CollegeID" Type="Int32" Nullable="false" />
           <NavigationProperty Name="MedCheckHeaders" Relationship="Self.FK_MedCheckHeader_Patient" FromRole="Patient" ToRole="MedCheckHeader" />
           <NavigationProperty Name="PatientType" Relationship="Self.FK_Patient_PatientType" FromRole="Patient" ToRole="PatientType" />
@@ -679,7 +679,7 @@
     <EntitySetMapping Name="MedCheckItems">
       <EntityTypeMapping TypeName="IsTypeOf(dbClinicManagementModel.MedCheckItem)">
         <MappingFragment StoreEntitySet="MedCheckItems">
-          <ScalarProperty Name="returned" ColumnName="returned" />
+                <ScalarProperty Name="returned" ColumnName="returned" />
                 <ScalarProperty Name="MedCheckID" ColumnName="MedCheckID" />
           <ScalarProperty Name="ItemID" ColumnName="ItemID" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />

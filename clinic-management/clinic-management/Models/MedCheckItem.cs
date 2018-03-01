@@ -11,16 +11,12 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class MedCheckItem
     {
-        [DisplayName("MedCheck ID")]
         public int MedCheckID { get; set; }
-        [DisplayName("Item ID")]
         public string ItemID { get; set; }
         public int Quantity { get; set; }
-        [DisplayName("Returned")]
         public Nullable<int> returned { get; set; }
     
         public virtual MedCheck MedCheck { get; set; }
