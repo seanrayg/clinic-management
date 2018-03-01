@@ -11,8 +11,7 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class Item
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,15 +20,11 @@ namespace clinic_management.Models
             this.MedCheckItems = new HashSet<MedCheckItem>();
             this.Supplies = new HashSet<Supply>();
         }
-        [DisplayName("Item ID")]
+    
         public string ItemID { get; set; }
-        [DisplayName("Item Name")]
         public string ItemName { get; set; }
-        [DisplayName("Quantity")]
         public short ItemQuantity { get; set; }
-        [DisplayName("Type of Item")]
         public string ItemType { get; set; }
-        [DisplayName("Purpose of the Item")]
         public string ItemPurpose { get; set; }
         public string deleted { get; set; }
     

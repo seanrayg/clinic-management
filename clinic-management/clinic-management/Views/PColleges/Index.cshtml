@@ -6,17 +6,12 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Patient Colleges</h1>
+        <h1 class="page-header">Patient Colleges @Html.ActionLink("Create New", "Create", "PColleges", null, new { @class = "btn btn-default pull-right" })</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 
 <div class="row">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
         <table class="table" id="tablePatientColleges">
             <thead>
                 <tr>
@@ -48,8 +43,6 @@
             </tbody>
         </table>
     </div>
-    <div class="col-lg-2"></div>
-</div>
 
 <script>
     $(document).ready(function () {
