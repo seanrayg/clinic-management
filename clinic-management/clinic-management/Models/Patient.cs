@@ -12,8 +12,7 @@ namespace clinic_management.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Patient
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,6 +20,7 @@ namespace clinic_management.Models
         {
             this.MedCheckHeaders = new HashSet<MedCheck>();
         }
+
         [DisplayName("Patient ID")]
         public int PatientID { get; set; }
         [DisplayName("Last Name")]
@@ -31,16 +31,17 @@ namespace clinic_management.Models
         public string PatientMid { get; set; }
         [DisplayName("Gender")]
         public string PatientGender { get; set; }
-        [DisplayName("Birth Date")]
+        [DisplayName("Birthdate")]
         public Nullable<System.DateTime> PatientBDate { get; set; }
-        [DisplayName("Home Address")]
+        [DisplayName("Address")]
         public string PatientAddrss { get; set; }
         [DisplayName("Patient Type")]
         public Nullable<int> TypeID { get; set; }
         [DisplayName("Class")]
         public Nullable<int> PatientClass { get; set; }
-        [DisplayName("College")]
+        [DisplayName("College ID")]
         public int CollegeID { get; set; }
+        [DisplayName("Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

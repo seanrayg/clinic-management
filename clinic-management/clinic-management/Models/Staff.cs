@@ -12,7 +12,7 @@ namespace clinic_management.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-
+    
     public partial class Staff
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,6 +20,7 @@ namespace clinic_management.Models
         {
             this.MedCheckHeaders = new HashSet<MedCheck>();
         }
+
         [DisplayName("Staff ID")]
         public string StaffID { get; set; }
         [DisplayName("Last Name")]
@@ -34,8 +35,9 @@ namespace clinic_management.Models
         public string StaffPassword { get; set; }
         [DisplayName("Joined Date")]
         public Nullable<System.DateTime> StaffJoinedDate { get; set; }
-        [DisplayName("Type of User")]
+        [DisplayName("User Type")]
         public Nullable<int> UserTypeID { get; set; }
+        [DisplayName("Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
