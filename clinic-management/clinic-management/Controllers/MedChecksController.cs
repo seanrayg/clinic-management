@@ -15,6 +15,7 @@ namespace clinic_management.Controllers
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
 
+
         // GET: MedChecks
         public ActionResult Index()
         {
@@ -46,27 +47,23 @@ namespace clinic_management.Controllers
             ModelContainer container = new ModelContainer();
             container.medcheck = db.MedChecks.Find(id);
 
-            string strTreatment = container.medcheck.Treatment;
-            string[] arrMedicine = strTreatment.Split(',');
-            string query = "SELECT * FROM dbo.Items WHERE ItemID != '' ";
+            //string strTreatment = container.medcheck.Treatment;
+            //string[] arrMedicine = strTreatment.Split(',');
 
-            for(var i = 0; i < arrMedicine.Length; i++)
-            {
-                if(arrMedicine[i] != "")
-                {
-                    if(i == 0)
-                    {
-                        string[] arrMedDetails = arrMedicine[i].Split('-');
-                        query += "AND ItemName LIKE '" + arrMedDetails[1] + "' ";
-                    }else
-                    {
-                        string[] arrMedDetails = arrMedicine[i].Split('-');
-                        query += "OR ItemName LIKE '" + arrMedDetails[1] + "' ";
-                    }
-                }
-            }
+            //if(arrMedicine.Length == 1)
+            //{
+            //    string[] arrMedDetails = arrMedicine[0].Split('-');
+            //    container.ItemList = db.Items.Where(i => i.ItemName == arrMedDetails[1]).ToList();
+            //}else if(arrMedicine.Length == 2)
+            //{
+            //    string[] arrMedDetails;
+            //    for(var i = 0; i < arrMedicine.Length; i++)
+            //    {
+            //        arrMedDetails[i] = arrMedicine[i].Split('-');
+            //    }
+            //}
 
-            container.ItemList = db.Items.SqlQuery(query).ToList();
+            container.ItemList = db.Items.ToList();
             container.MedCheckItem = db.MedCheckItems.Where(mi => mi.MedCheckID == id).ToList();
             if (container == null)
             {
@@ -92,7 +89,6 @@ namespace clinic_management.Controllers
                     medcheckitem.MedCheckID = MedCheckID;
                     medcheckitem.ItemID = arrData[i][0].ToString();
                     medcheckitem.Quantity = int.Parse(arrData[i][3].ToString());
-                    medcheckitem.returned = 0;
                     db.MedCheckItems.Add(medcheckitem);
                     db.SaveChanges();
 
