@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using clinic_management.Models;
+using static clinic_management.Helpers.Sessions;
 
 namespace clinic_management.Controllers
 {
+    [AuthorizationFilter]
     public class ItemsController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();

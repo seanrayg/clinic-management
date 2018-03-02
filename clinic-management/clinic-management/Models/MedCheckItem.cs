@@ -17,6 +17,7 @@ namespace clinic_management.Models
         public int MedCheckID { get; set; }
         public string ItemID { get; set; }
         public int Quantity { get; set; }
+        public Nullable<int> returned { get; set; }
     
         public virtual MedCheck MedCheck { get; set; }
         public virtual Item Item { get; set; }

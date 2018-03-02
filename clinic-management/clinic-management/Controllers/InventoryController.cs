@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using System.Diagnostics;
 using clinic_management.Models;
 using System.IO;
+using static clinic_management.Helpers.Sessions;
 
 namespace clinic_management.Controllers
 {
+    [AuthorizationFilter]
     public class InventoryController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();

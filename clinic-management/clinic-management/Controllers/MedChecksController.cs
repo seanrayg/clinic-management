@@ -8,9 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using clinic_management.Models;
 using System.Data.SqlClient;
+using static clinic_management.Helpers.Sessions;
 
 namespace clinic_management.Controllers
 {
+    [AuthorizationFilter]
     public class MedChecksController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();

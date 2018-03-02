@@ -149,7 +149,15 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>                 This certification is issued upon request for check-up purpose.</Value>
+                <Value>                 This certification is issued upon request for </Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value>=Parameters!Purpose.Value</Value>
+                <Style />
+              </TextRun>
+              <TextRun>
+                <Value> purpose.</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -472,6 +480,10 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="DateToday">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Purpose">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
