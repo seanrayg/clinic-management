@@ -163,8 +163,8 @@
           <Source>Embedded</Source>
           <Value>logo</Value>
           <Sizing>FitProportional</Sizing>
-          <Top>0.2249cm</Top>
-          <Left>4.23128cm</Left>
+          <Top>0.47625cm</Top>
+          <Left>4.196cm</Left>
           <Height>1.41111cm</Height>
           <Width>1.50812cm</Width>
           <Style>
@@ -263,10 +263,10 @@
             </Paragraph>
           </Paragraphs>
           <rd:DefaultName>Textbox2</rd:DefaultName>
-          <Top>0.2249cm</Top>
-          <Left>4.23128cm</Left>
+          <Top>0.18521cm</Top>
+          <Left>5.88051cm</Left>
           <Height>2.09021cm</Height>
-          <Width>10.2082cm</Width>
+          <Width>8.55897cm</Width>
           <ZIndex>1</ZIndex>
           <Style>
             <Border>
