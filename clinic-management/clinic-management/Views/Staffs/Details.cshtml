@@ -11,65 +11,62 @@
     <!-- /.col-lg-12 -->
 </div>
 
-<div class="row">
-    <div>
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.StaffLast)
-            </dt>
+    <div class="row">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayName("First Name")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StaffFirst)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.StaffLast)
-            </dd>
+                <dt>
+                    @Html.DisplayName("Middle Name")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StaffMid)
+                </dd>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StaffFirst)
-            </dt>
+                <dt>
+                    @Html.DisplayName("Last Name")
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StaffLast)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.StaffFirst)
-            </dd>
+                <dt>
+                    @Html.DisplayName("Gender")
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StaffMid)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StaffGender)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.StaffMid)
-            </dd>
+                <dt>
+                    @Html.DisplayName("Password")
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StaffGender)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StaffPassword)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.StaffGender)
-            </dd>
+                <dt>
+                    @Html.DisplayName("Date of Joined")
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StaffPassword)
-            </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.StaffJoinedDate)
+                </dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.StaffPassword)
-            </dd>
+                <dt>
+                    @Html.DisplayName("User")
+                </dt>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.StaffJoinedDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.StaffJoinedDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.UserType.TypeDesc)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.UserType.TypeDesc)
-            </dd>
-            @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
-        </dl>
+                <dd>
+                    @Html.DisplayFor(model => model.UserType.TypeDesc)
+                </dd>
+                @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
+            </dl>
+        </div>
     </div>
-</div>

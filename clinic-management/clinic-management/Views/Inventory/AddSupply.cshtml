@@ -21,7 +21,7 @@
             <input type="hidden" id="ItemID" name="ItemID" value="@ViewBag.ItemID" />
 
             <div class="form-group">
-                @Html.LabelFor(model => model.SupplyQuantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.SupplyQuantity, "Quantity", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     @Html.EditorFor(model => model.SupplyQuantity, new { htmlAttributes = new { @class = "form-control", type = "number" } })
                     @Html.ValidationMessageFor(model => model.SupplyQuantity, "", new { @class = "text-danger" })
@@ -29,7 +29,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ReceivedDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ReceivedDate, "Received Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
                         @Html.EditorFor(model => model.ReceivedDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
@@ -42,7 +42,7 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ExpirationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.ExpirationDate, "Expiration Date", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
                         @Html.EditorFor(model => model.ExpirationDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })

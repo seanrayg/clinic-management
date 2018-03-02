@@ -22,14 +22,15 @@
         @Html.HiddenFor(model => model.PatientID)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientLast, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TypeID, "Patient Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
-                @Html.EditorFor(model => model.PatientLast, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PatientLast, "", new { @class = "text-danger" })
+                @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientFirst, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PatientFirst, "First Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.PatientFirst, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PatientFirst, "", new { @class = "text-danger" })
@@ -37,16 +38,23 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientMid, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PatientMid, "Middle Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.PatientMid, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PatientMid, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.PatientLast, "Last Name", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.PatientLast, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PatientLast, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientGender, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PatientGender, "Gender", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 <input type="radio" name="gender" value="Female" id="gender_female" onchange="setGender(this)" /> Female
                 <br />
@@ -69,7 +77,7 @@
         }
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientBDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PatientBDate, "Birthdate", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 <div class="input-group date" data-date-format="dd.mm.yyyy">
                     @Html.EditorFor(model => model.PatientBDate, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
@@ -90,23 +98,17 @@
         </script>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientAddrss, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PatientAddrss, "Address", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.PatientAddrss, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PatientAddrss, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-5">
-                @Html.DropDownList("TypeID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TypeID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PatientClass, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PatientClass, "Class", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.EditorFor(model => model.PatientClass, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PatientClass, "", new { @class = "text-danger" })
@@ -114,7 +116,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CollegeID, "CollegeID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CollegeID, "College", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 @Html.DropDownList("CollegeID", null, htmlAttributes: new { @class = "js-example-basic-single form-control" })
                 @Html.ValidationMessageFor(model => model.CollegeID, "", new { @class = "text-danger" })

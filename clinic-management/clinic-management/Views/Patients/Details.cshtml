@@ -15,7 +15,14 @@
     <div>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.PatientLast)
+                @Html.DisplayName("Patient Type")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientType.TypeName)
+            </dd>
+            <dt>
+                @Html.DisplayName("Last Name")
             </dt>
 
             <dd>
@@ -23,7 +30,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PatientFirst)
+                @Html.DisplayName("First Name")
             </dt>
 
             <dd>
@@ -31,7 +38,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PatientMid)
+                @Html.DisplayName("Middle Name")
             </dt>
 
             <dd>
@@ -39,7 +46,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PatientGender)
+                @Html.DisplayName("Gender")
             </dt>
 
             <dd>
@@ -47,7 +54,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PatientBDate)
+                @Html.DisplayName("Birthdate")
             </dt>
 
             <dd>
@@ -55,7 +62,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PatientAddrss)
+                @Html.DisplayName("Address")
             </dt>
 
             <dd>
@@ -63,29 +70,20 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PatientClass)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientClass)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientType.TypeName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientType.TypeName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PCollege.CollegeCode)
+                @Html.DisplayName("College")
             </dt>
 
             <dd>
                 @Html.DisplayFor(model => model.PCollege.CollegeName)
             </dd>
 
+            <dt>
+                @Html.DisplayName("Class")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientClass)
+            </dd>
         </dl>
     </div>
     <div class="form-group">

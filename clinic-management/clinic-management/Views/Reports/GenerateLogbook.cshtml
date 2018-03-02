@@ -17,7 +17,7 @@
 
         <div class="form-horizontal">
             <div class="form-group">
-                @Html.Label("DateFrom", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Date From", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
                         @Html.Editor("DateFrom", new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
@@ -29,7 +29,7 @@
             </div>
 
             <div class="form-group">
-                @Html.Label("DateTo", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.Label("Date To", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
                     <div class="input-group date" data-date-format="dd.mm.yyyy">
                         @Html.Editor("DateTo", new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
@@ -58,7 +58,6 @@
     });
 </script>
 
-<div class="ReportHolder">
-    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { @style = "border: none; width:100% !important;" })
-
-</div>
+    <div class="ReportHolder">
+        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { @style = "border: none; width:100% !important;" })
+    </div>

@@ -36,7 +36,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.DateTimeOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DateTimeOfVisit, "Date of Visit", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 <div class="input-group date" data-date-format="dd.mm.yyyy">
                     @Html.EditorFor(model => model.DateTimeOfVisit, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD", @readonly = "readonly" } })
@@ -57,7 +57,7 @@
         </script>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MedCheckType, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.MedCheckType, "Medical Type", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.MedCheckType, new List<SelectListItem>
                 {
@@ -130,7 +130,7 @@
 
 
             <div class="form-group">
-                @Html.LabelFor(model => model.MedCheckStatus, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.MedCheckStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
                 {

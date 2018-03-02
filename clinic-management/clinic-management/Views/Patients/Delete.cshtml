@@ -16,63 +16,7 @@
         <label>Are you sure you want to delete this?</label>
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.PatientLast)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientLast)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientFirst)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientFirst)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientMid)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientMid)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientGender)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientGender)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientBDate)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientBDate)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientAddrss)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientAddrss)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientClass)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.PatientClass)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PatientType.TypeName)
+                @Html.DisplayName("Patient Type")
             </dt>
 
             <dd>
@@ -80,11 +24,66 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.PCollege.CollegeCode)
+                @Html.DisplayName("First Name")
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.PCollege.CollegeCode)
+                @Html.DisplayFor(model => model.PatientFirst)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Middle Name")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientMid)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Last Name")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientLast)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Gender")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientGender)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Birthdate")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientBDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Address")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientAddrss)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("College")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PCollege.CollegeName)
+            </dd>
+            <dt>
+                @Html.DisplayName("Class")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PatientClass)
             </dd>
 
         </dl>

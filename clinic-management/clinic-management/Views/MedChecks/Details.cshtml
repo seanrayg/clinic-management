@@ -18,7 +18,7 @@
     <div class="col-md-4">
         <dl class="dl-horizontal">
             <dt>
-                Patient Name
+                @Html.DisplayName("Patient Name")
             </dt>
 
             <dd>
@@ -33,7 +33,7 @@
                 @Html.DisplayFor(model => model.medcheck.Staff.StaffFirst) @Html.DisplayFor(model => model.medcheck.Staff.StaffLast)
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.medcheck.DateTimeOfVisit)
+                @Html.DisplayName("Date of Visit")
             </dt>
 
             <dd>
@@ -73,7 +73,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.medcheck.MedCheckType)
+                @Html.DisplayName("Medical Type")
             </dt>
 
             <dd>
@@ -88,7 +88,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.medcheck.MedCheckStatus)
+                @Html.DisplayName("Status")
             </dt>
 
             <dd>
@@ -109,7 +109,7 @@
                 }
             </dd>
             <dt>
-                @Html.DisplayNameFor(model => model.medcheck.Time_in)
+                @Html.DisplayName("Time-In")
             </dt>
 
             <dd>
@@ -117,7 +117,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.medcheck.Time_out)
+                @Html.DisplayName("Time-Out")
             </dt>
 
             <dd>
