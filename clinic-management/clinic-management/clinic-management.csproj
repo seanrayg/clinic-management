@@ -244,10 +244,10 @@
     <Compile Include="Controllers\PCollegesController.cs" />
     <Compile Include="Controllers\ReportsController.cs" />
     <Compile Include="Controllers\StaffsController.cs" />
-    <Compile Include="Controllers\UserTypesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\Sessions.cs" />
     <Compile Include="Models\dsReports.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -346,11 +346,6 @@
     <Content Include="Views\Patients\Edit.cshtml" />
     <Content Include="Views\Patients\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\UserTypes\Create.cshtml" />
-    <Content Include="Views\UserTypes\Delete.cshtml" />
-    <Content Include="Views\UserTypes\Details.cshtml" />
-    <Content Include="Views\UserTypes\Edit.cshtml" />
-    <Content Include="Views\UserTypes\Index.cshtml" />
     <Content Include="Views\PatientTypes\Create.cshtml" />
     <Content Include="Views\PatientTypes\Delete.cshtml" />
     <Content Include="Views\PatientTypes\Details.cshtml" />
@@ -371,7 +366,6 @@
     <Content Include="Views\Deletes\Admin.cshtml" />
     <Content Include="Views\PatientTypes\Recover.cshtml" />
     <Content Include="Views\PColleges\Recover.cshtml" />
-    <Content Include="Views\UserTypes\Recover.cshtml" />
     <Content Include="Views\Staffs\Recover.cshtml" />
     <Content Include="Views\Deletes\Regular.cshtml" />
     <Content Include="Views\Items\Recover.cshtml" />
@@ -386,6 +380,8 @@
     <Content Include="Views\Reports\Clearance_PF.cshtml" />
     <Content Include="Views\csValue\Index.cshtml" />
     <Content Include="Views\csValue\Change.cshtml" />
+    <Content Include="Views\Reports\Clearance_Med.cshtml" />
+    <Content Include="Views\Reports\Inventory.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -395,13 +391,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="report\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\Reports\Clearance_Med.rdlc" />
     <EmbeddedResource Include="Views\Reports\Clearance_PF.rdlc" />
     <EmbeddedResource Include="Views\Reports\ExcuseLetter.rdlc" />
+    <EmbeddedResource Include="Views\Reports\Inventory.rdlc" />
     <EmbeddedResource Include="Views\Reports\Logbook.rdlc" />
     <EmbeddedResource Include="Views\Reports\MedHistory.rdlc" />
   </ItemGroup>

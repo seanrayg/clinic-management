@@ -11,7 +11,6 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class MedCheck
     {
@@ -20,28 +19,19 @@ namespace clinic_management.Models
         {
             this.MedCheckItems = new HashSet<MedCheckItem>();
         }
-
-        [DisplayName("MedCheck ID")]
+    
         public int MedCheckID { get; set; }
-        [DisplayName("Staff ID")]
         public string StaffID { get; set; }
-        [DisplayName("Patient ID")]
         public Nullable<int> PatientID { get; set; }
-        [DisplayName("Data of Visit")]
         public System.DateTime DateTimeOfVisit { get; set; }
         public string Complaint { get; set; }
         public string Diagnosis { get; set; }
         public string Treatment { get; set; }
         public string Remarks { get; set; }
-        [DisplayName("MedCheck Type")]
         public Nullable<int> MedCheckType { get; set; }
-        [DisplayName("MedCheck Status")]
         public Nullable<int> MedCheckStatus { get; set; }
-        [DisplayName("Deleted")]
         public string deleted { get; set; }
-        [DisplayName("Time In")]
         public Nullable<System.DateTime> Time_in { get; set; }
-        [DisplayName("Time Out")]
         public Nullable<System.DateTime> Time_out { get; set; }
     
         public virtual Patient Patient { get; set; }

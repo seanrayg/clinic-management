@@ -6,29 +6,26 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Patients</h1>
+        <h1 class="page-header">Patients @Html.ActionLink("Create New", "Create", "Patients", null, new { @class = "btn btn-default pull-right" })</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 
 <div class="row">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
     <table class="table" id="tablePatients">
         <thead>
             <tr>
                 <th>
-                    Patient Name
+                    @Html.DisplayName("Patient Name")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientGender)
+                    @Html.DisplayName("Gender")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientAddrss)
+                    @Html.DisplayName("Address")
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.PatientType)
+                    @Html.DisplayName("Patient Type")
                 </th>
                 <th></th>
             </tr>

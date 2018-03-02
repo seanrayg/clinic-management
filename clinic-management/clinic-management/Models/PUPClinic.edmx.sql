@@ -123,7 +123,7 @@ CREATE TABLE [dbo].[Patients] (
     [PatientBDate] datetime  NULL,
     [PatientAddrss] varchar(max)  NULL,
     [TypeID] int  NULL,
-    [PatientClass] int  NULL,
+    [PatientClass] nvarchar(20)  NULL,
     [CollegeID] int  NOT NULL,
     [deleted] nvarchar(max)  NOT NULL
 );

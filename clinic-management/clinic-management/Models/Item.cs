@@ -11,7 +11,6 @@ namespace clinic_management.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     
     public partial class Item
     {
@@ -22,17 +21,11 @@ namespace clinic_management.Models
             this.Supplies = new HashSet<Supply>();
         }
     
-        [DisplayName("Item ID")]
         public string ItemID { get; set; }
-        [DisplayName("Item Name")]
         public string ItemName { get; set; }
-        [DisplayName("Item Quantity")]
         public short ItemQuantity { get; set; }
-        [DisplayName("Item Type")]
         public string ItemType { get; set; }
-        [DisplayName("Item Purpose")]
         public string ItemPurpose { get; set; }
-        [DisplayName("Deleted")]
         public string deleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

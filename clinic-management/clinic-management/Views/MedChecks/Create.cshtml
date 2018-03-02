@@ -14,7 +14,7 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
-  
+
         <div class="form-horizontal">
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
@@ -23,7 +23,7 @@
                     @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Doctor", htmlAttributes: new { @class = "js-example-basic-single form-control" })
                 </div>
             </div>
-            
+
             <div class="form-group">
                 @Html.LabelFor(model => model.PatientID, "Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-5">
@@ -82,45 +82,47 @@
                 </div>
             </div>
 
-            @if (Convert.ToInt32(Session["usertype"].ToString()) == 2) { 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Diagnosis, "Diagnosis", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Diagnosis, 3, 98, new { htmlAttributes = new { @class = "form-control"} })
-                    @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
+            @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Diagnosis, "Diagnosis", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Diagnosis, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Diagnosis, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Treatment, "Treatment", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Treatment, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Treatment, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Treatment, "Treatment", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Treatment, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Treatment, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.Remarks, "Remarks", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Remarks, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Remarks, "Remarks", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Remarks, 3, 98, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Remarks, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
             }
 
-            @if (Convert.ToInt32(Session["usertype"].ToString()) == 3) { 
-            <div class="form-group">
-                @Html.LabelFor(model => model.MedCheckStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
-                    @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
+            @if (Convert.ToInt32(Session["usertype"].ToString()) == 3)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.MedCheckStatus, "Status", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownListFor(model => model.MedCheckStatus, new List<SelectListItem>
                     {
                         new SelectListItem{ Text="Ongoing", Value = "1", Selected = true },
                         new SelectListItem{ Text="Done", Value = "2" },
                         new SelectListItem{ Text="Cancelled", Value = "3" },
-                    },  new { @disabled = "disabled" })
-                    @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
+                    }, new { @disabled = "disabled" })
+                        @Html.ValidationMessageFor(model => model.MedCheckStatus, "", new { @class = "text-danger" })
+                    </div>
                 </div>
-            </div>
             }
 
             @if (Convert.ToInt32(Session["usertype"].ToString()) == 2)
@@ -141,12 +143,12 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Save" class="btn btn-default" />
                     @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-default" })
                 </div>
             </div>
         </div>
-        
+
     }
 
 </div>

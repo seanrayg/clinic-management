@@ -6,49 +6,42 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Patient Colleges</h1>
+        <h1 class="page-header">Patient Colleges @Html.ActionLink("Create New", "Create", "PColleges", null, new { @class = "btn btn-default pull-right" })</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 
 <div class="row">
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-    <div class="col-lg-2"></div>
-    <div class="col-lg-8">
-        <table class="table" id="tablePatientColleges">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CollegeCode)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.CollegeName)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
+    <table class="table" id="tablePatientColleges">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("College Code")
+                </th>
+                <th>
+                    @Html.DisplayName("College Name")
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
             {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CollegeCode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CollegeName)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.CollegeID }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CollegeID })
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-    <div class="col-lg-2"></div>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CollegeCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CollegeName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CollegeID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CollegeID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 
 <script>

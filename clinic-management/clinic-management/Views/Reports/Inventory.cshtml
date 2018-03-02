@@ -1,11 +1,12 @@
 ﻿@using ReportViewerForMvc
+
 @{
-    ViewBag.Title = "GenerateLogbook";
+    ViewBag.Title = "Inventory";
 }
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Daily Time Record</h1>
+        <h1 class="page-header">Inventory Record</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -58,6 +59,7 @@
     });
 </script>
 
-    <div class="ReportHolder">
-        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { @style = "border: none; width:100% !important;" })
-    </div>
+<div class="ReportHolder">
+    @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer, new { @style = "border: none; width:100% !important;" })
+
+</div>
