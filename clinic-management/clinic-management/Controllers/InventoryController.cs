@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using System.Diagnostics;
 using clinic_management.Models;
 using System.IO;
+using static clinic_management.Helpers.Sessions;
 
 namespace clinic_management.Controllers
 {
+    [AuthorizationFilter]
     public class InventoryController : Controller
     {
         private dbClinicManagementEntities db = new dbClinicManagementEntities();
@@ -61,12 +63,12 @@ namespace clinic_management.Controllers
 
             ViewBag.CriticalStock = db.Items.Where(i => i.ItemQuantity <= critical_stock_value).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").Count();
             ViewBag.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").Count();
-            ViewBag.ItemsUsed = db.MedCheckItems.Where(s => s.returned == 0).Where(s => s.Item.ItemType == "Utensil").GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, QuantityUsed = g.Sum(ss => ss.Quantity) }).Count();
+            ViewBag.ItemsUsed = db.MedCheckItems.Where(s => s.Item.ItemType == "Utensil").GroupBy(s => s.ItemID).Select(g => new { ItemID = g.Key, QuantityUsed = g.Sum(ss => ss.Quantity) }).Count();
             ViewBag.ExpiredStocks = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).Count();
 
             modelcontainer.CriticalStock = db.Items.Where(i => i.ItemQuantity <= critical_stock_value).Where(i => i.ItemQuantity > 0).Where(i => i.deleted == "0").ToList();
             modelcontainer.OutOfStock = db.Items.Where(i => i.ItemQuantity == 0).Where(i => i.deleted == "0").ToList();
-            modelcontainer.MedCheckItem = db.MedCheckItems.SqlQuery("SELECT MedCheckItems.* FROM dbo.MedCheckItems, dbo.MedChecks WHERE ItemID LIKE 'UT%' AND returned = 0 AND MedCheckItems.MedCheckID = MedChecks.MedCheckID AND MedChecks.Time_out BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE()").ToList();
+            modelcontainer.MedCheckItem = db.MedCheckItems.SqlQuery("SELECT MedCheckItems.* FROM dbo.MedCheckItems, dbo.MedChecks WHERE ItemID LIKE 'UT%' AND MedCheckItems.MedCheckID = MedChecks.MedCheckID AND MedChecks.Time_out BETWEEN DATEADD(DAY, -7, GETDATE()) AND GETDATE()").ToList();
             modelcontainer.SupplyList = db.Supplies.Where(s => s.ExpirationDate <= DateTime.Now).ToList();
 
             if (TempData.ContainsKey("isUtensil"))
@@ -359,29 +361,6 @@ namespace clinic_management.Controllers
                 ViewBag.ItemName = result.Supply.Item.ItemName;
             }
             return View(db.SupplyChanges.Where(sc => sc.SupplyID == id).ToList());
-        }
-
-        //POST: Inventory/ReturnItem
-        public ActionResult ReturnItem(int? MedCheckID, string ItemID, int? Quantity)
-        {
-            if(MedCheckID == null || ItemID == null || Quantity == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            var result = db.MedCheckItems.Where(mci => mci.MedCheckID == MedCheckID).Where(mci => mci.ItemID == ItemID).FirstOrDefault();
-            if(result != null)
-            {
-                result.returned = 1;
-                db.SaveChanges();
-
-                var items = db.Items.FirstOrDefault(i => i.ItemID == ItemID);
-                if(items != null)
-                {
-                    items.ItemQuantity += (Int16)Quantity;
-                    db.SaveChanges();
-                }
-            }
-            return Json(new { status = true });
         }
     }
 }

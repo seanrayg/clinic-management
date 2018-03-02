@@ -5,9 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using System.IO;
 using System.Text;
+using static clinic_management.Helpers.Sessions;
 
 namespace clinic_management.Controllers
 {
+    [AuthorizationFilter]
     public class csValueController : Controller
     {
         // GET: csValue

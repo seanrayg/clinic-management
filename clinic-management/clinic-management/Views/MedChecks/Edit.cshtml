@@ -23,14 +23,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StaffID, "Doctor", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Doctor", htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                @Html.DropDownListFor(model => model.StaffID, (SelectList)ViewBag.ddlStaff, "Select Doctor", htmlAttributes: new { @class = "form-control" , @readonly = "readonly" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PatientID, "Patient Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.ddlPatient, "Select Patient", htmlAttributes: new { @class = "form-control", disabled = "disabled" })
+                @Html.DropDownListFor(model => model.PatientID, (SelectList)ViewBag.ddlPatient, "Select Patient", htmlAttributes: new { @class = "form-control", @readonly = "readonly" })
                 @Html.ValidationMessageFor(model => model.PatientID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -39,7 +39,7 @@
             @Html.LabelFor(model => model.DateTimeOfVisit, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-5">
                 <div class="input-group date" data-date-format="dd.mm.yyyy">
-                    @Html.EditorFor(model => model.DateTimeOfVisit, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD" } })
+                    @Html.EditorFor(model => model.DateTimeOfVisit, new { htmlAttributes = new { @class = "form-control", placeholder = "YYYY-MM-DD", @readonly = "readonly" } })
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
@@ -57,14 +57,13 @@
         </script>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.MedCheckType, htmlAttributes: new { @class = "control-label col-md-2", disabled = "disabled", @readonly = "readonly" })
+            @Html.LabelFor(model => model.MedCheckType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownListFor(model => model.MedCheckType, new List<SelectListItem>
                 {
                     new SelectListItem{ Text="For Check-up", Value = "1" },
                     new SelectListItem{ Text="For Medical Clearance", Value = "2" },
-                },
-                              "Select the purpose of visit")
+                }, "Select the purpose of visit", new { @readonly = "readonly"})
                 @Html.ValidationMessageFor(model => model.MedCheckType, "", new { @class = "text-danger" })
             </div>
         </div>
